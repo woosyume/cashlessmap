@@ -13,7 +13,6 @@ import com.google.gson.JsonSyntaxException;
 import com.mmgo.cashlessmap.entity.Todo;
 import com.mmgo.cashlessmap.repository.TodoRepository;
 
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpException;
 import org.apache.http.HttpStatus;
@@ -29,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class TranslateService {
+public class Translate {
 
     @Autowired
     private TodoRepository todoRepository;
