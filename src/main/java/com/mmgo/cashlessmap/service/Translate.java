@@ -28,12 +28,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class TodoService {
+public class Translate {
 
     @Autowired
     private TodoRepository todoRepository;
     
-    private String credential =  "";
+    private String credential =  "AIzaSyAEuceCXpy1UCZs9J6ic-XHtSafbntDFeA";
 
     @Autowired
     private Gson gson;

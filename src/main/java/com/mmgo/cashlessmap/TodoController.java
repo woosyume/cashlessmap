@@ -5,7 +5,7 @@ import java.io.IOException;
 import com.google.gson.JsonSyntaxException;
 import com.mmgo.cashlessmap.entity.Todo;
 import com.mmgo.cashlessmap.entity.TranslateLanguages;
-import com.mmgo.cashlessmap.service.TodoService;
+import com.mmgo.cashlessmap.service.Translate;
 
 import org.apache.http.HttpException;
 import org.apache.http.ParseException;
@@ -25,16 +25,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class TodoController {
 
     private static final String[] ALL_LANGUAGES = {"ja", "en", "zh-CN", "zh-TW", "ko", "es", "ru", "fr", "de"};
-
+    /*
     @Autowired
     private TodoService todoService;
+    */
+    @Autowired
+    private Translate translate;
 
+    
     @Autowired
     private TranslateLanguages translateLanguages;
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("todos", todoService.findTodos());
+        model.addAttribute("todos", translate.findTodos());
         return "home";
     }
 
@@ -49,7 +53,7 @@ public class TodoController {
 
     @PostMapping("/create")
     public String createTodo(@ModelAttribute Todo todo, RedirectAttributes attrs) throws JsonSyntaxException, ParseException, IOException, HttpException {
-        todo.setTranslatedText(todoService.translate2(todo));
+        todo.setTranslatedText(translate.translate2(todo));
         attrs.addFlashAttribute("todo", todo);
         return "redirect:/complete";
     }
@@ -61,7 +65,7 @@ public class TodoController {
 
     @PostMapping("/complete")
     public String completeTodo(@ModelAttribute Todo todo) {
-        todoService.save(todo);
+        translate.save(todo);
         translateLanguages.setSourceLanguage(todo.getSourceLanguage());
         translateLanguages.setTargetLanguage(todo.getTargetLanguage());
         return "redirect:/";
