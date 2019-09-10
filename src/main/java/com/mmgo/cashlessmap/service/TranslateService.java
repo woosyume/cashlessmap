@@ -10,8 +10,8 @@ import com.google.cloud.translate.TranslateOptions;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.mmgo.cashlessmap.entity.Todo;
-import com.mmgo.cashlessmap.repository.TodoRepository;
+import com.mmgo.cashlessmap.entity.Translate;
+import com.mmgo.cashlessmap.repository.TranslateRepository;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpException;
@@ -28,24 +28,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class TodoService {
+public class TranslateService {
 
     @Autowired
-    private TodoRepository todoRepository;
+    private TranslateRepository todoRepository;
     
     private String credential =  "";
     
     private Gson gson;
 
-    public List<Todo> findTodos() {
+    public List<Translate> findTodos() {
         return todoRepository.findAll();
     }
 
-    public Todo save(Todo todo) {
+    public Translate save(Translate todo) {
         return todoRepository.save(todo);
     }
 
-    public String translate(Todo todo) {
+    public String translate(Translate todo) {
         return TranslateOptions.getDefaultInstance().getService()
             .translate(todo.getText(),
                 TranslateOption.sourceLanguage(todo.getSourceLanguage()),
@@ -53,7 +53,7 @@ public class TodoService {
             .getTranslatedText();
     }
 
-    public String translate2(Todo todo) throws JsonSyntaxException, ParseException, IOException, HttpException {
+    public String translate2(Translate todo) throws JsonSyntaxException, ParseException, IOException, HttpException {
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(createQueryHttpPost(todo));) {
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == HttpStatus.SC_OK) {
@@ -64,7 +64,7 @@ public class TodoService {
         }
     }
 
-    private HttpPost createQueryHttpPost(Todo todo) {
+    private HttpPost createQueryHttpPost(Translate todo) {
     	URIBuilder builder = null;
 		try {
 			builder = new URIBuilder("https://translation.googleapis.com/language/translate/v2");

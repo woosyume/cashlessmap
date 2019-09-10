@@ -4,7 +4,7 @@ package com.mmgo.cashlessmap.entity;
 import javax.persistence.*;
 
 @Entity
-public class Todo {
+public class Translate {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -14,7 +14,7 @@ public class Todo {
     private String targetLanguage;
     private String translatedText;
 
-    protected Todo() {}
+    protected Translate() {}
 
 	/**
 	 * @return the number
