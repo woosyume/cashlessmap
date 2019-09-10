@@ -9,8 +9,7 @@ import com.google.cloud.translate.TranslateOptions;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.mmgo.cashlessmap.entity.Cashlessmap;
-import com.mmgo.cashlessmap.repository.TodoRepository;
+import com.mmgo.cashlessmap.entity.Translate;
 
 
 import org.apache.http.HttpEntity;
@@ -36,8 +35,8 @@ public class TranslateService {
     @Autowired
     private Gson gson;
 
-    public String translate(Cashlessmap todo) throws JsonSyntaxException, ParseException, IOException, HttpException {
-        try (CloseableHttpResponse response = HttpClients.createDefault().execute(createQueryHttpPost(todo));) {
+    public String translate(Translate translate) throws JsonSyntaxException, ParseException, IOException, HttpException {
+        try (CloseableHttpResponse response = HttpClients.createDefault().execute(createQueryHttpPost(translate));) {
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == HttpStatus.SC_OK) {
                 return parseTranslationText(response.getEntity());
@@ -47,14 +46,14 @@ public class TranslateService {
         }
     }
 
-    private HttpPost createQueryHttpPost(Cashlessmap todo) {
+    private HttpPost createQueryHttpPost(Translate translate) {
     	URIBuilder builder = null;
 		try {
 			builder = new URIBuilder("https://translation.googleapis.com/language/translate/v2");
 		} catch (URISyntaxException e) {	
 			e.printStackTrace();
 		}
-		builder.setParameter("q", todo.getText()).setParameter("target", todo.getTargetLanguage()).setParameter("key",credential);
+		builder.setParameter("q", translate.getText()).setParameter("target", translate.getTargetLanguage()).setParameter("key",credential);
     try {
 			return new HttpPost(builder.build());
 		} catch (URISyntaxException e) {

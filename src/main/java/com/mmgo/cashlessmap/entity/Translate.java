@@ -4,7 +4,7 @@ package com.mmgo.cashlessmap.entity;
 import javax.persistence.*;
 
 @Entity
-public class Cashlessmap {
+public class Translate {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -14,7 +14,7 @@ public class Cashlessmap {
     private String targetLanguage;
     private String translatedText;
 
-    protected Cashlessmap() {}
+    protected Translate() {}
 
 	/**
 	 * @return the number
