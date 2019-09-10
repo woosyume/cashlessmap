@@ -16,6 +16,7 @@ public class Translate {
 
     protected Translate() {}
 
+    
 	/**
 	 * @return the number
 	 */
