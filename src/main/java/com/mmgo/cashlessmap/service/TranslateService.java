@@ -9,7 +9,7 @@ import com.google.cloud.translate.TranslateOptions;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.mmgo.cashlessmap.entity.Todo;
+import com.mmgo.cashlessmap.entity.Cashlessmap;
 import com.mmgo.cashlessmap.repository.TodoRepository;
 
 
@@ -38,15 +38,7 @@ public class TranslateService {
     @Autowired
     private Gson gson;
 
-    public List<Todo> findTodos() {
-        return todoRepository.findAll();
-    }
-
-    public Todo save(Todo todo) {
-        return todoRepository.save(todo);
-    }
-
-    public String translate2(Todo todo) throws JsonSyntaxException, ParseException, IOException, HttpException {
+    public String translate2(Cashlessmap todo) throws JsonSyntaxException, ParseException, IOException, HttpException {
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(createQueryHttpPost(todo));) {
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == HttpStatus.SC_OK) {
@@ -57,7 +49,7 @@ public class TranslateService {
         }
     }
 
-    private HttpPost createQueryHttpPost(Todo todo) {
+    private HttpPost createQueryHttpPost(Cashlessmap todo) {
     	URIBuilder builder = null;
 		try {
 			builder = new URIBuilder("https://translation.googleapis.com/language/translate/v2");
