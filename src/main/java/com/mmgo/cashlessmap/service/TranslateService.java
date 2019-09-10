@@ -30,15 +30,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TranslateService {
 
-    @Autowired
-    private TodoRepository todoRepository;
     
     private String credential =  "";
 
     @Autowired
     private Gson gson;
 
-    public String translate2(Cashlessmap todo) throws JsonSyntaxException, ParseException, IOException, HttpException {
+    public String translate(Cashlessmap todo) throws JsonSyntaxException, ParseException, IOException, HttpException {
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(createQueryHttpPost(todo));) {
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == HttpStatus.SC_OK) {
@@ -53,15 +51,13 @@ public class TranslateService {
     	URIBuilder builder = null;
 		try {
 			builder = new URIBuilder("https://translation.googleapis.com/language/translate/v2");
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
+		} catch (URISyntaxException e) {	
 			e.printStackTrace();
 		}
 		builder.setParameter("q", todo.getText()).setParameter("target", todo.getTargetLanguage()).setParameter("key",credential);
     try {
 			return new HttpPost(builder.build());
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	return null;
