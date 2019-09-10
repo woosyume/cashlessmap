@@ -3,9 +3,111 @@
     <head>
         <meta charset="UTF-8" />
         <title>現金が持ちたくないあなたのために「CashlessMap」</title>
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <style>
+        .hidden_box {
+        margin: 2em 0;/*前後の余白*/
+        padding: 0;
+        }
+    
+        .hidden_box label {
+            padding: 15px;
+            font-weight: bold;
+            border: solid 2px black;
+            cursor :pointer;
+        }
+    
+        .hidden_box label:hover {
+            background: #efefef;
+        }
+    
+        #description {
+            display: none;
+        }
+    
+        #pay {
+            display: none;
+        }
+    
+        #settings {
+            display: none;
+        }
+    
+        #pay1 {
+            display: none;
+        }
+    
+        .hidden_box .hidden_show {
+            height: 0;
+            padding: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: 0.8s;
+        }
+    
+        .hidden_box input:checked ~ .hidden_show {
+            padding: 10px 0;
+            height: auto;
+            opacity: 1;
+        }
+        </style>
+    
     </head>
     <body>
         <h1 th:text="${message}"></h1>
         現金が持ちたくないあなたのために「CashlessMap」
+        <div>
+            <form method="POST">
+                <div class="hidden_box">
+                <label for="pay">Pay</label>
+                <input type="checkbox" id="pay"/>
+                <div class="hidden_show">
+                　<!--非表示ここから-->     
+                <p>
+                <input type="checkbox" id="pay1" name="pay" value="rakuten">
+                <p><img src="rakutenpay.png" width="20"></p>
+                <input type="checkbox" id="pay1" name="pay" value="paypay">
+                <p><img src="paypay.png" width="20"></p>
+                <input type="checkbox" id="pay1" name="pay" value="apple">
+                <p><img src="applepay.png" width="20"></p>
+                </p>
+                　<!--ここまで-->
+                </div>
+                <div class="hidden_box">
+                <label for="settings">Settings</label>
+                <input type="checkbox" id="settings"/>
+                <div class="hidden_show">
+                　<!--非表示ここから-->     
+                <p>
+                <input type="radio" name="lang" value="ja">日本語
+                <br>
+                <input type="radio" name="lang" value="en">英語
+                <br>
+                <input type="radio" name="lang" value="cn">中国語
+                <br>
+                </p>
+                　<!--ここまで-->
+                </div>
+            
+                <div class="hidden_box">
+                <label for="description">Description</label>
+                <input type="checkbox" id="description"/>
+                <div class="hidden_show" id="hidden_description">
+                　<!--非表示ここから-->     
+                <p>
+                <input type="checkbox" name="lunch" value="0" class="lunch_slct">ランチ利用可
+                <br>
+                <input type="checkbox" name="card" value="0" class="card_slct">カード利用可
+                <br>
+                <input type="checkbox" name="no-smoking" value="0" class="nosmoking_slct">禁煙
+                <br>
+                </p>
+                　<!--ここまで-->
+                </div>
+                </div>
+            </form>
+        </div>
     </body>
 </html>
