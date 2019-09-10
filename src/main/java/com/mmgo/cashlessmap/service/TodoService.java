@@ -34,7 +34,8 @@ public class TodoService {
     private TodoRepository todoRepository;
     
     private String credential =  "";
-    
+
+    @Autowired
     private Gson gson;
 
     public List<Todo> findTodos() {
@@ -43,14 +44,6 @@ public class TodoService {
 
     public Todo save(Todo todo) {
         return todoRepository.save(todo);
-    }
-
-    public String translate(Todo todo) {
-        return TranslateOptions.getDefaultInstance().getService()
-            .translate(todo.getText(),
-                TranslateOption.sourceLanguage(todo.getSourceLanguage()),
-                TranslateOption.targetLanguage(todo.getTargetLanguage()))
-            .getTranslatedText();
     }
 
     public String translate2(Todo todo) throws JsonSyntaxException, ParseException, IOException, HttpException {
@@ -72,8 +65,8 @@ public class TodoService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	builder.setParameter("q", todo.getText()).setParameter("target", todo.getTargetLanguage()).setParameter("key",credential);
-    	try {
+		builder.setParameter("q", todo.getText()).setParameter("target", todo.getTargetLanguage()).setParameter("key",credential);
+    try {
 			return new HttpPost(builder.build());
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
@@ -83,13 +76,14 @@ public class TodoService {
     }
     
     private String parseTranslationText(HttpEntity entity) throws JsonSyntaxException, ParseException, IOException {
-        return gson.fromJson(EntityUtils.toString(entity, "UTF-8"), JsonObject.class)
-            .getAsJsonObject("data")
-            .getAsJsonArray("translations")
-            .get(0)
-            .getAsJsonObject()
-            .get("translatedText")
-            .getAsString();
+      JsonObject object = gson.fromJson(EntityUtils.toString(entity, "UTF-8"), JsonObject.class);
+      String result = object.getAsJsonObject("data")
+          .getAsJsonArray("translations")
+          .get(0)
+          .getAsJsonObject()
+          .get("translatedText")
+          .getAsString();
+      return result;
     }
 
 }
