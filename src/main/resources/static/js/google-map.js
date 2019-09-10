@@ -3,7 +3,8 @@ function success(position) {
     var Options = {
         zoom: 15,      //地図の縮尺値
         center: MyLatLng,    //地図の中心座標
-        mapTypeId: 'roadmap'   //地図の種類
+        mapTypeId: 'roadmap',   //地図の種類
+        disableDefaultUI: true
     };
     var map = new google.maps.Map(document.getElementById('map'), Options);
 
@@ -12,6 +13,9 @@ function success(position) {
         var marker = new google.maps.Marker({
             position: markerLatLng,
             map: map
+        });
+        marker.addListener("click", function() {
+            alert("店の情報");
         });
     }
 
