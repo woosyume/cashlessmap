@@ -66,11 +66,11 @@
                     <div class="hidden_show">
                     　<!--非表示ここから-->     
                     <p>
-                    <input type="checkbox" class="rakutenpay" name="pay" value="rakutenpay">
+                    <input type="checkbox" class="rakutenpay" name="pay" value="0">
                         <p><img src="rakutenpay.png" width="20"></p>
-                    <input type="checkbox" class="paypay" name="pay" value="paypay">
+                    <input type="checkbox" class="paypay" name="pay" value="0">
                         <p><img src="paypay.png" width="20"></p>
-                    <input type="checkbox" class="applepay" name="pay" value="applepay">
+                    <input type="checkbox" class="applepay" name="pay" value="0">
                         <p><img src="applepay.png" width="20"></p>
                     </p>
                     　<!--ここまで-->
@@ -110,15 +110,17 @@
             </form>
         </div>
         <script type="text/javascript">
+            var language;
+
             $(function(){
                 // Set options for creating dynamic url
                 $(".rakutenpay").click(function(){
                     if(this.checked){
-                        $(".rakutenpay").val("rakutenpay");
+                        $(".rakutenpay").val("1");
                         console.log(createJson(collectValuesAsList()));
 
                     } else {
-                        $(".rakutenpay").val("rakutenpay");
+                        $(".rakutenpay").val("0");
                         console.log(createJson(collectValuesAsList()));
 
                     };
@@ -126,11 +128,11 @@
 
                 $(".paypay").click(function(){
                     if(this.checked){
-                        $(".paypay").val("paypay");
+                        $(".paypay").val("1");
                         console.log(createJson(collectValuesAsList()));
 
                     } else {
-                        $(".paypay").val("paypay");
+                        $(".paypay").val("0");
                         console.log(createJson(collectValuesAsList()));
 
                     };
@@ -138,23 +140,20 @@
 
                 $(".applepay").click(function(){
                     if(this.checked){
-                        $(".applepay").val("applepay");
+                        $(".applepay").val("1");
                         console.log(createJson(collectValuesAsList()));
 
                     } else {
-                        $(".applepay").val("applepay");
+                        $(".applepay").val("0");
                         console.log(createJson(collectValuesAsList()));
 
                     };
                 });
-
                 // Set language for creating dynamic url
-                $(".lang").click(function(){
-
-                    alert($('input[name=lang]').val());
+                $('input[name="lang"]').change(function() {
+                    language = $(this).val();
                     console.log(createJson(collectValuesAsList()));
-
-                });
+                })
 
                 // Set options for creating dynamic url
                 $(".lunch_slct").click(function(){
@@ -210,16 +209,21 @@
                 var array  = new Array();
 
                 // Language
-                var array_pay  = new Array();
-                array.push($('.lang_ja').val());
+                array.push(language);
                 
                 // Pay
                 var array_pay  = new Array();
-                
+                if ($('.rakutenpay').val() == 0 &&
+                 $('.paypay').val() == 0 &&
+                 $('.applepay').val() == 0) {
+                    array_pay.push("rakutenpay"); // Set rakuten pay as default
 
-                // array_pay.push($('.rakutenpay').val());
-                // array_pay.push($('.paypay').val());
-                // array_pay.push($('.applepay').val());
+                } else {
+                    if ($('.rakutenpay').val() == 1) array_pay.push("rakutenpay");
+                    if ($('.paypay').val() == 1) array_pay.push("paypay");
+                    if ($('.applepay').val() == 1) array_pay.push("applepay");
+                }
+
                 array.push(array_pay);
 
                 // Options
@@ -244,7 +248,6 @@
                 obj.longitude = params[6];
 
                 var jsontext = JSON.stringify(obj);
-                alert(jsontext);
                 return jsontext;
             }
         </script>
