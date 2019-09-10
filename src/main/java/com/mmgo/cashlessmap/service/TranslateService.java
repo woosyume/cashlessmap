@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class Translate {
+public class TranslateService {
 
     @Autowired
     private TodoRepository todoRepository;
