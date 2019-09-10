@@ -107,8 +107,8 @@ function collectValuesAsList(lang) {
     array.push($('.card_slct').val());
     array.push($('.nosmoking_slct').val());
     // TODO : latitude
-    array.push("44.968046");
-    array.push("-94.420307");
+    array.push("34.662778");
+    array.push("135.572867");
     return array;
 }
 function createJson(params) {
@@ -126,17 +126,15 @@ function createJson(params) {
 
 function requestToApi() {
     $.ajax({
-            url:'/navi',
-            type:'get',
-            data : createJson(collectValuesAsList(language)),
-            contentType: 'application/JSON',
-            dataType : 'JSON',
-            scriptCharset: 'utf-8'
+            url: "/navi",
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            data : createJson(collectValuesAsList(language))
         })
-        .done( (data) => {
+        .done(function(data, textStatus, jqXHR){
             console.log(data);
-        })
-        .fail( (data) => {
-            console.log(data);
-        })            
+        }).fail(function(jqXHR, textStatus, errorThrown){
+            alert('error');
+     });           
 }
