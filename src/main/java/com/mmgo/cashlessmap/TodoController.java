@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * このクラスは、ウェブアプリケーションの挙動を制御するためのコントローラークラスです。。
  * コントローラーとして使えるように、コードを記入してください。
  */
+
 @Controller
 public class TodoController {
 
