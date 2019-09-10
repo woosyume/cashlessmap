@@ -4,6 +4,7 @@ $(function(){
     $('input[name="lang"]').change(function() {
         language = $(this).val();
         console.log(createJson(collectValuesAsList(language)));
+        requestToApi();
     })
                     
     // Set options for creating dynamic url
@@ -11,27 +12,33 @@ $(function(){
         if(this.checked){
             $(".rakutenpay").val("1");
             console.log(createJson(collectValuesAsList(language)));
+            requestToApi();
         } else {
             $(".rakutenpay").val("0");
             console.log(createJson(collectValuesAsList(language)));
+            requestToApi();
         };
     });
     $(".paypay").click(function(){
         if(this.checked){
             $(".paypay").val("1");
             console.log(createJson(collectValuesAsList(language)));
+            requestToApi();
         } else {
             $(".paypay").val("0");
             console.log(createJson(collectValuesAsList(language)));
+            requestToApi();
         };
     });
     $(".applepay").click(function(){
         if(this.checked){
             $(".applepay").val("1");
             console.log(createJson(collectValuesAsList(language)));
+            requestToApi();
         } else {
             $(".applepay").val("0");
             console.log(createJson(collectValuesAsList(language)));
+            requestToApi();
         };
     });
     // Set options for creating dynamic url
@@ -39,18 +46,22 @@ $(function(){
         if(this.checked){
             $(".lunch_slct").val("1");
             console.log(createJson(collectValuesAsList(language)));
+            requestToApi();
         } else {
             $(".lunch_slct").val("0");
             console.log(createJson(collectValuesAsList(language)));
+            requestToApi();
         };
     });
     $(".card_slct").click(function(){
         if(this.checked){
             $(".card_slct").val("1");
             console.log(createJson(collectValuesAsList(language)));
+            requestToApi();
         } else {
             $(".card_slct").val("0");
             console.log(createJson(collectValuesAsList(language)));
+            requestToApi();
         };
     });
     $(".nosmoking_slct").click(function(){
@@ -111,4 +122,21 @@ function createJson(params) {
     obj.longitude = params[6];
     var jsontext = JSON.stringify(obj);
     return jsontext;
+}
+
+function requestToApi() {
+    $.ajax({
+            url:'/navi',
+            type:'get',
+            data : createJson(collectValuesAsList(language)),
+            contentType: 'application/JSON',
+            dataType : 'JSON',
+            scriptCharset: 'utf-8'
+        })
+        .done( (data) => {
+            console.log(data);
+        })
+        .fail( (data) => {
+            console.log(data);
+        })            
 }
