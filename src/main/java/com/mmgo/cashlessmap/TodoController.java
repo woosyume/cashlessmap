@@ -1,7 +1,6 @@
 package com.mmgo.cashlessmap;
 
 import java.io.IOException;
-
 import com.google.gson.JsonSyntaxException;
 import com.mmgo.cashlessmap.entity.Todo;
 import com.mmgo.cashlessmap.entity.TranslateLanguages;
