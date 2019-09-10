@@ -33,7 +33,7 @@ public class Translate {
     @Autowired
     private TodoRepository todoRepository;
     
-    private String credential =  "AIzaSyAEuceCXpy1UCZs9J6ic-XHtSafbntDFeA";
+    private String credential =  "";
 
     @Autowired
     private Gson gson;
