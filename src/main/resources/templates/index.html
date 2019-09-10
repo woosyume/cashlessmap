@@ -10,10 +10,9 @@
     </head>
     <body>
         <h1 th:text="${message}"></h1>
-        現金が持ちたくないあなたのために「CashlessMap」
-        
         <div id="map"></div>
         <script src="js/google-map.js"></script>
+        <script src="js/navi_function.js"></script>
     
         <div class="menu-trigger" href="">
             <span></span>
@@ -28,12 +27,12 @@
                 <div class="hidden_show">
                 　<!--非表示ここから-->     
                     <p>
-                    <input type="checkbox" id="pay1" name="pay" value="rakuten">
-                    <p><img src="image/rakutenpay.png" width="40"></p>
-                    <input type="checkbox" id="pay1" name="pay" value="paypay">
-                    <p><img src="image/paypay.png" width="40"></p>
-                    <input type="checkbox" id="pay1" name="pay" value="apple">
-                    <p><img src="image/applepay.png" width="40"></p>
+                        <input type="checkbox" class="rakutenpay" name="pay" value="0">
+                            <p><img src="image/rakutenpay.png" width="40"></p>
+                        <input type="checkbox" class="paypay" name="pay" value="0">
+                            <p><img src="image/paypay.png" width="40"></p>
+                        <input type="checkbox" class="applepay" name="pay" value="0">
+                            <p><img src="image/applepay.png" width="40"></p>
                     </p>
                 　<!--ここまで-->
                 </div>
@@ -43,11 +42,11 @@
                 <div class="hidden_show">
                 　<!--非表示ここから-->     
                     <p>
-                    <input type="radio" name="lang" value="ja">日本語
-                    <br>
-                    <input type="radio" name="lang" value="en">英語
-                    <br>
-                    <input type="radio" name="lang" value="cn">中国語
+                        <input type="radio" class="lang_ja" name="lang" value="ja">日本語
+                        <br>
+                        <input type="radio" class="lang_en" name="lang" value="en">English
+                        <br>
+                        <input type="radio" class="lang_cn" name="lang" value="cn">中国語
                     <br>
                     <br\>
                     </p>
@@ -60,11 +59,11 @@
                 <div class="hidden_show" id="hidden_description">
                 　<!--非表示ここから-->     
                     <p>
-                    <input type="checkbox" name="lunch" value="0">ランチ利用可
-                    <br>
-                    <input type="checkbox" name="card" value="0">カード利用可
-                    <br>
-                    <input type="checkbox" name="no-smoking" value="0">禁煙
+                        <input type="checkbox" name="lunch" value="0" class="lunch_slct">ランチ利用可
+                        <br>
+                        <input type="checkbox" name="card" value="0" class="card_slct">カード利用可
+                        <br>
+                        <input type="checkbox" name="no-smoking" value="0" class="nosmoking_slct">禁煙
                     <br>
                     </p>
                 　<!--ここまで-->
