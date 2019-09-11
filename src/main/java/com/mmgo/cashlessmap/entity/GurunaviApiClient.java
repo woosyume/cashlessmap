@@ -21,7 +21,6 @@ import com.mmgo.cashlessmap.utility.Option;
 import io.grpc.internal.IoUtils;
 
 public class GurunaviApiClient {
-	
 
 	private Gson gson = new Gson();
 	
@@ -30,11 +29,10 @@ public class GurunaviApiClient {
 	public Stores execute(Option option) throws JsonSyntaxException, ParseException, IOException, HttpException {
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(findStore(option));) {
             int statusCode = response.getStatusLine().getStatusCode();
-            System.out.println("StatusCode: " + statusCode);
             if (statusCode == HttpStatus.SC_OK) {
-                return getJsonValue(parseText(response.getEntity()));
+                return transformFrom(parseText(response.getEntity()));
             } else {
-				return this.processNotFoundResult(parseText(response.getEntity()));
+								return this.processNotFoundResult(parseText(response.getEntity()));
             }
         }
     }
@@ -73,7 +71,7 @@ public class GurunaviApiClient {
 		return response;
     }
 	
-	private Stores getJsonValue(String response) {
+	private Stores transformFrom(String response) {
 		JsonObject object = gson.fromJson(response, JsonObject.class);
 		Stores stores = new Stores();
 		for(int i = 0 ; i < object.getAsJsonArray("rest").size() ; i++) {
