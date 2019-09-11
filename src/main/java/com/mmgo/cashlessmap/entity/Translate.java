@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Entity
 public class Translate {
 
+	@Id
     private String text;
     private String targetLanguage;
     private String translatedText;
