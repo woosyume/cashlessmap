@@ -117,9 +117,9 @@ function collectValuesAsList(lang) {
     array.push($('.lunch_slct').val());
     array.push($('.card_slct').val());
     array.push($('.nosmoking_slct').val());
-    // TODO : latitude
-    array.push("34.662778");
-    array.push("135.572867");
+    currentPosition = getCurrentPosision();
+    array.push(currentPosition.latitude);
+    array.push(currentPosition.longitude);
     return array;
 }
 function createJson(params) {
