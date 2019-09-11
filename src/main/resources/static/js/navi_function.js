@@ -67,9 +67,11 @@ $(function(){
     $(".nosmoking_slct").click(function(){
         if(this.checked){
             $(".nosmoking_slct").val("1");
+            console.log(createJson(collectValuesAsList(language)));
             requestToApi();
         } else {
             $(".nosmoking_slct").val("0");
+            console.log(createJson(collectValuesAsList(language)));
             requestToApi();
         };
     });
@@ -116,8 +118,8 @@ function createJson(params) {
     obj.lang = params[0];
     obj.pay = params[1];
     obj.lunch = params[2];
-    obj.nosmoking = params[3];
-    obj.card = params[4];
+    obj.card = params[3];
+    obj.nosmoking = params[4];
     obj.latitude = params[5];
     obj.longitude = params[6];
     var jsontext = JSON.stringify(obj);
