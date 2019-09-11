@@ -8,35 +8,44 @@ $(function(){
     })
                     
     // Set options for creating dynamic url
-    $(".rakutenpay").click(function(){
-        if(this.checked){
-            $(".rakutenpay").val("1");
+    $("#rakutenicon").click(function(){
+        if ($("#rakutenicon").attr("value") == 0){
+            $("#rakutenicon").attr('value', 1);
+            var src = $(this).children('img').attr('src');
+            $("#rakuten-selected").attr("src", src);
             console.log(createJson(collectValuesAsList(language)));
             requestToApi();
         } else {
-            $(".rakutenpay").val("0");
+            $("#rakutenicon").attr('value', 0);
+            $("#rakuten-selected").attr("src", "");
             console.log(createJson(collectValuesAsList(language)));
             requestToApi();
         };
     });
-    $(".paypay").click(function(){
-        if(this.checked){
-            $(".paypay").val("1");
+    $("#paypayicon").click(function(){
+        if ($("#paypayicon").attr("value") == 0){
+            $("#paypayicon").attr("value", 1);
+            var src = $(this).children('img').attr('src');
+            $("#paypay-selected").attr("src", src);
             console.log(createJson(collectValuesAsList(language)));
             requestToApi();
         } else {
-            $(".paypay").val("0");
+            $("#paypayicon").attr("value", 0);
+            $("#paypay-selected").attr("src", "");
             console.log(createJson(collectValuesAsList(language)));
             requestToApi();
         };
     });
-    $(".applepay").click(function(){
-        if(this.checked){
-            $(".applepay").val("1");
+    $("#appleicon").click(function(){
+        if ($("#appleicon").attr("value") == 0){
+            $("#appleicon").attr('value', "1");
+            var src = $(this).children('img').attr('src');
+            $("#apple-selected").attr("src", src);
             console.log(createJson(collectValuesAsList(language)));
             requestToApi();
         } else {
-            $(".applepay").val("0");
+            $("#appleicon").attr("value", 0);
+            $("#apple-selected").attr("src", "");
             console.log(createJson(collectValuesAsList(language)));
             requestToApi();
         };
@@ -67,9 +76,11 @@ $(function(){
     $(".nosmoking_slct").click(function(){
         if(this.checked){
             $(".nosmoking_slct").val("1");
+            console.log(createJson(collectValuesAsList(language)));
             requestToApi();
         } else {
             $(".nosmoking_slct").val("0");
+            console.log(createJson(collectValuesAsList(language)));
             requestToApi();
         };
     });
@@ -92,14 +103,14 @@ function collectValuesAsList(lang) {
     
     // Pay
     var array_pay  = new Array();
-    if ($('.rakutenpay').val() == 0 &&
-     $('.paypay').val() == 0 &&
-     $('.applepay').val() == 0) {
+    if ($('#rakutenicon').attr('value') == 0 &&
+     $('#paypayicon').attr('value') == 0 &&
+     $('#appleicon').attr('value') == 0) {
         array_pay.push("rakutenpay"); // Set rakuten pay as default
     } else {
-        if ($('.rakutenpay').val() == 1) array_pay.push("rakutenpay");
-        if ($('.paypay').val() == 1) array_pay.push("paypay");
-        if ($('.applepay').val() == 1) array_pay.push("applepay");
+        if ($('#rakutenicon').attr('value') == 1) array_pay.push("rakutenpay");
+        if ($('#paypayicon').attr('value') == 1) array_pay.push("paypay");
+        if ($('#appleicon').attr('value') == 1) array_pay.push("applepay");
     }
     array.push(array_pay);
     // Options
@@ -116,8 +127,8 @@ function createJson(params) {
     obj.lang = params[0];
     obj.pay = params[1];
     obj.lunch = params[2];
-    obj.nosmoking = params[3];
-    obj.card = params[4];
+    obj.card = params[3];
+    obj.nosmoking = params[4];
     obj.latitude = params[5];
     obj.longitude = params[6];
     var jsontext = JSON.stringify(obj);
@@ -125,6 +136,12 @@ function createJson(params) {
 }
 
 function requestToApi() {
+    var themeName = 'sk-dot';
+    HoldOn.open({
+        theme: themeName,
+        message:"<h4>検索中です。しばらくお待ちください。</h4>"
+    });
+
     $.ajax({
             url: "/navi",
             type: 'post',
@@ -136,5 +153,6 @@ function requestToApi() {
             console.log(data);
         }).fail(function(jqXHR, textStatus, errorThrown){
             alert('error');
-     });           
+     });   
+     HoldOn.close();
 }
