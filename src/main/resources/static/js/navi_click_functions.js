@@ -138,6 +138,7 @@ function createJson(params) {
 
 function requestToApi() {
     var themeName = 'sk-dot';
+    clearMarkers();
     HoldOn.open({
         theme: themeName,
         message:"<h4>検索中です。しばらくお待ちください。</h4>"
@@ -150,10 +151,17 @@ function requestToApi() {
             contentType: 'application/json',
             data : createJson(collectValuesAsList(language))
         })
-        .done(function(data, textStatus, jqXHR){
-            console.log(data);
+        .done(function(json, textStatus, jqXHR){
+        	console.log(json);
+
+        	json["stores"].forEach(function(store){
+              var latitude = store["latitude"];
+              var longitude = store["longitude"];
+              setMarker(latitude, longitude);
+          })
+
         }).fail(function(jqXHR, textStatus, errorThrown){
             alert('error');
-     });   
+     });
      HoldOn.close();
 }
