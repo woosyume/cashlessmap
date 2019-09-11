@@ -9,13 +9,26 @@
         <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
         <link href="css/HoldOn.css" rel="stylesheet">
         <script src="js/HoldOn.js"></script>
+        <script type="text/javascript" language="JavaScript" src="js/jquery.i18n.properties-min.js"></script>
     </head>
     <body>
-        <h1 th:text="${message}"></h1>
+        <h1 id="msg_welcome"></h1>
         <div id="map"></div>
         <script src="js/google-map.js"></script>
         <script src="js/navi_click_functions.js"></script>
-    
+        <script>
+        var lang = 'ko';
+        $.i18n.properties({ 
+            name: 'Messages', 
+            path: 'bundle/', 
+            mode: 'both', 
+            language: lang, 
+            callback: function() { 
+                console.log($.i18n);
+                $("#msg_welcome").text($.i18n.map.msg_welcome); 
+            }
+        });
+        </script>
         <div class="menu-trigger" >
             <span></span>
             <span></span>
