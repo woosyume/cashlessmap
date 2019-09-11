@@ -15,11 +15,7 @@ public class Stores {
 	public List<Store> getStores() {
 		return this.stores;
 	}
-	
-	public void remote(Store store) {
-		this.stores.remove(store);
-	}
-	
+
 	public Stores filterJsonValue(Option option){
 		Stores newStores = new Stores();
 		for(Store store: this.getStores()) {
