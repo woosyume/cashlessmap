@@ -127,6 +127,12 @@ function createJson(params) {
 }
 
 function requestToApi() {
+    var themeName = 'sk-dot';
+    HoldOn.open({
+        theme: themeName,
+        message:"<h4>検索中です。しばらくお待ちください。</h4>"
+    });
+
     $.ajax({
             url: "/navi",
             type: 'post',
@@ -138,5 +144,6 @@ function requestToApi() {
             console.log(data);
         }).fail(function(jqXHR, textStatus, errorThrown){
             alert('error');
-     });           
+     });   
+     HoldOn.close();
 }
