@@ -6,7 +6,7 @@ $(function(){
         console.log(createJson(collectValuesAsList(language)));
         requestToApi();
     })
-                    
+
     // Set options for creating dynamic url
     $(".rakutenpay").click(function(){
         if(this.checked){
@@ -89,7 +89,7 @@ function collectValuesAsList(lang) {
     var array  = new Array();
     // Language
     array.push(lang);
-    
+
     // Pay
     var array_pay  = new Array();
     if ($('.rakutenpay').val() == 0 &&
@@ -132,9 +132,14 @@ function requestToApi() {
             contentType: 'application/json',
             data : createJson(collectValuesAsList(language))
         })
-        .done(function(data, textStatus, jqXHR){
-            console.log(data);
+        .done(function(json, textStatus, jqXHR){
+        	console.log(json);
+
+        	var latitude = json["stores"][0]["latitude"];
+            var longitude = json["stores"][0]["longitude"];
+            setMarker(latitude, longitude);
+
         }).fail(function(jqXHR, textStatus, errorThrown){
             alert('error');
-     });           
+     });
 }
