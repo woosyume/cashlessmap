@@ -29,7 +29,7 @@ public class GurunaviApiClient {
 
 	private Gson gson = new Gson();
 	
-	private String credential = "e7295aa012ca9b21408cca91e1aa32f4";
+	private String credential = "e7295aa012ca9b21408cca91e1aa32f4"; // TODO property
 	
 	public List<Store> execute(Option option) throws JsonSyntaxException, ParseException, IOException, HttpException {
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(findStore(option));) {
@@ -38,7 +38,7 @@ public class GurunaviApiClient {
             if (statusCode == HttpStatus.SC_OK) {
                 return firstJsonValue(parseText(response.getEntity()));
             } else {
-                throw new HttpException(Integer.toString(statusCode));
+				return this.processNotFoundResult(parseText(response.getEntity()));
             }
         }
     }
@@ -102,5 +102,10 @@ public class GurunaviApiClient {
 		}
         
         return list;
+	}
+
+	private List<Store> processNotFoundResult(String response) {
+		System.out.println(response);
+        return new ArrayList<>();
 	}
 }
