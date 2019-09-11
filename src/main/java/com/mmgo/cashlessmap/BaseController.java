@@ -60,7 +60,11 @@ public class BaseController {
 			
 			for(Store store : list) {
 				Translate translate = new Translate(store.name, option.lang);
-				store.translatedName  = translateService.translate2(translate);
+				store.translatedName  = translateService.translate(translate);
+				translate.setText(store.prLong);
+				store.translatedPrLong = translateService.translate(translate);
+				translate.setText(store.prShort);
+				store.translatedPrShort = translateService.translate(translate);
 			}
 			
     		return list;
