@@ -77,10 +77,6 @@ public class GurunaviApiClient {
     }
 	
 	private Stores getJsonValue(String response) {
-		System.out.println("JSON>>");
-		System.out.println(response);
-		System.out.println("<<JSON");
-		
 		JsonObject object = gson.fromJson(response, JsonObject.class);
 		Stores stores = new Stores();
 		for(int i = 0 ; i < object.getAsJsonArray("rest").size() ; i++) {

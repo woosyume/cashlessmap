@@ -15,6 +15,8 @@ public class RequestParser {
 				option.pay.add(jsonObj.getAsJsonArray("pay").get(i).getAsString());
 			}
 		}
+		//Payの処理追
+		option.lang = jsonObj.get("lang").getAsString();	
 		option.card = jsonObj.get("card").getAsInt();		
 		option.lunch = jsonObj.get("lunch").getAsInt();
 		option.noSmoking = jsonObj.get("nosmoking").getAsInt();

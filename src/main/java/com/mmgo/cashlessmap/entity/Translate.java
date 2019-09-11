@@ -14,7 +14,10 @@ public class Translate {
     private String targetLanguage;
     private String translatedText;
 
-    protected Translate() {}
+    public Translate(String text , String targetLanguage) {
+    	this.text = text;
+    	this.targetLanguage = targetLanguage;    	
+    }
 
 	/**
 	 * @return the number
