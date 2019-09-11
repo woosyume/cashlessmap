@@ -9,13 +9,12 @@
         <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
         <link href="css/HoldOn.css" rel="stylesheet">
         <script src="js/HoldOn.js"></script>
-
     </head>
     <body>
         <h1 th:text="${message}"></h1>
         <div id="map"></div>
         <script src="js/google-map.js"></script>
-        <script src="js/navi_function.js"></script>
+        <script src="js/navi_click_functions.js"></script>
     
         <div class="menu-trigger" >
             <span></span>
@@ -33,35 +32,28 @@
                 <label for="pay">Pay</label>
                 <input type="checkbox" id="pay"/>
                 <div class="hidden_show">
-                　<!--非表示ここから-->     
-                    <p>
-                            <div id="rakutenicon" value="1">
-                                <img src="image/rakutenpay.png" width="40">
-                            </div>
-                            <div id="paypayicon" value="0">
-                                <img src="image/paypay.png" width="40" >
-                            </div>
-                            <div id="appleicon" value="0">
-                                <img src="image/applepay.png" width="40">
-                            </div>
-                    </p>
-                　<!--ここまで-->
+                    <div id="rakutenicon" value="1">
+                        <img src="image/rakutenpay.png" width="40">
+                    </div>
+                    <div id="paypayicon" value="0">
+                        <img src="image/paypay.png" width="40" >
+                    </div>
+                    <div id="appleicon" value="0">
+                        <img src="image/applepay.png" width="40">
+                    </div>
                 </div>
                 <div class="hidden_box">
                 <label for="settings">Settings</label>
                 <input type="checkbox" id="settings"/>
                 <div class="hidden_show">
-                　<!--非表示ここから-->    
-                <br> 
-                <input type="radio" class="lang_en" name="lang" value="en">English
-                <br>
-                <input type="radio" class="lang_kr" name="lang" value="ko">한글
-                <br>
-                <input type="radio" class="lang_ja" name="lang" value="ja">日本語
-                <br>
-                　<!--ここまで-->
+                    <br> 
+                    <input type="radio" class="lang_en" name="lang" value="en">English
+                    <br>
+                    <input type="radio" class="lang_kr" name="lang" value="ko">한글
+                    <br>
+                    <input type="radio" class="lang_ja" name="lang" value="ja">日本語
+                    <br>
                 </div>
-            
                 <div class="hidden_box">
                 <label for="description">Description</label>
                 <input type="checkbox" id="description"/>
@@ -79,32 +71,6 @@
             </form>
         </nav>
         <div class="overlay"></div>
-            
-        <script>
-            $('.menu-trigger').on('click',function(){
-            if($(this).hasClass('active')){
-                $(this).removeClass('active');
-                $('nav').removeClass('open');
-                $('.overlay').removeClass('open');
-            } else {
-                $(this).addClass('active');
-                $('nav').addClass('open');
-                $('.overlay').addClass('open');
-            }
-            });
-            $('.overlay').on('click',function(){
-            if($(this).hasClass('open')){
-                $(this).removeClass('open');
-                $('.menu-trigger').removeClass('active');
-                $('nav').removeClass('open');      
-            }
-            });
-        </script>
-        <script>
-            $(document).ready(function() {
-                var src = $("#rakutenicon").children('img').attr('src');
-                $("#rakuten-selected").attr("src", src);
-            });
-        </script>
+        <script src="js/navi_slide_functions.js"></script>
     </body>
 </html>
