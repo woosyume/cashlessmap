@@ -27,8 +27,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class BaseController {
 
-    private static final String[] ALL_LANGUAGES = {"ja", "en", "zh-CN", "zh-TW", "ko", "es", "ru", "fr", "de"};
-
     @Autowired
     private TranslateService translateService;
     
@@ -42,28 +40,27 @@ public class BaseController {
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/navi")
     @ResponseBody
     public Stores json(@RequestBody String text) {
-    	try {
-			Option option = RequestParser.parse(text);
-			
-			Stores stores = guruNaviApiClient.execute(option);
-		  stores = stores.filterJsonValue(option);
-			stores = translateService.translate(stores, option);
+	    try {
+		    Option option = RequestParser.parse(text);
 
+		    Stores stores = guruNaviApiClient.execute(option);
+		    stores = stores.filterJsonValue(option);
+		    stores = translateService.translate(stores, option);
 
-    		return stores;
-		} catch (JsonSyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HttpException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	return null;
+		    return stores;
+	    } catch (JsonSyntaxException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+	    } catch (ParseException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+	    } catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+	    } catch (HttpException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+	    }
+	    return null;
     }
 }
