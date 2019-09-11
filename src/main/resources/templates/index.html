@@ -7,6 +7,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <link rel="stylesheet" href="css/google-map.css" type="text/css">
         <link rel="stylesheet" href="css/drawer.css" type="text/css">
+        <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+        <link href="css/HoldOn.css" rel="stylesheet">
+        <script src="js/HoldOn.js"></script>
+
     </head>
     <body>
         <h1 th:text="${message}"></h1>
@@ -14,11 +18,16 @@
         <script src="js/google-map.js"></script>
         <script src="js/navi_function.js"></script>
     
-        <div class="menu-trigger" href="">
+        <div class="menu-trigger" >
             <span></span>
             <span></span>
             <span></span>
-        </div>
+            <div id="selected">
+                <image src="" id="rakuten-selected" width="40">
+                <image src="" id="paypay-selected" width="40" >
+                <image src="" id="apple-selected" width="40">
+            </div>  
+        </div> 
             <nav>
                 <form method="POST">
                 <div class="hidden_box">
@@ -27,12 +36,15 @@
                 <div class="hidden_show">
                 　<!--非表示ここから-->     
                     <p>
-                        <input type="checkbox" class="rakutenpay" id="pay1" name="pay" value="0">
-                            <p><img src="image/rakutenpay.png" width="40"></p>
-                        <input type="checkbox" class="paypay" id="pay1" name="pay" value="0">
-                            <p><img src="image/paypay.png" width="40"></p>
-                        <input type="checkbox" class="applepay" id="pay1" name="pay" value="0">
-                            <p><img src="image/applepay.png" width="40"></p>
+                            <div id="rakutenicon" value="0">
+                                <img src="image/rakutenpay.png" width="40">
+                            </div>
+                            <div id="paypayicon" value="0">
+                                <img src="image/paypay.png" width="40" >
+                            </div>
+                            <div id="appleicon" value="0">
+                                <img src="image/applepay.png" width="40">
+                            </div>
                     </p>
                 　<!--ここまで-->
                 </div>
@@ -93,5 +105,51 @@
             }
             });
         </script>
+        <script>
+
+            $(document).ready(function() {
+                var src = $("#rakutenicon").children('img').attr('src');
+                $("#rakuten-selected").attr("src", src);
+
+                $("#rakutenicon").click(function() {
+                    if ($("#rakutenicon").attr("value") == 1){ //if rakuten pay is selected
+                        $("#rakutenicon").attr("value", 0); //make value to 0(state of not selected)
+                        $("#rakuten-selected").attr("src", "");
+                    } else {
+                        $("#rakutenicon").attr("value", 1);
+                        var src = $(this).children('img').attr('src');
+                        $("#rakuten-selected").attr("src", src);
+
+                    }
+                });
+
+                $("#paypayicon").click(function() {
+                    if ($("#paypayicon").attr("value") == 1){
+                        $("#paypayicon").attr("value", 0);
+                        $("#paypay-selected").attr("src", "");
+                    } else {
+                        $("#paypayicon").attr("value", 1);
+                        var src = $(this).children('img').attr('src');
+                        $("#paypay-selected").attr("src", src);
+
+                    }
+                });
+                $("#appleicon").click(function() {
+                    if ($("#appleicon").attr("value") == 1){
+                        $("#appleicon").attr("value", 0);
+                        $("#apple-selected").attr("src", "");
+                    } else {
+                        $("#appleicon").attr("value", 1);
+                        var src = $(this).children('img').attr('src');
+                        $("#apple-selected").attr("src", src);
+
+                    }
+                });
+            });
+            
+        </script>
+            
+        
+
     </body>
 </html>

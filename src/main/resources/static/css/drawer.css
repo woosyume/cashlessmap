@@ -1,6 +1,6 @@
-.hidden_box {
-    margin: 2em 0;/*前後の余白*/
-    padding: 0;
+    .hidden_box {
+        margin: 2em 0;/*前後の余白*/
+        padding: 0;
     }
 
     .hidden_box label {
@@ -30,6 +30,25 @@
 
     #pay1 {
         display: none;
+    }
+
+    #rakuten-selected {
+        border: 2px solid lightgray;
+        margin-top: 0px;
+        z-index: 10;
+        margin-top: 40px;
+    }
+
+    #paypay-selected {
+        border: 2px solid lightgray;
+        margin-top: 0px;
+        z-index: 10;
+    }
+
+    #apple-selected {
+        border: 2px solid lightgray;
+        margin-top: 0px;
+        z-index: 10;
     }
 
     .hidden_box .hidden_show {
@@ -69,26 +88,11 @@
         height: 100%;
         opacity: 1;
     }
-    /* main {
-        height: 100%;
-        min-height: 100vh;
-        padding: 0 50px;
-        background-color: #eee;
-        transition: all .5s;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+
+    h1 {
+        margin: 0px;
     }
-    main.open {
-        transform: translateX(-250px);
-    }
-    main h1 {
-        text-align: center;
-        font-weight: 500;
-    }
-    main p {
-        text-align: center;
-    } */
+
     .menu-trigger {
         display: inline-block;
         width: 36px;
@@ -101,6 +105,7 @@
         z-index: 100;
         transform: translateX(0);
         transition: transform .5s;
+        
     }
     .menu-trigger.active {
         transform: translateX(250px);
