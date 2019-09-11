@@ -8,6 +8,7 @@ import javax.ws.rs.core.Response;
 import com.google.gson.JsonSyntaxException;
 import com.mmgo.cashlessmap.entity.GurunaviApiClient;
 import com.mmgo.cashlessmap.entity.Store;
+import com.mmgo.cashlessmap.entity.Stores;
 import com.mmgo.cashlessmap.entity.Translate;
 import com.mmgo.cashlessmap.entity.TranslateLanguages;
 import com.mmgo.cashlessmap.service.TranslateService;
@@ -51,10 +52,10 @@ public class BaseController {
     
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/navi")
     @ResponseBody
-    public List<Store> json(@RequestBody String text) {
+    public Stores json(@RequestBody String text) {
     	try {
-			List<Store> list = guruNaviApiClient.execute(RequestParser.parse(text));
-    		return list;
+			Stores stores = guruNaviApiClient.execute(RequestParser.parse(text));
+    		return stores;
 		} catch (JsonSyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

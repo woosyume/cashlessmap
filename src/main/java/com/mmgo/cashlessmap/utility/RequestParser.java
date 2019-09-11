@@ -13,7 +13,7 @@ public class RequestParser {
 			option.eMoney = 1;
 			for(int i = 0 ; i < jsonObj.getAsJsonArray("pay").size() ; i++) {
 				option.pay.add(jsonObj.getAsJsonArray("pay").get(i).getAsString());
-			}	
+			}
 		}
 		option.card = jsonObj.get("card").getAsInt();		
 		option.lunch = jsonObj.get("lunch").getAsInt();

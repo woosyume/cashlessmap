@@ -31,12 +31,12 @@ public class GurunaviApiClient {
 	
 	private String credential = "e7295aa012ca9b21408cca91e1aa32f4"; // TODO property
 	
-	public List<Store> execute(Option option) throws JsonSyntaxException, ParseException, IOException, HttpException {
+	public Stores execute(Option option) throws JsonSyntaxException, ParseException, IOException, HttpException {
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(findStore(option));) {
             int statusCode = response.getStatusLine().getStatusCode();
             System.out.println("StatusCode: " + statusCode);
             if (statusCode == HttpStatus.SC_OK) {
-                return firstJsonValue(parseText(response.getEntity()));
+                return getJsonValue(parseText(response.getEntity()));
             } else {
 				return this.processNotFoundResult(parseText(response.getEntity()));
             }
@@ -76,13 +76,13 @@ public class GurunaviApiClient {
 		return response;
     }
 	
-	private List<Store> firstJsonValue(String response) {
+	private Stores getJsonValue(String response) {
 		System.out.println("JSON>>");
 		System.out.println(response);
 		System.out.println("<<JSON");
 		
 		JsonObject object = gson.fromJson(response, JsonObject.class);
-		List<Store> list = new ArrayList<>();
+		Stores stores = new Stores();
 		for(int i = 0 ; i < object.getAsJsonArray("rest").size() ; i++) {
 			Store store = new Store();
 			store.name = object.getAsJsonArray("rest").get(i).getAsJsonObject().get("name").getAsString();
@@ -92,13 +92,20 @@ public class GurunaviApiClient {
 			store.eMoney = object.getAsJsonArray("rest").get(i).getAsJsonObject().get("e_money").getAsString();
 			store.latitude = object.getAsJsonArray("rest").get(i).getAsJsonObject().get("latitude").getAsString();
 			store.longitude = object.getAsJsonArray("rest").get(i).getAsJsonObject().get("longitude").getAsString();
-			list.add(store);
+			stores.add(store);
 		}        
-        return list;
+        return stores;
 	}
+	
+//	private List<Store> filterJsonValue(List<Store> store){
+//		for(String emony: store.eMoney) {
+//			
+//		}
+//		return store;
+//	}
 
-	private List<Store> processNotFoundResult(String response) {
+	private Stores processNotFoundResult(String response) {
 		System.out.println(response);
-        return new ArrayList<>();
+        return new Stores();
 	}
 }
