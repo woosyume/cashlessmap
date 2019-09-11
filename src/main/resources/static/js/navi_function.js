@@ -95,11 +95,11 @@ function collectValuesAsList(lang) {
     if ($('.rakutenpay').val() == 0 &&
      $('.paypay').val() == 0 &&
      $('.applepay').val() == 0) {
-        array_pay.push("rakutenpay"); // Set rakuten pay as default
+        array_pay.push("楽天ペイ"); // Set rakuten pay as default
     } else {
-        if ($('.rakutenpay').val() == 1) array_pay.push("rakutenpay");
-        if ($('.paypay').val() == 1) array_pay.push("paypay");
-        if ($('.applepay').val() == 1) array_pay.push("applepay");
+        if ($('.rakutenpay').val() == 1) array_pay.push("楽天ペイ");
+        if ($('.paypay').val() == 1) array_pay.push("PayPay");
+        if ($('.applepay').val() == 1) array_pay.push("Apple Pay");
     }
     array.push(array_pay);
     // Options
