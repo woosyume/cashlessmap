@@ -1,14 +1,24 @@
 var map;
 
+var markers = [];
+
 function setMarker(lat, lng) {
     var markerLatLng = new google.maps.LatLng(lat, lng);
     var marker = new google.maps.Marker({
         position: markerLatLng,
         map: map
     });
+    markers.push(marker);
     marker.addListener("click", function() {
         alert("店の情報");
     });
+}
+
+
+function clearMarkers() {
+    for(var i=0; i < markers.length; i++) {
+        markers[i].setMap(null);
+    }
 }
 
 function success(position) {

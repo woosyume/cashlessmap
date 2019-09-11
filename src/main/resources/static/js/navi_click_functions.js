@@ -137,6 +137,7 @@ function createJson(params) {
 
 function requestToApi() {
     var themeName = 'sk-dot';
+    clearMarkers();
     HoldOn.open({
         theme: themeName,
         message:"<h4>検索中です。しばらくお待ちください。</h4>"
