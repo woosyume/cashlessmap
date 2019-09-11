@@ -4,6 +4,7 @@ $(function(){
     $('input[name="lang"]').change(function() {
         language = $(this).val();
         console.log(createJson(collectValuesAsList(language)));
+        loadLanguage(language);
         requestToApi();
     })
                     
