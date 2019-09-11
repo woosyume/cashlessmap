@@ -1,0 +1,10 @@
+com/mmgo/cashlessmap/service/TranslateService.class
+com/mmgo/cashlessmap/entity/GurunaviApiClient.class
+com/mmgo/cashlessmap/utility/Option.class
+com/mmgo/cashlessmap/entity/Translate.class
+com/mmgo/cashlessmap/entity/TranslateLanguages.class
+com/mmgo/cashlessmap/entity/Store.class
+com/mmgo/cashlessmap/utility/RequestParser.class
+com/mmgo/cashlessmap/BaseController.class
+com/mmgo/cashlessmap/repository/TranslateRepository.class
+com/mmgo/cashlessmap/DemoApplication.class
