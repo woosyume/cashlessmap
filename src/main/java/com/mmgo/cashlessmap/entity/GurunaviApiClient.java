@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpException;
 import org.apache.http.HttpStatus;
 import org.apache.http.ParseException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -26,13 +25,13 @@ public class GurunaviApiClient {
 	
 	private String credential = "e7295aa012ca9b21408cca91e1aa32f4"; // TODO property
 	
-	public Stores execute(Option option) throws JsonSyntaxException, ParseException, IOException, HttpException {
+	public Stores execute(Option option) throws JsonSyntaxException, ParseException, IOException {
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(findStore(option));) {
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == HttpStatus.SC_OK) {
                 return transformFrom(parseText(response.getEntity()));
             } else {
-								return this.processNotFoundResult(parseText(response.getEntity()));
+	            return this.processNotFoundResult(parseText(response.getEntity()));
             }
         }
     }
