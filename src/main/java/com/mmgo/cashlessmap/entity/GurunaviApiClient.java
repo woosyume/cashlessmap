@@ -89,7 +89,6 @@ public class GurunaviApiClient {
 	}
 	
 	private Stores processNotFoundResult(String response) {
-		System.out.println(response);
         return new Stores();
 	}
 }
