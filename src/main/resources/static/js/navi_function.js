@@ -67,9 +67,11 @@ $(function(){
     $(".nosmoking_slct").click(function(){
         if(this.checked){
             $(".nosmoking_slct").val("1");
+            console.log(createJson(collectValuesAsList(language)));
             requestToApi();
         } else {
             $(".nosmoking_slct").val("0");
+            console.log(createJson(collectValuesAsList(language)));
             requestToApi();
         };
     });
@@ -116,8 +118,8 @@ function createJson(params) {
     obj.lang = params[0];
     obj.pay = params[1];
     obj.lunch = params[2];
-    obj.nosmoking = params[3];
-    obj.card = params[4];
+    obj.card = params[3];
+    obj.nosmoking = params[4];
     obj.latitude = params[5];
     obj.longitude = params[6];
     var jsontext = JSON.stringify(obj);
@@ -125,6 +127,12 @@ function createJson(params) {
 }
 
 function requestToApi() {
+    var themeName = 'sk-dot';
+    HoldOn.open({
+        theme: themeName,
+        message:"<h4>検索中です。しばらくお待ちください。</h4>"
+    });
+
     $.ajax({
             url: "/navi",
             type: 'post',
@@ -136,5 +144,6 @@ function requestToApi() {
             console.log(data);
         }).fail(function(jqXHR, textStatus, errorThrown){
             alert('error');
-     });           
+     });   
+     HoldOn.close();
 }
