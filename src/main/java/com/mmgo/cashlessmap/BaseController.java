@@ -8,9 +8,11 @@ import javax.ws.rs.core.Response;
 import com.google.gson.JsonSyntaxException;
 import com.mmgo.cashlessmap.entity.GurunaviApiClient;
 import com.mmgo.cashlessmap.entity.Store;
+import com.mmgo.cashlessmap.entity.Stores;
 import com.mmgo.cashlessmap.entity.Translate;
 import com.mmgo.cashlessmap.entity.TranslateLanguages;
 import com.mmgo.cashlessmap.service.TranslateService;
+import com.mmgo.cashlessmap.utility.Option;
 import com.mmgo.cashlessmap.utility.RequestParser;
 
 import org.apache.http.HttpException;
@@ -37,7 +39,7 @@ public class BaseController {
     private static final String[] ALL_LANGUAGES = {"ja", "en", "zh-CN", "zh-TW", "ko", "es", "ru", "fr", "de"};
 
     @Autowired
-    private TranslateService todoService;
+    private TranslateService translateService;
     
     private GurunaviApiClient guruNaviApiClient = new GurunaviApiClient();
     
@@ -51,10 +53,22 @@ public class BaseController {
     
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/navi")
     @ResponseBody
-    public List<Store> json(@RequestBody String text) {
+    public Stores json(@RequestBody String text) {
     	try {
-			List<Store> list = guruNaviApiClient.execute(RequestParser.parse(text));
-    		return list;
+			Option option = RequestParser.parse(text);
+			
+			Stores stores = guruNaviApiClient.execute(option);
+			stores = stores.filterJsonValue(option);
+			for(Store store : stores.getStores()) {
+				Translate translate = new Translate(store.name, option.lang);
+				store.translatedName  = translateService.translate(translate);
+				translate.setText(store.prLong);
+				store.translatedPrLong = translateService.translate(translate);
+				translate.setText(store.prShort);
+				store.translatedPrShort = translateService.translate(translate);
+			}
+			
+    		return stores;
 		} catch (JsonSyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

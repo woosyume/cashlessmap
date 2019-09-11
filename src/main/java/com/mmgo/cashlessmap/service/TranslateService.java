@@ -33,9 +33,9 @@ public class TranslateService {
     @Autowired
     private TranslateRepository todoRepository;
     
-    private String credential =  "";
+    private String credential =  "AIzaSyAEuceCXpy1UCZs9J6ic-XHtSafbntDFeA\n";
     
-    private Gson gson;
+    private Gson gson = new Gson();
 
     public List<Translate> findTodos() {
         return todoRepository.findAll();
@@ -44,16 +44,8 @@ public class TranslateService {
     public Translate save(Translate todo) {
         return todoRepository.save(todo);
     }
-
-    public String translate(Translate todo) {
-        return TranslateOptions.getDefaultInstance().getService()
-            .translate(todo.getText(),
-                TranslateOption.sourceLanguage(todo.getSourceLanguage()),
-                TranslateOption.targetLanguage(todo.getTargetLanguage()))
-            .getTranslatedText();
-    }
-
-    public String translate2(Translate todo) throws JsonSyntaxException, ParseException, IOException, HttpException {
+    
+    public String translate(Translate todo) throws JsonSyntaxException, ParseException, IOException, HttpException {
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(createQueryHttpPost(todo));) {
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == HttpStatus.SC_OK) {
@@ -65,25 +57,26 @@ public class TranslateService {
     }
 
     private HttpPost createQueryHttpPost(Translate todo) {
+        
     	URIBuilder builder = null;
 		try {
 			builder = new URIBuilder("https://translation.googleapis.com/language/translate/v2");
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	builder.setParameter("q", todo.getText()).setParameter("target", todo.getTargetLanguage()).setParameter("key",credential);
     	try {
 			return new HttpPost(builder.build());
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	return null;
     }
     
     private String parseTranslationText(HttpEntity entity) throws JsonSyntaxException, ParseException, IOException {
-        return gson.fromJson(EntityUtils.toString(entity, "UTF-8"), JsonObject.class)
+        JsonObject object = gson.fromJson(EntityUtils.toString(entity, "UTF-8"), JsonObject.class);
+        
+        return object
             .getAsJsonObject("data")
             .getAsJsonArray("translations")
             .get(0)

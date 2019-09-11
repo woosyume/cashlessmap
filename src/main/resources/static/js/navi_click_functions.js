@@ -6,7 +6,7 @@ $(function(){
         console.log(createJson(collectValuesAsList(language)));
         requestToApi();
     })
-                    
+
     // Set options for creating dynamic url
     $("#rakutenicon").click(function(){
         if ($("#rakutenicon").attr("value") == 0){
@@ -100,17 +100,17 @@ function collectValuesAsList(lang) {
     var array  = new Array();
     // Language
     array.push(lang);
-    
+
     // Pay
     var array_pay  = new Array();
     if ($('#rakutenicon').attr('value') == 0 &&
-     $('#paypayicon').attr('value') == 0 &&
-     $('#appleicon').attr('value') == 0) {
-        array_pay.push("rakutenpay"); // Set rakuten pay as default
+      $('#paypayicon').attr('value') == 0 &&
+      $('#appleicon').attr('value') == 0) {
+        array_pay.push("Suica"); // Set rakuten pay as default
     } else {
-        if ($('#rakutenicon').attr('value') == 1) array_pay.push("rakutenpay");
-        if ($('#paypayicon').attr('value') == 1) array_pay.push("paypay");
-        if ($('#appleicon').attr('value') == 1) array_pay.push("applepay");
+        if ($('#rakutenicon').attr('value') == 1) array_pay.push("楽天ペイ");
+        if ($('#paypayicon').attr('value') == 1) array_pay.push("PayPay");
+        if ($('#appleicon').attr('value') == 1) array_pay.push("Apple Pay");
     }
     array.push(array_pay);
     // Options
@@ -149,10 +149,17 @@ function requestToApi() {
             contentType: 'application/json',
             data : createJson(collectValuesAsList(language))
         })
-        .done(function(data, textStatus, jqXHR){
-            console.log(data);
+        .done(function(json, textStatus, jqXHR){
+        	console.log(json);
+
+        	json["stores"].forEach(function(store){
+              var latitude = store["latitude"];
+              var longitude = store["longitude"];
+              setMarker(latitude, longitude);
+          })
+
         }).fail(function(jqXHR, textStatus, errorThrown){
             alert('error');
-     });   
+     });
      HoldOn.close();
 }
