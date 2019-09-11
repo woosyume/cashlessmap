@@ -10,7 +10,6 @@ import com.mmgo.cashlessmap.entity.GurunaviApiClient;
 import com.mmgo.cashlessmap.entity.Store;
 import com.mmgo.cashlessmap.entity.Stores;
 import com.mmgo.cashlessmap.entity.Translate;
-import com.mmgo.cashlessmap.entity.TranslateLanguages;
 import com.mmgo.cashlessmap.service.TranslateService;
 import com.mmgo.cashlessmap.utility.Option;
 import com.mmgo.cashlessmap.utility.RequestParser;
@@ -42,9 +41,6 @@ public class BaseController {
     private TranslateService translateService;
     
     private GurunaviApiClient guruNaviApiClient = new GurunaviApiClient();
-    
-    @Autowired
-    private TranslateLanguages translateLanguages;
 
     @GetMapping("/")
     public String home(Model model) {
