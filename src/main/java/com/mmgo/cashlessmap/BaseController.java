@@ -56,9 +56,9 @@ public class BaseController {
     public Stores json(@RequestBody String text) {
     	try {
 			Option option = RequestParser.parse(text);
-    		
-			Stores stores = guruNaviApiClient.execute(option);
 			
+			Stores stores = guruNaviApiClient.execute(option);
+			stores = stores.filterJsonValue(option);
 			for(Store store : stores.getStores()) {
 				Translate translate = new Translate(store.name, option.lang);
 				store.translatedName  = translateService.translate(translate);

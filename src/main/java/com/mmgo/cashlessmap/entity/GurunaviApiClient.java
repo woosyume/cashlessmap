@@ -36,7 +36,7 @@ public class GurunaviApiClient {
             int statusCode = response.getStatusLine().getStatusCode();
             System.out.println("StatusCode: " + statusCode);
             if (statusCode == HttpStatus.SC_OK) {
-                return filterJsonValue(getJsonValue(parseText(response.getEntity())),option);
+                return getJsonValue(parseText(response.getEntity()));
             } else {
 				return this.processNotFoundResult(parseText(response.getEntity()));
             }
@@ -58,6 +58,7 @@ public class GurunaviApiClient {
     	.setParameter("lunch",option.lunch.toString())
     	.setParameter("no_smoking",option.noSmoking.toString())
       	.setParameter("card", option.card.toString())
+      	.setParameter("hit_per_page", option.hitPerPage.toString())
     	.setParameter("range",option.range);
     	try {
 			return new HttpGet(builder.build());
@@ -93,20 +94,6 @@ public class GurunaviApiClient {
         return stores;
 	}
 	
-	private Stores filterJsonValue(Stores stores, Option option){
-		Stores newStores = new Stores();
-		for(Store store: stores.getStores()) {
-			String[] pays = store.eMoney.split(",",0);	
-			for(String pay : pays) {
-				if(option.pay.contains(pay)) {
-					newStores.add(store);
-					break;
-				}
-			}
-		}
-		return newStores;
-	}
-
 	private Stores processNotFoundResult(String response) {
 		System.out.println(response);
         return new Stores();
