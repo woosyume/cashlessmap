@@ -8,6 +8,7 @@ public class RequestParser {
 		Option option = new Option();
 		JsonObject jsonObj = (JsonObject) new Gson().fromJson(text, JsonObject.class);
 		//Payの処理追
+		option.lang = jsonObj.get("lang").getAsString();	
 		option.card = jsonObj.get("card").getAsInt();		
 		option.lunch = jsonObj.get("lunch").getAsInt();
 		option.noSmoking = jsonObj.get("nosmoking").getAsInt();

@@ -33,9 +33,9 @@ public class TranslateService {
     @Autowired
     private TranslateRepository todoRepository;
     
-    private String credential =  "";
+    private String credential =  "AIzaSyAEuceCXpy1UCZs9J6ic-XHtSafbntDFeA";
     
-    private Gson gson;
+    private Gson gson = new Gson();
 
     public List<Translate> findTodos() {
         return todoRepository.findAll();
@@ -65,6 +65,7 @@ public class TranslateService {
     }
 
     private HttpPost createQueryHttpPost(Translate todo) {
+        
     	URIBuilder builder = null;
 		try {
 			builder = new URIBuilder("https://translation.googleapis.com/language/translate/v2");
@@ -83,7 +84,9 @@ public class TranslateService {
     }
     
     private String parseTranslationText(HttpEntity entity) throws JsonSyntaxException, ParseException, IOException {
-        return gson.fromJson(EntityUtils.toString(entity, "UTF-8"), JsonObject.class)
+        JsonObject object = gson.fromJson(EntityUtils.toString(entity, "UTF-8"), JsonObject.class);
+        
+        return object
             .getAsJsonObject("data")
             .getAsJsonArray("translations")
             .get(0)
