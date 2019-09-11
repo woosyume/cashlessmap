@@ -35,7 +35,7 @@
                 <div class="hidden_show">
                 　<!--非表示ここから-->     
                     <p>
-                            <div id="rakutenicon" value="0">
+                            <div id="rakutenicon" value="1">
                                 <img src="image/rakutenpay.png" width="40">
                             </div>
                             <div id="paypayicon" value="0">
@@ -51,16 +51,14 @@
                 <label for="settings">Settings</label>
                 <input type="checkbox" id="settings"/>
                 <div class="hidden_show">
-                　<!--非表示ここから-->     
-                    <p>
-                        <input type="radio" class="lang_ja" name="lang" value="ja">日本語
-                        <br>
-                        <input type="radio" class="lang_en" name="lang" value="en">English
-                        <br>
-                        <input type="radio" class="lang_cn" name="lang" value="cn">中国語
-                    <br>
-                    <br\>
-                    </p>
+                　<!--非表示ここから-->    
+                <br> 
+                <input type="radio" class="lang_en" name="lang" value="en">English
+                <br>
+                <input type="radio" class="lang_kr" name="lang" value="ko">한글
+                <br>
+                <input type="radio" class="lang_ja" name="lang" value="ja">日本語
+                <br>
                 　<!--ここまで-->
                 </div>
             
@@ -68,16 +66,14 @@
                 <label for="description">Description</label>
                 <input type="checkbox" id="description"/>
                 <div class="hidden_show" id="hidden_description">
-                　<!--非表示ここから-->     
-                    <p>
+                    <div id="hidden_options">
                         <input type="checkbox" name="lunch" value="0" class="lunch_slct">ランチ利用可
                         <br>
                         <input type="checkbox" name="card" value="0" class="card_slct">カード利用可
                         <br>
                         <input type="checkbox" name="no-smoking" value="0" class="nosmoking_slct">禁煙
-                    <br>
-                    </p>
-                　<!--ここまで-->
+                        <br>
+                    </div>
                 </div>
                 </div>
             </form>
@@ -105,50 +101,10 @@
             });
         </script>
         <script>
-
             $(document).ready(function() {
                 var src = $("#rakutenicon").children('img').attr('src');
                 $("#rakuten-selected").attr("src", src);
-
-                $("#rakutenicon").click(function() {
-                    if ($("#rakutenicon").attr("value") == 1){ //if rakuten pay is selected
-                        $("#rakutenicon").attr("value", 0); //make value to 0(state of not selected)
-                        $("#rakuten-selected").attr("src", "");
-                    } else {
-                        $("#rakutenicon").attr("value", 1);
-                        var src = $(this).children('img').attr('src');
-                        $("#rakuten-selected").attr("src", src);
-
-                    }
-                });
-
-                $("#paypayicon").click(function() {
-                    if ($("#paypayicon").attr("value") == 1){
-                        $("#paypayicon").attr("value", 0);
-                        $("#paypay-selected").attr("src", "");
-                    } else {
-                        $("#paypayicon").attr("value", 1);
-                        var src = $(this).children('img').attr('src');
-                        $("#paypay-selected").attr("src", src);
-
-                    }
-                });
-                $("#appleicon").click(function() {
-                    if ($("#appleicon").attr("value") == 1){
-                        $("#appleicon").attr("value", 0);
-                        $("#apple-selected").attr("src", "");
-                    } else {
-                        $("#appleicon").attr("value", 1);
-                        var src = $(this).children('img').attr('src');
-                        $("#apple-selected").attr("src", src);
-
-                    }
-                });
             });
-            
         </script>
-            
-        
-
     </body>
 </html>

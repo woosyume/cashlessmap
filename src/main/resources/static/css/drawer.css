@@ -12,6 +12,10 @@
         background: red;
     }
 
+    #hidden_options {
+        padding-top: 20px;
+    }
+
     .hidden_box label:hover {
         background: red;
     }
@@ -53,16 +57,16 @@
 
     .hidden_box .hidden_show {
         height: 0;
-        padding: 0;
+        padding: 2px;
         overflow: hidden;
         opacity: 0;
         transition: 0.8s;
     }
 
     .hidden_box input:checked ~ .hidden_show {
-        padding: 10px 0;
         height: auto;
         opacity: 1;
+        padding-left: 12px;
     }
 
     .wrapper {
@@ -154,6 +158,7 @@
         transform: translate(-250px);
         transition: all .5s;
         overflow: scroll;
+        padding: 0;
     }
     nav.open {
         transform: translateZ(0);
