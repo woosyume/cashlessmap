@@ -2,13 +2,11 @@ package com.mmgo.cashlessmap.service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.mmgo.cashlessmap.entity.Translate;
-import com.mmgo.cashlessmap.repository.TranslateRepository;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpException;
@@ -27,21 +25,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TranslateService {
 
-    @Autowired
-    private TranslateRepository todoRepository;
-    
     private String credential =  "AIzaSyAEuceCXpy1UCZs9J6ic-XHtSafbntDFeA\n";
     
     private Gson gson = new Gson();
 
-    public List<Translate> findTodos() {
-        return todoRepository.findAll();
-    }
-
-    public Translate save(Translate todo) {
-        return todoRepository.save(todo);
-    }
-    
     public String translate(Translate todo) throws JsonSyntaxException, ParseException, IOException, HttpException {
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(createQueryHttpPost(todo));) {
             int statusCode = response.getStatusLine().getStatusCode();
