@@ -1,22 +1,20 @@
 package com.mmgo.cashlessmap.utility;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RequestParser {
 	public static Option parse(String text) {
 		Option option = new Option();
-		JsonObject jsonObj = (JsonObject) new Gson().fromJson(text, JsonObject.class);
-		if(jsonObj.getAsJsonArray("pay").size() == 0) {
-			option.eMoney = 0;
-		}else {
-			option.eMoney = 1;
-			for(int i = 0 ; i < jsonObj.getAsJsonArray("pay").size() ; i++) {
-				option.pay.add(jsonObj.getAsJsonArray("pay").get(i).getAsString());
-			}
-		}
-		//Payの処理追
-		option.lang = jsonObj.get("lang").getAsString();	
+		JsonObject jsonObj = new Gson().fromJson(text, JsonObject.class);
+
+		option.eMoney = getEMoneyAsInt(jsonObj);
+		option.pay = getPayAsList(jsonObj);
+		option.lang = jsonObj.get("lang").getAsString();
 		option.card = jsonObj.get("card").getAsInt();		
 		option.lunch = jsonObj.get("lunch").getAsInt();
 		option.noSmoking = jsonObj.get("nosmoking").getAsInt();
@@ -24,5 +22,21 @@ public class RequestParser {
 		option.longitude = jsonObj.get("longitude").getAsString();
 		return option;
 	}
-	
+
+	private static List<String> getPayAsList(JsonObject jsonObject) {
+		List<String> pay = new ArrayList<String>();
+		for(JsonElement element : jsonObject.getAsJsonArray("pay")) {
+			pay.add(element.getAsString());
+		}
+		return pay;
+	}
+
+	private static Integer getEMoneyAsInt(JsonObject jsonObject) {
+		if(jsonObject.getAsJsonArray("pay").size() == 0) {
+			return 0;
+		} else {
+			return 1;
+		}
+	}
+
 }
