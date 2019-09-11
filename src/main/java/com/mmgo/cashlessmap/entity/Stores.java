@@ -13,5 +13,9 @@ public class Stores {
 	public List<Store> getStores() {
 		return this.stores;
 	}
+	
+	public void remote(Store store) {
+		this.stores.remove(store);
+	}
 
 }
