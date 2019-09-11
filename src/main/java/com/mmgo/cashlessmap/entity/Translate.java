@@ -10,7 +10,6 @@ public class Translate {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long number;
     private String text;
-    private String sourceLanguage;
     private String targetLanguage;
     private String translatedText;
 
@@ -59,20 +58,6 @@ public class Translate {
 	 */
 	public void setDescription(String translatedText) {
 		this.translatedText = translatedText;
-	}
-
-	/**
-	 * @return the sourceLanguage
-	 */
-	public String getSourceLanguage() {
-		return sourceLanguage;
-	}
-
-	/**
-	 * @param sourceLanguage the sourceLanguage to set
-	 */
-	public void setSourceLanguage(String sourceLanguage) {
-		this.sourceLanguage = sourceLanguage;
 	}
 
 	/**
