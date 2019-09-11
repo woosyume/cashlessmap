@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
-import com.google.cloud.translate.Translate.TranslateOption;
-import com.google.cloud.translate.TranslateOptions;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
