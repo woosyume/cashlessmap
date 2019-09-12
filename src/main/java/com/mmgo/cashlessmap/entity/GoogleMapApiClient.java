@@ -1,11 +1,9 @@
-package com.mmgo.cashlessmap.service;
+package com.mmgo.cashlessmap.entity;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.mmgo.cashlessmap.entity.Coordinate;
-import com.mmgo.cashlessmap.entity.GoogleMapApiResponse;
 import io.grpc.internal.IoUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
@@ -25,8 +23,11 @@ public class GoogleMapApiClient {
 
     private Gson gson = new Gson();
 
-    public GoogleMapApiResponse execute(List<Coordinate> coodinates) {
-        try (CloseableHttpResponse response = HttpClients.createDefault().execute(getDirection(coodinates));) {
+    private final String DIRECTIONS_API_HOST = "https://maps.googleapis.com/maps/api/directions/json";
+    private final String KEY = "AIzaSyD3as-pI0qLXEte93YpO0MQ7cISB0jrf6Q";
+
+    public GoogleMapApiResponse execute(List<Coordinate> coordinates) {
+        try (CloseableHttpResponse response = HttpClients.createDefault().execute(getDirection(coordinates));) {
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == HttpStatus.SC_OK) {
                 return transformFrom(parseText(response.getEntity()));
@@ -39,16 +40,16 @@ public class GoogleMapApiClient {
         return null;
     }
 
-    private HttpUriRequest getDirection(List<Coordinate> coodinates) {
+    private HttpUriRequest getDirection(List<Coordinate> coordinates) {
         URIBuilder builder = null;
         try {
-            builder = new URIBuilder("https://maps.googleapis.com/maps/api/directions/json");
+            builder = new URIBuilder(DIRECTIONS_API_HOST);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        builder.setParameter("origin", coodinates.get(0).toString());
-        builder.setParameter("destination", coodinates.get(1).toString());
-        builder.setParameter("key", "AIzaSyD3as-pI0qLXEte93YpO0MQ7cISB0jrf6Q");
+        builder.setParameter("origin", coordinates.get(0).toString());
+        builder.setParameter("destination", coordinates.get(1).toString());
+        builder.setParameter("key", KEY);
         try {
             return new HttpGet(builder.build());
         } catch (URISyntaxException e) {
