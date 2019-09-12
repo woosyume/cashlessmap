@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    var src = $("#rakutenicon").children('img').attr('src');
+    var src = 'image/rakutenpay.png';
     $("#rakuten-selected").attr("src", src);
-
+    requestToApi();
     var defaultLang='en';
     loadLanguage(defaultLang);
 });

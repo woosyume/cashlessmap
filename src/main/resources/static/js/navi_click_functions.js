@@ -12,7 +12,7 @@ $(function(){
     $("#rakutenicon").click(function(){
         if ($("#rakutenicon").attr("value") == 0){
             $("#rakutenicon").attr('value', 1);
-            var src = $(this).children('img').attr('src');
+            var src = 'image/rakutenpay.png';
             $("#rakuten-selected").attr("src", src);
             console.log(createJson(collectValuesAsList(language)));
             requestToApi();
@@ -26,7 +26,7 @@ $(function(){
     $("#paypayicon").click(function(){
         if ($("#paypayicon").attr("value") == 0){
             $("#paypayicon").attr("value", 1);
-            var src = $(this).children('img').attr('src');
+            var src = 'image/paypay.png';
             $("#paypay-selected").attr("src", src);
             console.log(createJson(collectValuesAsList(language)));
             requestToApi();
@@ -40,7 +40,7 @@ $(function(){
     $("#appleicon").click(function(){
         if ($("#appleicon").attr("value") == 0){
             $("#appleicon").attr('value', "1");
-            var src = $(this).children('img').attr('src');
+            var src = 'image/applepay.png';
             $("#apple-selected").attr("src", src);
             console.log(createJson(collectValuesAsList(language)));
             requestToApi();
@@ -148,7 +148,8 @@ function requestToApi() {
             type: 'post',
             dataType: 'json',
             contentType: 'application/json',
-            data : createJson(collectValuesAsList(language))
+            data : createJson(collectValuesAsList(language)),
+            async: true
         })
         .done(function(json, textStatus, jqXHR){
         	console.log(json);
@@ -159,10 +160,33 @@ function requestToApi() {
                 var name = store["translatedName"];
                 var pr = store["translatedPrShort"];
                 setMarker(latitude, longitude, name, pr);
+                HoldOn.close();
             })
 
         }).fail(function(jqXHR, textStatus, errorThrown){
             alert('error');
         });
-     HoldOn.close();
 }
+
+function loadLanguage(lang) {
+    $.i18n.properties({ 
+        name: 'Messages', 
+        path: 'bundle/', 
+        mode: 'both', 
+        language: lang, 
+        callback: function() { 
+            $("#msg_welcome").text($.i18n.map.msg_welcome);
+            $("#msg_option_lunch").text($.i18n.map.msg_option_lunch); 
+            $("#msg_option_card").text($.i18n.map.msg_option_card); 
+            $("#msg_option_nosmoking").text($.i18n.map.msg_option_nosmoking); 
+            $("#msg_menu_pay").text($.i18n.map.msg_menu_pay); 
+            $("#msg_menu_settings").text($.i18n.map.msg_menu_settings); 
+            $("#msg_menu_detail").text($.i18n.map.msg_menu_detail); 
+        }
+    });
+}
+
+function sleep(waitMsec) {
+    var startMsec = new Date();
+    while (new Date() - startMsec < waitMsec);
+};
