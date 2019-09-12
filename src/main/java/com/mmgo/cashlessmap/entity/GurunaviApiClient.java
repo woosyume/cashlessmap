@@ -55,7 +55,8 @@ public class GurunaviApiClient {
     	.setParameter("no_smoking",option.noSmoking.toString())
       	.setParameter("card", option.card.toString())
       	.setParameter("hit_per_page", option.hitPerPage.toString())
-    	.setParameter("range",option.range);
+    	.setParameter("range",option.range)
+    	.setParameter("freeword","");
     	try {
 			return new HttpGet(builder.build());
 		} catch (URISyntaxException e) {
