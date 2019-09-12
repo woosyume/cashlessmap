@@ -30,6 +30,8 @@ function setMarker(lat, lng, name, pr, img1, img2, QR, storeId) {
                 storeId = store["prShort"];
             })
             document.getElementById("storeName").innerHTML = name;
+            document.getElementById("storeName").style.color = 'navy';
+            document.getElementById("storeName").style.borderBottom = 'dashed 2px navy';
             document.getElementById("PR").innerHTML = storeId;
     
             $(".shopImage1").attr("src", img1);
