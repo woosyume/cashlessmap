@@ -3,6 +3,11 @@ var map;
 var markers = [];
 var currentPosition;
 
+var directionsService = new google.maps.DirectionsService();
+var directionsDisplay = new google.maps.DirectionsRenderer({
+	suppressMarkers: true
+});
+
 function setMarker(lat, lng) {
     var markerLatLng = new google.maps.LatLng(lat, lng);
     var marker = new google.maps.Marker({
@@ -12,11 +17,12 @@ function setMarker(lat, lng) {
     markers.push(marker);
     marker.addListener("click", function() {
     	requestDurationToApi(currentPosition.latitude, currentPosition.longitude, lat, lng);
+    	setRoute(currentPosition.latitude, currentPosition.longitude, lat, lng);
     });
 }
 
-
 function clearMarkers() {
+	clearRoute();
     for(var i=0; i < markers.length; i++) {
         markers[i].setMap(null);
     }
@@ -52,6 +58,26 @@ function requestDurationToApi(fromLat, fromLng, toLat, toLng) {
 	});
 }
 
+function setRoute(fromLat, fromLng, toLat, toLng) {
+	var origin = new google.maps.LatLng(fromLat, fromLng) ;
+	var distination = new google.maps.LatLng(toLat, toLng) ;
+	var request = {
+		origin: origin,
+		destination: distination,
+		travelMode: google.maps.DirectionsTravelMode.WALKING,
+	};
+
+	directionsDisplay.setMap(map);
+	directionsService.route(request, function(response,status){
+		if (status == google.maps.DirectionsStatus.OK){
+			directionsDisplay.setDirections(response);
+		}
+	});
+}
+
+function clearRoute() {
+	directionsDisplay.setMap(null);
+}
 
 function success(position) {
     var MyLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
