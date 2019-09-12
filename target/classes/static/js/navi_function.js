@@ -6,7 +6,7 @@ $(function(){
         console.log(createJson(collectValuesAsList(language)));
         requestToApi();
     })
-                    
+
     // Set options for creating dynamic url
     $(".rakutenpay").click(function(){
         if(this.checked){
@@ -89,13 +89,13 @@ function collectValuesAsList(lang) {
     var array  = new Array();
     // Language
     array.push(lang);
-    
+
     // Pay
     var array_pay  = new Array();
     if ($('.rakutenpay').val() == 0 &&
      $('.paypay').val() == 0 &&
      $('.applepay').val() == 0) {
-        array_pay.push("楽天ペイ"); // Set rakuten pay as default
+        array_pay.push("Suica"); // Set rakuten pay as default
     } else {
         if ($('.rakutenpay').val() == 1) array_pay.push("楽天ペイ");
         if ($('.paypay').val() == 1) array_pay.push("PayPay");
@@ -132,9 +132,16 @@ function requestToApi() {
             contentType: 'application/json',
             data : createJson(collectValuesAsList(language))
         })
-        .done(function(data, textStatus, jqXHR){
-            console.log(data);
+        .done(function(json, textStatus, jqXHR){
+        	console.log(json);
+
+        	json["stores"].forEach(function(store){
+              var latitude = store["latitude"];
+              var longitude = store["longitude"];
+              setMarker(latitude, longitude);
+          })
+
         }).fail(function(jqXHR, textStatus, errorThrown){
             alert('error');
-     });           
+     });
 }
