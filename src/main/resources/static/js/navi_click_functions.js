@@ -12,7 +12,7 @@ $(function(){
     $("#rakutenicon").click(function(){
         if ($("#rakutenicon").attr("value") == 0){
             $("#rakutenicon").attr('value', 1);
-            var src = $(this).children('img').attr('src');
+            var src = 'image/rakutenpay.png';
             $("#rakuten-selected").attr("src", src);
             console.log(createJson(collectValuesAsList(language)));
             requestToApi();
@@ -26,7 +26,7 @@ $(function(){
     $("#paypayicon").click(function(){
         if ($("#paypayicon").attr("value") == 0){
             $("#paypayicon").attr("value", 1);
-            var src = $(this).children('img').attr('src');
+            var src = 'image/paypay.png';
             $("#paypay-selected").attr("src", src);
             console.log(createJson(collectValuesAsList(language)));
             requestToApi();
@@ -40,7 +40,7 @@ $(function(){
     $("#appleicon").click(function(){
         if ($("#appleicon").attr("value") == 0){
             $("#appleicon").attr('value', "1");
-            var src = $(this).children('img').attr('src');
+            var src = 'image/applepay.png';
             $("#apple-selected").attr("src", src);
             console.log(createJson(collectValuesAsList(language)));
             requestToApi();
