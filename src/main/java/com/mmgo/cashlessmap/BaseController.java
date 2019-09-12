@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.google.gson.JsonSyntaxException;
 import com.mmgo.cashlessmap.entity.GurunaviApiClient;
 import com.mmgo.cashlessmap.entity.Stores;
+import com.mmgo.cashlessmap.entity.Translate;
 import com.mmgo.cashlessmap.service.TranslateService;
 import com.mmgo.cashlessmap.utility.Option;
 import com.mmgo.cashlessmap.utility.RequestParser;
@@ -31,7 +32,7 @@ public class BaseController {
 
     @Autowired
     private TranslateService translateService;
-    
+
     private GurunaviApiClient guruNaviApiClient = new GurunaviApiClient();
 
     @GetMapping("/")
@@ -44,9 +45,10 @@ public class BaseController {
     public Stores json(@RequestBody String text) {
     	try {
 			Option option = RequestParser.parse(text);
-			
+			Translate translate = new Translate(option.seachText, "ja");
+			option.translatedSeachText=translateService.translate(translate);
 			Stores stores = guruNaviApiClient.execute(option);
-		  stores = stores.filterJsonValue(option);
+			stores = stores.filterJsonValue(option);
 			stores = translateService.translate(stores, option);
 
 

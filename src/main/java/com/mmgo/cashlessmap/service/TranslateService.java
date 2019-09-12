@@ -50,10 +50,7 @@ public class TranslateService {
     }
 
     public String translate(Translate translate) throws JsonSyntaxException, ParseException, IOException, HttpException {
-        if(translate.getTargetLanguage().equals("ja")) {
-          return translate.getText();
-        }
-        try (CloseableHttpResponse response = HttpClients.createDefault().execute(createQueryHttpPost(translate));) {
+            try (CloseableHttpResponse response = HttpClients.createDefault().execute(createQueryHttpPost(translate));) {
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == HttpStatus.SC_OK) {
                 return parseTranslationText(response.getEntity());
