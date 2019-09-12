@@ -148,7 +148,8 @@ function requestToApi() {
             type: 'post',
             dataType: 'json',
             contentType: 'application/json',
-            data : createJson(collectValuesAsList(language))
+            data : createJson(collectValuesAsList(language)),
+            async: true
         })
         .done(function(json, textStatus, jqXHR){
         	console.log(json);
@@ -157,10 +158,29 @@ function requestToApi() {
               var latitude = store["latitude"];
               var longitude = store["longitude"];
               setMarker(latitude, longitude);
+              HoldOn.close();
           })
 
         }).fail(function(jqXHR, textStatus, errorThrown){
             alert('error');
      });
-     HoldOn.close();
 }
+
+function loadLanguage(lang) {
+    $.i18n.properties({ 
+        name: 'Messages', 
+        path: 'bundle/', 
+        mode: 'both', 
+        language: lang, 
+        callback: function() { 
+            $("#msg_welcome").text($.i18n.map.msg_welcome);
+            $("#msg_option_lunch").text($.i18n.map.msg_option_lunch); 
+            $("#msg_option_card").text($.i18n.map.msg_option_card); 
+            $("#msg_option_nosmoking").text($.i18n.map.msg_option_nosmoking); 
+            $("#msg_menu_pay").text($.i18n.map.msg_menu_pay); 
+            $("#msg_menu_settings").text($.i18n.map.msg_menu_settings); 
+            $("#msg_menu_detail").text($.i18n.map.msg_menu_detail); 
+        }
+    });
+}
+

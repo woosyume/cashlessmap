@@ -26,27 +26,33 @@
             </div>  
         </div> 
             <nav>
+                <!-- Logo -->
+                <div class="logo">
+                    <img src="image/logo.png" class="img_logo"/>
+                </div>
+                <!-- /Logo -->
                 <form method="POST">
                 <div class="hidden_box">
                 <label for="pay" id="msg_menu_pay"></label>
                 <input type="checkbox" id="pay"/>
-                <div class="hidden_show">
+                <div class="hidden_show" style="padding-top: 10%;">
                     <div id="rakutenicon" value="1">
-                        <img src="image/selectrakuten.png" width="40">
+                        <img src="image/selectrakuten.png" width="40%">
                     </div>
                     <div id="paypayicon" value="0">
-                        <img src="image/selectpaypay.png" width="40" >
+                        <img src="image/selectpaypay.png" width="40%" >
                     </div>
                     <div id="appleicon" value="0">
-                        <img src="image/selectapple.png" width="40">
+                        <img src="image/selectapple.png" width="40%">
                     </div>
                 </div>
                 <div class="hidden_box">
                 <label for="settings" id="msg_menu_settings"></label>
                 <input type="checkbox" id="settings"/>
-                <div class="hidden_show">
-                    <br> 
+                <div class="hidden_show" style="padding-top: 10%;">
                     <input type="radio" class="lang_en" name="lang" value="en">English
+                    <br>
+                    <input type="radio" class="lang_mo" name="lang" value="mo">Монгол хэл
                     <br>
                     <input type="radio" class="lang_kr" name="lang" value="ko">한글
                     <br>
@@ -56,7 +62,7 @@
                 <div class="hidden_box">
                 <label for="description" id="msg_menu_detail"></label>
                 <input type="checkbox" id="description"/>
-                <div class="hidden_show" id="hidden_description">
+                <div class="hidden_show">
                     <div id="hidden_options">
                         <div id="wrapper">
                             <input type="checkbox" name="lunch" value="0" class="lunch_slct"><div id="msg_option_lunch"></div>
@@ -77,24 +83,5 @@
         </nav>
         <div class="overlay"></div>
         <script src="js/navi_slide_functions.js"></script>
-        <script>
-            function loadLanguage(lang) {
-                $.i18n.properties({ 
-                    name: 'Messages', 
-                    path: 'bundle/', 
-                    mode: 'both', 
-                    language: lang, 
-                    callback: function() { 
-                        $("#msg_welcome").text($.i18n.map.msg_welcome);
-                        $("#msg_option_lunch").text($.i18n.map.msg_option_lunch); 
-                        $("#msg_option_card").text($.i18n.map.msg_option_card); 
-                        $("#msg_option_nosmoking").text($.i18n.map.msg_option_nosmoking); 
-                        $("#msg_menu_pay").text($.i18n.map.msg_menu_pay); 
-                        $("#msg_menu_settings").text($.i18n.map.msg_menu_settings); 
-                        $("#msg_menu_detail").text($.i18n.map.msg_menu_detail); 
-                    }
-                });
-            }
-        </script>
     </body>
 </html>
