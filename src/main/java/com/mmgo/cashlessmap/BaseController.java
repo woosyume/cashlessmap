@@ -49,13 +49,11 @@ public class BaseController {
         try {
             stores = guruNaviApiClient.execute(storeId);
         } catch (JsonSyntaxException | ParseException | IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         try {
             stores = translateService.translate(stores, lang);
         } catch (JsonSyntaxException | ParseException | IOException | HttpException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return stores;
@@ -72,13 +70,10 @@ public class BaseController {
 
             return stores;
         } catch (JsonSyntaxException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return null;

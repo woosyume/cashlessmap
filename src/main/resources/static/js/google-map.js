@@ -1,9 +1,9 @@
 var map;
-
+var language = 'en';
 var markers = [];
 var currentPosition;
 
-function setMarker(lat, lng, name, pr, img1, img2, QR) {
+function setMarker(lat, lng, name, pr, img1, img2, QR, storeId) {
     var markerLatLng = new google.maps.LatLng(lat, lng, name, pr, img1, img2, QR);
     var marker = new google.maps.Marker({
         position: markerLatLng,
@@ -12,36 +12,50 @@ function setMarker(lat, lng, name, pr, img1, img2, QR) {
     markers.push(marker);
     marker.addListener("click", function() {
         $('.detail').addClass('open');
-        alert(lang);
         // Request to translate details for clicked merchant.
         $.ajax({
-            url: "/internationalize",
+            url: "/international",
             type: 'post',
             dataType: 'json',
             contentType: 'application/json',
-            data : {
-                lang: lang,
-                storeid: ""
-            },
+            data : createInternationalJson(language, storeId),
             async: true
         })
         .done(function(json, textStatus, jqXHR){
-            console.log(json);
+            console.log(JSON.stringify(json));
 
+            var name, storeId;
+        	json["stores"].forEach(function(store){
+                name = store["name"];
+                storeId = store["prShort"];
+            })
+            document.getElementById("storeName").innerHTML = name;
+            document.getElementById("PR").innerHTML = storeId;
+    
+            $(".shopImage1").attr("src", img1);
+            $(".shopImage2").attr("src", img2);
+            $(".QR").attr("src", QR);
+    
         }).fail(function(jqXHR, textStatus, errorThrown){
             alert('error');
         });
         // 
-        document.getElementById("storeName").innerHTML = name;
-        document.getElementById("PR").innerHTML = pr;
+        // document.getElementById("storeName").innerHTML = name;
+        // document.getElementById("PR").innerHTML = pr;
 
-        $(".shopImage1").attr("src", img1);
-        $(".shopImage2").attr("src", img2);
-        $(".QR").attr("src", QR);
+        // $(".shopImage1").attr("src", img1);
+        // $(".shopImage2").attr("src", img2);
+        // $(".QR").attr("src", QR);
     });
-        
 }
 
+function createInternationalJson(language, storeId) {
+    var obj = new Object();
+    obj.lang = language;
+    obj.storeId = storeId;
+    var jsontext = JSON.stringify(obj);
+    return jsontext;
+}
 
 function clearMarkers() {
     for(var i=0; i < markers.length; i++) {

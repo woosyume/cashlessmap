@@ -110,9 +110,6 @@ public class TranslateService {
     }
 
     private HttpPost createQueryHttpPost(String text, String targetLang) {
-        System.out.println(text);
-        System.out.println(targetLang);
-
         URIBuilder builder = null;
         try {
             builder = new URIBuilder(TRANSLATE_HOST);

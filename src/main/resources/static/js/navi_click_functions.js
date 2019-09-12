@@ -1,4 +1,4 @@
-var language = 'en';
+language = 'en';
 $(function(){
     // Set language for creating dynamic url
     $('input[name="lang"]').change(function() {
@@ -136,8 +136,9 @@ function createJson(params) {
 }
 
 function requestToApi() {
-    var themeName = 'sk-dot';
+    var themeName = 'sk-cube-grid';
     clearMarkers();
+    
     HoldOn.open({
         theme: themeName,
         message:"<h4>検索中です。しばらくお待ちください。</h4>"
@@ -162,7 +163,8 @@ function requestToApi() {
                 var img1 = store["shopImage1"]; //src of img
                 var img2 = store["shopImage2"];
                 var QR = store["qrCode"];
-                setMarker(latitude, longitude, name, pr, img1, img2, QR);
+                var storeId = store["storeId"];
+                setMarker(latitude, longitude, name, pr, img1, img2, QR, storeId);
                 HoldOn.close();
             })
 
