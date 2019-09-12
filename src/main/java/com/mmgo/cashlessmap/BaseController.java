@@ -74,8 +74,8 @@ public class BaseController {
         Option option = RequestParser.parse(text);
 
         JsonObject jsonObj = new Gson().fromJson(text, JsonObject.class);
-        String lang = jsonObj.get("lang").getAsString();
-        String storeId = jsonObj.get("storeId").getAsString();
+        option.lang = jsonObj.get("lang").getAsString();
+        option.storeId = jsonObj.get("storeId").getAsString();
         Stores stores = null;
         try {
             stores = guruNaviApiClient.execute(option);
