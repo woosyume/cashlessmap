@@ -11,14 +11,34 @@ function setMarker(lat, lng, name, pr, img1, img2, QR) {
     });
     markers.push(marker);
     marker.addListener("click", function() {
+        $('.detail').addClass('open');
+        alert(lang);
+        // Request to translate details for clicked merchant.
+        $.ajax({
+            url: "/internationalize",
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            data : {
+                lang: lang,
+                storeid: ""
+            },
+            async: true
+        })
+        .done(function(json, textStatus, jqXHR){
+            console.log(json);
+
+        }).fail(function(jqXHR, textStatus, errorThrown){
+            alert('error');
+        });
+        // 
         document.getElementById("storeName").innerHTML = name;
         document.getElementById("PR").innerHTML = pr;
-                $('.detail').addClass('open');
-                //if(img1=="")
-                $(".shopImage1").attr("src", img1);
-                $(".shopImage2").attr("src", img2);
-                $(".QR").attr("src", QR);
-        });
+
+        $(".shopImage1").attr("src", img1);
+        $(".shopImage2").attr("src", img2);
+        $(".QR").attr("src", QR);
+    });
         
 }
 
