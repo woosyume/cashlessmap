@@ -1,9 +1,9 @@
+var language = 'en';
 var map;
-
 var markers = [];
 var currentPosition;
 
-function setMarker(lat, lng, name, pr, img1, img2, QR) {
+function setMarker(lat, lng, name, pr, img1, img2, QR, storeId) {
     var markerLatLng = new google.maps.LatLng(lat, lng, name, pr, img1, img2, QR);
     var marker = new google.maps.Marker({
         position: markerLatLng,
@@ -12,7 +12,6 @@ function setMarker(lat, lng, name, pr, img1, img2, QR) {
     markers.push(marker);
     marker.addListener("click", function() {
         $('.detail').addClass('open');
-        alert(lang);
         // Request to translate details for clicked merchant.
         $.ajax({
             url: "/internationalize",
@@ -20,8 +19,8 @@ function setMarker(lat, lng, name, pr, img1, img2, QR) {
             dataType: 'json',
             contentType: 'application/json',
             data : {
-                lang: lang,
-                storeid: ""
+                lang: language,
+                storeid: storeId
             },
             async: true
         })

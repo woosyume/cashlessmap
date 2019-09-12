@@ -1,4 +1,4 @@
-var language = 'en';
+language = 'en';
 $(function(){
     // Set language for creating dynamic url
     $('input[name="lang"]').change(function() {
@@ -162,7 +162,8 @@ function requestToApi() {
                 var img1 = store["shopImage1"]; //src of img
                 var img2 = store["shopImage2"];
                 var QR = store["qrCode"];
-                setMarker(latitude, longitude, name, pr, img1, img2, QR);
+                var storeId = store["storeId"];
+                setMarker(latitude, longitude, name, pr, img1, img2, QR, storeId);
                 HoldOn.close();
             })
 
