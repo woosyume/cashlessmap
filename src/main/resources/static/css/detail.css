@@ -1,12 +1,15 @@
+h1 {
+    color: #6594e0;
+    border-bottom: dashed 2px #6594e0;
+}
 .detail.open {
     transform: translateZ(0);
 }
-
 .detail {
     width: 500px;
     height: 100%;
     padding-top: 100px;
-    background-color:rgba(255, 255, 255, 0.5);
+    background-color:rgba(255, 255, 255, 0.9);
     position: fixed;
     top: 0;
     right: 0;
@@ -22,11 +25,7 @@ h1.open {
 p.open {
     transform: translateZ(0);
 }
-#storeName {
-    color: #6594e0;
-    border-bottom: dashed 2px #6594e0;
-}
-    
+
 .batsu {
     display: inline-block;
     width: 30px;
