@@ -2,11 +2,10 @@ package com.mmgo.cashlessmap;
 
 import java.io.IOException;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.mmgo.cashlessmap.entity.GurunaviApiClient;
 import com.mmgo.cashlessmap.entity.Stores;
+import com.mmgo.cashlessmap.entity.Translate;
 import com.mmgo.cashlessmap.service.TranslateService;
 import com.mmgo.cashlessmap.utility.Option;
 import com.mmgo.cashlessmap.utility.RequestParser;
@@ -39,41 +38,28 @@ public class BaseController {
         return "index";
     }
 
-    @RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/international")
-    @ResponseBody
-    public Stores international(@RequestBody String text) {
-        JsonObject jsonObj = new Gson().fromJson(text, JsonObject.class);
-        String lang = jsonObj.get("lang").getAsString();
-        String storeId = jsonObj.get("storeId").getAsString();
-        Stores stores = null;
-        try {
-            stores = guruNaviApiClient.execute(storeId);
-        } catch (JsonSyntaxException | ParseException | IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            stores = translateService.translate(stores, lang);
-        } catch (JsonSyntaxException | ParseException | IOException | HttpException e) {
-            e.printStackTrace();
-        }
-        return stores;
-    }
-
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/navi")
     @ResponseBody
     public Stores json(@RequestBody String text) {
         try {
             Option option = RequestParser.parse(text);
-
+            Translate translate = new Translate(option.seachText, "ja");
+            option.translatedSeachText=translateService.translate(translate);
             Stores stores = guruNaviApiClient.execute(option);
             stores = stores.filterJsonValue(option);
 
             return stores;
         } catch (JsonSyntaxException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (ParseException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (HttpException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return null;

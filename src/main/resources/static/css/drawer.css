@@ -51,6 +51,32 @@
         margin-top: 0px;
         z-index: 10;
     }
+    .btn-square {
+ 		display: inline-block;
+  		padding: 0.2em 1em;
+  		text-decoration: none;
+  		background: red;
+  		color: white;
+  		border-bottom: solid 2px #627295;
+  		border-radius: 1px;
+	}
+	.btn-square:active {
+  		-webkit-transform: translateY(4px);
+  		transform: translateY(4px);
+  		border-bottom: none;
+	}
+	.textbox{
+ 	 width: 160px;
+	 padding: 2px 8px;
+  	 border-radius: 6px;
+  	 border-top: 1px solid #aaa;
+  	 border-left: 1px solid #aaa;
+  	 border-right: 2px solid #aaa;
+  	 border-bottom: 2px solid #aaa;
+  	 background-image: none
+  	 background-color: #ddd;
+  	 font-size: 16px;
+  	 }
 
     .hidden_box .hidden_show {
         height: 0;
