@@ -139,9 +139,21 @@ function requestToApi() {
     var themeName = 'sk-cube-grid';
     clearMarkers();
     
+    var message;
+
+    $.i18n.properties({ 
+        name: 'Messages', 
+        path: 'bundle/', 
+        mode: 'both', 
+        language: language, 
+        callback: function() { 
+            message = $.i18n.map.msg_loading;
+        }
+    });
+
     HoldOn.open({
         theme: themeName,
-        message:"<h4>検索中です。しばらくお待ちください。</h4>"
+        message: message
     });
 
     $.ajax({
