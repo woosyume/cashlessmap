@@ -2,6 +2,8 @@ package com.mmgo.cashlessmap;
 
 import java.io.IOException;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.mmgo.cashlessmap.entity.GurunaviApiClient;
 import com.mmgo.cashlessmap.entity.Stores;
@@ -37,6 +39,28 @@ public class BaseController {
         return "index";
     }
     
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/international")
+    @ResponseBody
+    public Stores international(@RequestBody String text) {
+    	JsonObject jsonObj = new Gson().fromJson(text, JsonObject.class);
+    	String lang = jsonObj.get("lang").getAsString();
+    	String storeId = jsonObj.get("storeid").getAsString();
+    	Stores stores = null;
+    	try {
+			stores = guruNaviApiClient.execute(storeId);
+		} catch (JsonSyntaxException | ParseException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	try {
+			stores = translateService.translate(stores, lang);
+		} catch (JsonSyntaxException | ParseException | IOException | HttpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return stores;
+    }
+    
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/navi")
     @ResponseBody
     public Stores json(@RequestBody String text) {
@@ -45,7 +69,6 @@ public class BaseController {
 
 		    Stores stores = guruNaviApiClient.execute(option);
 		    stores = stores.filterJsonValue(option);
-		    stores = translateService.translate(stores, option);
 
 		    return stores;
 	    } catch (JsonSyntaxException e) {

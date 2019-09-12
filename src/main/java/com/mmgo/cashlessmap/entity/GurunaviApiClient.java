@@ -38,6 +38,17 @@ public class GurunaviApiClient {
         }
     }
 	
+	public Stores execute(String storeId)throws JsonSyntaxException, ParseException, IOException{
+		try (CloseableHttpResponse response = HttpClients.createDefault().execute(findStore(storeId));) {
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == HttpStatus.SC_OK) {
+                return transformFrom(parseText(response.getEntity()));
+            } else {
+	            return this.processNotFoundResult(parseText(response.getEntity()));
+            }
+        }
+	}
+	
 	private HttpGet findStore(Option option) {
     	URIBuilder builder = null;
 		try {
@@ -63,6 +74,26 @@ public class GurunaviApiClient {
 		}
     	return null;
     }
+	
+	private HttpGet findStore(String storeId) {
+		URIBuilder builder = null;
+		try {
+			builder = new URIBuilder(GNAVI_API_HOST);
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	builder.setParameter("keyid", CREDENTIAL)
+    	.setParameter("id", storeId);
+    	try {
+			return new HttpGet(builder.build());
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
+		
+	}
     
 	private String parseText(HttpEntity entity) throws JsonSyntaxException, ParseException, IOException {
 		String response;

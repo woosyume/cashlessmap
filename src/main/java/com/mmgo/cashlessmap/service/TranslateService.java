@@ -94,4 +94,39 @@ public class TranslateService {
             .get("translatedText")
             .getAsString();
     }
+    
+    public Stores translate(Stores stores, String targetLang) throws JsonSyntaxException, ParseException, IOException, HttpException {
+    	for(Store store : stores.getStores()) {
+    		try (CloseableHttpResponse response = HttpClients.createDefault().execute(createQueryHttpPost(store.prShort, targetLang));) {
+                int statusCode = response.getStatusLine().getStatusCode();
+                if (statusCode == HttpStatus.SC_OK) {
+                    store.prShort = parseTranslationText(response.getEntity());
+                } else {
+                    throw new HttpException(Integer.toString(statusCode));
+                }
+            }
+    	}
+    	return stores;
+    }
+    
+    private HttpPost createQueryHttpPost(String text, String targetLang) {
+      System.out.println(text);
+      System.out.println(targetLang);
+    	
+      URIBuilder builder = null;
+      try {
+        builder = new URIBuilder(TRANSLATE_HOST);
+      } catch (URISyntaxException e) {
+        e.printStackTrace();
+      }
+      builder.setParameter("q", text)
+          .setParameter("target", targetLang)
+          .setParameter("key", CREDENTIAL);
+      try {
+        return new HttpPost(builder.build());
+      } catch (URISyntaxException e) {
+        e.printStackTrace();
+      }
+    	return null;
+    }
 }
