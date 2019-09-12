@@ -22,6 +22,7 @@ public class RequestParser {
 		option.noSmoking = jsonObj.get("nosmoking").getAsInt();
 		option.latitude = jsonObj.get("latitude").getAsString();
 		option.longitude = jsonObj.get("longitude").getAsString();
+		option.seachText = jsonObj.get("seachText").getAsString();
 		return option;
 	}
 	

@@ -50,6 +50,11 @@ $(function(){
             requestToApi();
         };
     });
+	$("#button1").click(function() {
+		var seachText = $('#text1').val();
+		console.log(createJson(collectValuesAsList(language)));
+		requestToApi();
+	});
     // Set options for creating dynamic url
     $(".lunch_slct").click(function(){
         if(this.checked){
@@ -94,6 +99,7 @@ $(function createJson(params) {
     obj.card = params[4];
     obj.latitude = params[5];
     obj.longitude = params[6];
+    obj.seachText = params[7];
     return obj;
 })
 function collectValuesAsList(lang) {
@@ -120,6 +126,7 @@ function collectValuesAsList(lang) {
     currentPosition = getCurrentPosision();
     array.push(currentPosition.latitude);
     array.push(currentPosition.longitude);
+    array.push($('#text1').val());
     return array;
 }
 function createJson(params) {
@@ -131,6 +138,7 @@ function createJson(params) {
     obj.nosmoking = params[4];
     obj.latitude = params[5];
     obj.longitude = params[6];
+    obj.seachText = params[7];
     var jsontext = JSON.stringify(obj);
     return jsontext;
 }
