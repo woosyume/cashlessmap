@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="css/drawer.css" type="text/css">
         <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
         <link href="css/HoldOn.css" rel="stylesheet">
+        <link href="css/detail.css" rel="stylesheet">
         <script src="js/HoldOn.js"></script>
         <script type="text/javascript" language="JavaScript" src="js/jquery.i18n.properties-min.js"></script>
     </head>
@@ -25,12 +26,19 @@
                 <image src="" id="apple-selected" width="40">
             </div>  
         </div> 
-            <nav>
+        <div class="detail">
+        <div class="batsu"><span></span></div>
+            <h1 id="storeName">
+            </h1>
+            <p id="PR">
+            </p>
+        </div>
+        <nav>
                 <!-- Logo -->
                 <div class="logo">
                     <img src="image/logo.png" class="img_logo"/>
                 </div>
-                <!-- /Logo -->
+                <!-- /Logo -->            
                 <form method="POST">
                 <div class="hidden_box">
                 <label for="pay" id="msg_menu_pay"></label>

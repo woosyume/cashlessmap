@@ -3,16 +3,19 @@ var map;
 var markers = [];
 var currentPosition;
 
-function setMarker(lat, lng) {
-    var markerLatLng = new google.maps.LatLng(lat, lng);
+function setMarker(lat, lng, name, pr) {
+    var markerLatLng = new google.maps.LatLng(lat, lng, name, pr);
     var marker = new google.maps.Marker({
         position: markerLatLng,
         map: map,
     });
     markers.push(marker);
     marker.addListener("click", function() {
-        alert("店の情報");
-    });
+        document.getElementById("storeName").innerHTML = name;
+        document.getElementById("PR").innerHTML = pr;
+                $('.detail').addClass('open');
+        });
+        
 }
 
 

@@ -5,6 +5,10 @@ $(document).ready(function() {
     var defaultLang='en';
     loadLanguage(defaultLang);
 });
+$(".batsu").on('click', function(){
+    $('.batsu').removeClass('active');
+    $('.detail').removeClass('open');
+})
 
 $('.menu-trigger').on('click',function(){
     if($(this).hasClass('active')){

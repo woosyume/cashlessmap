@@ -1,0 +1,50 @@
+.detail.open {
+    transform: translateZ(0);
+}
+
+.detail {
+    width: 250px;
+    height: 100%;
+    padding-top: 100px;
+    background-color:rgba(255, 255, 255, 0.5);
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    transform: translate(300px);
+    transition: all .5s;
+    overflow: scroll;
+    padding: 0;
+}
+h1.open {
+    transform: translateZ(0);
+}
+p.open {
+    transform: translateZ(0);
+}
+
+.batsu {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+}
+.batsu span::before,
+.batsu span::after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 84%;
+    height: 16%;
+    margin: -8% 0 0 -42%;
+    background: rgb(167, 128, 66);
+}
+.batsu span::before {
+    transform: rotate(-45deg);
+}
+.batsu span::after {
+    transform: rotate(45deg);
+}
