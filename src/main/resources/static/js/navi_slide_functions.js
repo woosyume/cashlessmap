@@ -1,6 +1,9 @@
 $(document).ready(function() {
     var src = $("#rakutenicon").children('img').attr('src');
     $("#rakuten-selected").attr("src", src);
+
+    var defaultLang='en';
+    loadLanguage(defaultLang);
 });
 
 $('.menu-trigger').on('click',function(){

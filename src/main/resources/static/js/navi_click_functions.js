@@ -1,12 +1,13 @@
-var language;
+var language = 'en';
 $(function(){
     // Set language for creating dynamic url
     $('input[name="lang"]').change(function() {
         language = $(this).val();
         console.log(createJson(collectValuesAsList(language)));
+        loadLanguage(language);
         requestToApi();
     })
-
+                    
     // Set options for creating dynamic url
     $("#rakutenicon").click(function(){
         if ($("#rakutenicon").attr("value") == 0){
@@ -100,26 +101,26 @@ function collectValuesAsList(lang) {
     var array  = new Array();
     // Language
     array.push(lang);
-
+    
     // Pay
     var array_pay  = new Array();
     if ($('#rakutenicon').attr('value') == 0 &&
-      $('#paypayicon').attr('value') == 0 &&
-      $('#appleicon').attr('value') == 0) {
-        array_pay.push("Suica"); // Set rakuten pay as default
+     $('#paypayicon').attr('value') == 0 &&
+     $('#appleicon').attr('value') == 0) {
+        array_pay.push("rakutenpay"); // Set rakuten pay as default
     } else {
-        if ($('#rakutenicon').attr('value') == 1) array_pay.push("楽天ペイ");
-        if ($('#paypayicon').attr('value') == 1) array_pay.push("PayPay");
-        if ($('#appleicon').attr('value') == 1) array_pay.push("Apple Pay");
+        if ($('#rakutenicon').attr('value') == 1) array_pay.push("rakutenpay");
+        if ($('#paypayicon').attr('value') == 1) array_pay.push("paypay");
+        if ($('#appleicon').attr('value') == 1) array_pay.push("applepay");
     }
     array.push(array_pay);
     // Options
     array.push($('.lunch_slct').val());
     array.push($('.card_slct').val());
     array.push($('.nosmoking_slct').val());
-    currentPosition = getCurrentPosision();
-    array.push(currentPosition.latitude);
-    array.push(currentPosition.longitude);
+    // TODO : latitude
+    array.push("34.662778");
+    array.push("135.572867");
     return array;
 }
 function createJson(params) {

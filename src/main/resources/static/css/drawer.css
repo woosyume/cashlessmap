@@ -97,6 +97,11 @@
         margin: 0px;
     }
 
+    #wrapper {
+        width: 500px;
+        display:flex;
+    }
+
     .menu-trigger {
         display: inline-block;
         width: 36px;
