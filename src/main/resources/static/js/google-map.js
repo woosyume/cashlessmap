@@ -39,13 +39,6 @@ function setMarker(lat, lng, name, pr, img1, img2, QR, storeId) {
         }).fail(function(jqXHR, textStatus, errorThrown){
             alert('error');
         });
-        // 
-        // document.getElementById("storeName").innerHTML = name;
-        // document.getElementById("PR").innerHTML = pr;
-
-        // $(".shopImage1").attr("src", img1);
-        // $(".shopImage2").attr("src", img2);
-        // $(".QR").attr("src", QR);
     });
 }
 

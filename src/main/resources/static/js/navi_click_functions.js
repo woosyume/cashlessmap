@@ -15,11 +15,13 @@ $(function(){
             var src = 'image/rakutenpay.png';
             $("#rakuten-selected").attr("src", src);
             console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
             requestToApi();
         } else {
             $("#rakutenicon").attr('value', 0);
             $("#rakuten-selected").attr("src", "");
             console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
             requestToApi();
         };
     });
@@ -29,11 +31,13 @@ $(function(){
             var src = 'image/paypay.png';
             $("#paypay-selected").attr("src", src);
             console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
             requestToApi();
         } else {
             $("#paypayicon").attr("value", 0);
             $("#paypay-selected").attr("src", "");
             console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
             requestToApi();
         };
     });
@@ -43,11 +47,13 @@ $(function(){
             var src = 'image/applepay.png';
             $("#apple-selected").attr("src", src);
             console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
             requestToApi();
         } else {
             $("#appleicon").attr("value", 0);
             $("#apple-selected").attr("src", "");
             console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
             requestToApi();
         };
     });
@@ -56,10 +62,12 @@ $(function(){
         if(this.checked){
             $(".lunch_slct").val("1");
             console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
             requestToApi();
         } else {
             $(".lunch_slct").val("0");
             console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
             requestToApi();
         };
     });
@@ -67,10 +75,12 @@ $(function(){
         if(this.checked){
             $(".card_slct").val("1");
             console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
             requestToApi();
         } else {
             $(".card_slct").val("0");
             console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
             requestToApi();
         };
     });
@@ -78,10 +88,12 @@ $(function(){
         if(this.checked){
             $(".nosmoking_slct").val("1");
             console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
             requestToApi();
         } else {
             $(".nosmoking_slct").val("0");
             console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
             requestToApi();
         };
     });
@@ -137,8 +149,6 @@ function createJson(params) {
 
 function requestToApi() {
     var themeName = 'sk-cube-grid';
-    clearMarkers();
-    
     var message;
 
     $.i18n.properties({ 
