@@ -37,31 +37,31 @@ public class BaseController {
     public String home(Model model) {
         return "index";
     }
-    
+
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/navi")
     @ResponseBody
     public Stores json(@RequestBody String text) {
-	    try {
-		    Option option = RequestParser.parse(text);
-		    Translate translate = new Translate(option.seachText, "ja");
-		    option.translatedSeachText=translateService.translate(translate);
-		    Stores stores = guruNaviApiClient.execute(option);
-		    stores = stores.filterJsonValue(option);
+        try {
+            Option option = RequestParser.parse(text);
+            Translate translate = new Translate(option.seachText, "ja");
+            option.translatedSeachText=translateService.translate(translate);
+            Stores stores = guruNaviApiClient.execute(option);
+            stores = stores.filterJsonValue(option);
 
-		    return stores;
-	    } catch (JsonSyntaxException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-	    } catch (ParseException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-	    } catch (IOException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-	    } catch (HttpException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-	    }
-	    return null;
+            return stores;
+        } catch (JsonSyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (HttpException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
 }
