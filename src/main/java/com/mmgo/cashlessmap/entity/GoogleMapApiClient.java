@@ -49,6 +49,7 @@ public class GoogleMapApiClient {
         }
         builder.setParameter("origin", coordinates.get(0).toString());
         builder.setParameter("destination", coordinates.get(1).toString());
+        builder.setParameter("mode", "walking");
         builder.setParameter("key", KEY);
         try {
             return new HttpGet(builder.build());
