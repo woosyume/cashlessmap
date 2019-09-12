@@ -154,13 +154,15 @@ function requestToApi() {
         	console.log(json);
 
         	json["stores"].forEach(function(store){
-              var latitude = store["latitude"];
-              var longitude = store["longitude"];
-              setMarker(latitude, longitude);
-          })
+                var latitude = store["latitude"];
+                var longitude = store["longitude"];
+                var name = store["translatedName"];
+                var pr = store["translatedPrShort"];
+                setMarker(latitude, longitude, name, pr);
+            })
 
         }).fail(function(jqXHR, textStatus, errorThrown){
             alert('error');
-     });
+        });
      HoldOn.close();
 }
