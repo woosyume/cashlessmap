@@ -11,7 +11,7 @@ function setMarker(lat, lng) {
     });
     markers.push(marker);
     marker.addListener("click", function() {
-        alert("店の情報");
+    	requestDurationToApi(currentPosition.latitude, currentPosition.longitude, lat, lng);
     });
 }
 
@@ -29,6 +29,29 @@ function clearMarkers() {
         }
     }));
 }
+
+function requestDurationToApi(fromLat, fromLng, toLat, toLng) {
+	var json = {
+		    fromLatitude: fromLat,
+		    fromLongitude: fromLng,
+		    toLatitude: toLat,
+		    toLongitude: toLng
+	}
+
+	$.ajax({
+	    url: "/map/duration",
+	    type: 'post',
+	    dataType: 'json',
+	    contentType: 'application/json',
+	    data : JSON.stringify(json)
+	})
+	.done(function(json, textStatus, jqXHR){
+	    console.log(json);
+	}).fail(function(jqXHR, textStatus, errorThrown){
+	    alert('error');
+	});
+}
+
 
 function success(position) {
     var MyLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
