@@ -83,6 +83,9 @@ public class GurunaviApiClient {
 			store.prLong = element.getAsJsonObject().get("pr").getAsJsonObject().get("pr_long").getAsString();
 			store.creditCard = element.getAsJsonObject().get("credit_card").getAsString();
 			store.eMoney = element.getAsJsonObject().get("e_money").getAsString();
+			store.shopImage1 = element.getAsJsonObject().get("image_url").getAsJsonObject().get("shop_image1").getAsString();
+			store.shopImage2 = element.getAsJsonObject().get("image_url").getAsJsonObject().get("shop_image2").getAsString();
+			store.qrCode = element.getAsJsonObject().get("image_url").getAsJsonObject().get("qrcode").getAsString();
 			store.latitude = element.getAsJsonObject().get("latitude").getAsString();
 			store.longitude = element.getAsJsonObject().get("longitude").getAsString();
 			stores.add(store);
