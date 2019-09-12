@@ -136,7 +136,7 @@ function createJson(params) {
 }
 
 function requestToApi() {
-    var themeName = 'sk-dot';
+    var themeName = 'sk-cube-grid';
     clearMarkers();
     HoldOn.open({
         theme: themeName,
