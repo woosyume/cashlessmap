@@ -37,20 +37,17 @@
     }
 
     #rakuten-selected {
-        border: 2px solid lightgray;
         margin-top: 0px;
         z-index: 10;
         margin-top: 40px;
     }
 
     #paypay-selected {
-        border: 2px solid lightgray;
         margin-top: 0px;
         z-index: 10;
     }
 
     #apple-selected {
-        border: 2px solid lightgray;
         margin-top: 0px;
         z-index: 10;
     }
@@ -119,10 +116,6 @@
         opacity: 1;
     }
 
-    h1 {
-        margin: 0px;
-    }
-
     #wrapper {
         width: 500px;
         display:flex;
@@ -177,6 +170,12 @@
         transform: translateY(-12px) rotate(45deg);
     }
 
+    .img_logo {
+        width: 87%;
+        padding-top: 20px;
+        padding-left: 13px;
+    }
+
     nav {
         width: 250px;
         height: 100%;
@@ -198,4 +197,7 @@
         color: #fff;
         text-align: center;
         padding: 10px 0;
+    }
+    body {
+        margin: 0px;
     }
