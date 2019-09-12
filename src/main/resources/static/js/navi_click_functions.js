@@ -159,7 +159,10 @@ function requestToApi() {
                 var longitude = store["longitude"];
                 var name = store["translatedName"];
                 var pr = store["translatedPrShort"];
-                setMarker(latitude, longitude, name, pr);
+                var img1 = store["shopImage1"]; //src of img
+                var img2 = store["shopImage2"];
+                var QR = store["qrCode"];
+                setMarker(latitude, longitude, name, pr, img1, img2, QR);
                 HoldOn.close();
             })
 

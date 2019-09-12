@@ -3,8 +3,8 @@ var map;
 var markers = [];
 var currentPosition;
 
-function setMarker(lat, lng, name, pr) {
-    var markerLatLng = new google.maps.LatLng(lat, lng, name, pr);
+function setMarker(lat, lng, name, pr, img1, img2, QR) {
+    var markerLatLng = new google.maps.LatLng(lat, lng, name, pr, img1, img2, QR);
     var marker = new google.maps.Marker({
         position: markerLatLng,
         map: map,
@@ -14,6 +14,10 @@ function setMarker(lat, lng, name, pr) {
         document.getElementById("storeName").innerHTML = name;
         document.getElementById("PR").innerHTML = pr;
                 $('.detail').addClass('open');
+                //if(img1=="")
+                $(".shopImage1").attr("src", img1);
+                $(".shopImage2").attr("src", img2);
+                $(".QR").attr("src", QR);
         });
         
 }

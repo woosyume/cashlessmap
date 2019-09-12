@@ -3,7 +3,7 @@
 }
 
 .detail {
-    width: 250px;
+    width: 500px;
     height: 100%;
     padding-top: 100px;
     background-color:rgba(255, 255, 255, 0.5);
@@ -11,7 +11,7 @@
     top: 0;
     right: 0;
     z-index: 10;
-    transform: translate(300px);
+    transform: translate(500px);
     transition: all .5s;
     overflow: scroll;
     padding: 0;
@@ -22,7 +22,11 @@ h1.open {
 p.open {
     transform: translateZ(0);
 }
-
+#storeName {
+    color: #6594e0;
+    border-bottom: dashed 2px #6594e0;
+}
+    
 .batsu {
     display: inline-block;
     width: 30px;
