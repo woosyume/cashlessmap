@@ -107,20 +107,19 @@ function collectValuesAsList(lang) {
     if ($('#rakutenicon').attr('value') == 0 &&
      $('#paypayicon').attr('value') == 0 &&
      $('#appleicon').attr('value') == 0) {
-        array_pay.push("rakutenpay"); // Set rakuten pay as default
+        array_pay.push("楽天ペイ"); // Set rakuten pay as default
     } else {
-        if ($('#rakutenicon').attr('value') == 1) array_pay.push("rakutenpay");
-        if ($('#paypayicon').attr('value') == 1) array_pay.push("paypay");
-        if ($('#appleicon').attr('value') == 1) array_pay.push("applepay");
+        if ($('#rakutenicon').attr('value') == 1) array_pay.push("楽天ペイ");
+        if ($('#paypayicon').attr('value') == 1) array_pay.push("PayPay");
+        if ($('#appleicon').attr('value') == 1) array_pay.push("Apple Pay");
     }
     array.push(array_pay);
     // Options
     array.push($('.lunch_slct').val());
     array.push($('.card_slct').val());
     array.push($('.nosmoking_slct').val());
-    // TODO : latitude
-    array.push("34.662778");
-    array.push("135.572867");
+    array.push(getCurrentPosision().latitude);
+    array.push(getCurrentPosision().longitude);
     return array;
 }
 function createJson(params) {
