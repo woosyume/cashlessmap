@@ -79,6 +79,7 @@ public class GurunaviApiClient {
 		for(JsonElement element : object.getAsJsonArray("rest")) {
 			Store store = new Store();
 			store.name = element.getAsJsonObject().get("name").getAsString();
+			store.storeId = element.getAsJsonObject().get("id").getAsString();
 			store.prShort = element.getAsJsonObject().get("pr").getAsJsonObject().get("pr_short").getAsString();
 			store.prLong = element.getAsJsonObject().get("pr").getAsJsonObject().get("pr_long").getAsString();
 			store.creditCard = element.getAsJsonObject().get("credit_card").getAsString();
