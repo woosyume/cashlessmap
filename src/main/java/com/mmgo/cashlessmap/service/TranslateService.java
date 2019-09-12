@@ -27,7 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TranslateService {
 
-    private String credential =  "AIzaSyAEuceCXpy1UCZs9J6ic-XHtSafbntDFeA";
+    private final String CREDENTIAL =  "AIzaSyAEuceCXpy1UCZs9J6ic-XHtSafbntDFeA";
+    private final String TRANSLATE_HOST = "https://translation.googleapis.com/language/translate/v2";
     
     private Gson gson = new Gson();
 
@@ -64,11 +65,13 @@ public class TranslateService {
         
     	URIBuilder builder = null;
       try {
-        builder = new URIBuilder("https://translation.googleapis.com/language/translate/v2");
+        builder = new URIBuilder(TRANSLATE_HOST);
       } catch (URISyntaxException e) {
         e.printStackTrace();
       }
-      builder.setParameter("q", todo.getText()).setParameter("target", todo.getTargetLanguage()).setParameter("key",credential);
+      builder.setParameter("q", todo.getText())
+          .setParameter("target", todo.getTargetLanguage())
+          .setParameter("key", CREDENTIAL);
       try {
         return new HttpPost(builder.build());
       } catch (URISyntaxException e) {

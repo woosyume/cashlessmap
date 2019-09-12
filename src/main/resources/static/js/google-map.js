@@ -7,7 +7,7 @@ function setMarker(lat, lng) {
     var markerLatLng = new google.maps.LatLng(lat, lng);
     var marker = new google.maps.Marker({
         position: markerLatLng,
-        map: map
+        map: map,
     });
     markers.push(marker);
     marker.addListener("click", function() {
@@ -22,7 +22,11 @@ function clearMarkers() {
     }
     markers.push( new google.maps.Marker({
         position: new google.maps.LatLng(currentPosition.latitude, currentPosition.longitude),
-        map: map
+        map: map,
+        icon: {
+            url: "image/glico.png",
+            scaledSize: new google.maps.Size(56, 84)
+        }
     }));
 }
 
@@ -37,7 +41,14 @@ function success(position) {
     currentPosition = position.coords;
     map = new google.maps.Map(document.getElementById('map'), Options);
 
-    setMarker(position.coords.latitude, position.coords.longitude);
+    markers.push( new google.maps.Marker({
+        position: new google.maps.LatLng(currentPosition.latitude, currentPosition.longitude),
+        map: map,
+        icon: {
+            url: "image/glico.png",
+            scaledSize: new google.maps.Size(56, 84)
+        }
+    }));
 }
 
 function getCurrentPosision() {

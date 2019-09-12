@@ -6,11 +6,8 @@ import javax.persistence.*;
 @Entity
 public class Translate {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long number;
+	@Id
     private String text;
-    private String sourceLanguage;
     private String targetLanguage;
     private String translatedText;
 
@@ -18,20 +15,6 @@ public class Translate {
     	this.text = text;
     	this.targetLanguage = targetLanguage;    	
     }
-
-	/**
-	 * @return the number
-	 */
-	public Long getNumber() {
-		return number;
-	}
-
-	/**
-	 * @param number the number to set
-	 */
-	public void setNumber(Long number) {
-		this.number = number;
-	}
 
 	/**
 	 * @return the title
@@ -59,20 +42,6 @@ public class Translate {
 	 */
 	public void setDescription(String translatedText) {
 		this.translatedText = translatedText;
-	}
-
-	/**
-	 * @return the sourceLanguage
-	 */
-	public String getSourceLanguage() {
-		return sourceLanguage;
-	}
-
-	/**
-	 * @param sourceLanguage the sourceLanguage to set
-	 */
-	public void setSourceLanguage(String sourceLanguage) {
-		this.sourceLanguage = sourceLanguage;
 	}
 
 	/**

@@ -1,12 +1,13 @@
-var language;
+var language = 'en';
 $(function(){
     // Set language for creating dynamic url
     $('input[name="lang"]').change(function() {
         language = $(this).val();
         console.log(createJson(collectValuesAsList(language)));
+        loadLanguage(language);
         requestToApi();
     })
-
+                    
     // Set options for creating dynamic url
     $("#rakutenicon").click(function(){
         if ($("#rakutenicon").attr("value") == 0){
@@ -98,20 +99,20 @@ $(function createJson(params) {
     obj.card = params[4];
     obj.latitude = params[5];
     obj.longitude = params[6];
-    obj.seachText = params[7];
+    obj.searchText = params[7];
     return obj;
 })
 function collectValuesAsList(lang) {
     var array  = new Array();
     // Language
     array.push(lang);
-
+    
     // Pay
     var array_pay  = new Array();
     if ($('#rakutenicon').attr('value') == 0 &&
-      $('#paypayicon').attr('value') == 0 &&
-      $('#appleicon').attr('value') == 0) {
-        array_pay.push("Suica"); // Set rakuten pay as default
+     $('#paypayicon').attr('value') == 0 &&
+     $('#appleicon').attr('value') == 0) {
+        array_pay.push("楽天ペイ"); // Set rakuten pay as default
     } else {
         if ($('#rakutenicon').attr('value') == 1) array_pay.push("楽天ペイ");
         if ($('#paypayicon').attr('value') == 1) array_pay.push("PayPay");
@@ -122,9 +123,8 @@ function collectValuesAsList(lang) {
     array.push($('.lunch_slct').val());
     array.push($('.card_slct').val());
     array.push($('.nosmoking_slct').val());
-    currentPosition = getCurrentPosision();
-    array.push(currentPosition.latitude);
-    array.push(currentPosition.longitude);
+    array.push(getCurrentPosision().latitude);
+    array.push(getCurrentPosision().longitude);
     array.push($('#text1').val());
     return array;
 }
@@ -137,7 +137,7 @@ function createJson(params) {
     obj.nosmoking = params[4];
     obj.latitude = params[5];
     obj.longitude = params[6];
-    obj.seachText = params[7];
+    obj.searchText = params[7];
     var jsontext = JSON.stringify(obj);
     return jsontext;
 }
