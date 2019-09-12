@@ -18,7 +18,7 @@ function success(position) {
         }
     }));
 }
-sleep(1500);
+// sleep(1500);
 navigator.geolocation.getCurrentPosition(success);
 
 $(document).ready(function() {
@@ -26,7 +26,7 @@ $(document).ready(function() {
     $("#rakuten-selected").attr("src", src);
 
     // currentPosition
-
+    sleep(1500);
     
     requestToApi();
     var defaultLang='en';

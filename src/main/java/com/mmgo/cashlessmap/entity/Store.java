@@ -12,4 +12,7 @@ public class Store {
 	public String eMoney;
 	public String latitude;
 	public String longitude;
+	public String shopImage1;
+	public String shopImage2;
+	public String qrCode;
 }

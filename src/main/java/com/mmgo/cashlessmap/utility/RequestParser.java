@@ -24,6 +24,15 @@ public class RequestParser {
 		return option;
 	}
 
+	public static Option getOptionWithParsedJsonForInternational(String text) {
+		Option option = new Option();
+		JsonObject jsonObj = new Gson().fromJson(text, JsonObject.class);
+
+		option.lang = jsonObj.get("lang").getAsString();
+		option.storeId = jsonObj.get("storeId").getAsString();		
+		return option;
+	}
+
 	private static List<String> getPayAsList(JsonObject jsonObject) {
 		List<String> pay = new ArrayList<String>();
 		for(JsonElement element : jsonObject.getAsJsonArray("pay")) {
@@ -33,6 +42,7 @@ public class RequestParser {
 	}
 
 	private static Integer getEMoneyAsInt(JsonObject jsonObject) {
+		System.out.println("json=" + jsonObject);
 		if(jsonObject.getAsJsonArray("pay").size() == 0) {
 			return 0;
 		} else {

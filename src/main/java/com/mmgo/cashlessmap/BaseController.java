@@ -71,11 +71,7 @@ public class BaseController {
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/international")
     @ResponseBody
     public Stores international(@RequestBody String text) {
-        Option option = RequestParser.parse(text);
-
-        JsonObject jsonObj = new Gson().fromJson(text, JsonObject.class);
-        option.lang = jsonObj.get("lang").getAsString();
-        option.storeId = jsonObj.get("storeId").getAsString();
+        Option option = RequestParser.getOptionWithParsedJsonForInternational(text);
         Stores stores = null;
         try {
             stores = guruNaviApiClient.execute(option);
