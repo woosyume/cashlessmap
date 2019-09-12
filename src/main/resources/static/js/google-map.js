@@ -17,7 +17,7 @@ function setMarker(lat, lng, name, pr, img1, img2, QR) {
                 //if(img1=="")
                 $(".shopImage1").attr("src", img1);
                 $(".shopImage2").attr("src", img2);
-                $(".QR").attr("src", QR);
+                $("#QR").attr("src", "https://c-r.gnst.jp/tool/qr/?id=kc92111&q=6");
         });
         
 }
