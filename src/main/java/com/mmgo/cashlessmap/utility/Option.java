@@ -12,6 +12,8 @@ public class Option {
 	public Integer eMoney;
 	public String latitude;
 	public String longitude;
+	public String seachText;
+	public String translatedSeachText;
 	public final Integer hitPerPage = 100;
 	public final String range = "5";
 }

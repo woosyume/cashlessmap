@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.google.gson.JsonSyntaxException;
 import com.mmgo.cashlessmap.entity.GurunaviApiClient;
 import com.mmgo.cashlessmap.entity.Stores;
+import com.mmgo.cashlessmap.entity.Translate;
 import com.mmgo.cashlessmap.service.TranslateService;
 import com.mmgo.cashlessmap.utility.Option;
 import com.mmgo.cashlessmap.utility.RequestParser;
@@ -29,35 +30,38 @@ public class BaseController {
 
     @Autowired
     private TranslateService translateService;
-    
+
     private GurunaviApiClient guruNaviApiClient = new GurunaviApiClient();
 
     @GetMapping("/")
     public String home(Model model) {
         return "index";
     }
-    
+
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/navi")
     @ResponseBody
     public Stores json(@RequestBody String text) {
-	    try {
-		    Option option = RequestParser.parse(text);
+        try {
+            Option option = RequestParser.parse(text);
+            Translate translate = new Translate(option.seachText, "ja");
+            option.translatedSeachText=translateService.translate(translate);
+            Stores stores = guruNaviApiClient.execute(option);
+            stores = stores.filterJsonValue(option);
 
-		    Stores stores = guruNaviApiClient.execute(option);
-		    stores = stores.filterJsonValue(option);
-		    stores = translateService.translate(stores, option);
-
-		    return stores;
-	    } catch (JsonSyntaxException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-	    } catch (ParseException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-	    } catch (IOException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-	    }
-	    return null;
+            return stores;
+        } catch (JsonSyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (HttpException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
 }
