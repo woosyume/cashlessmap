@@ -42,7 +42,6 @@ public class RequestParser {
 	}
 
 	private static Integer getEMoneyAsInt(JsonObject jsonObject) {
-		System.out.println("json=" + jsonObject);
 		if(jsonObject.getAsJsonArray("pay").size() == 0) {
 			return 0;
 		} else {

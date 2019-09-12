@@ -44,11 +44,9 @@ public class GurunaviApiClient {
 		try {
 			builder = new URIBuilder(GNAVI_API_HOST);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		System.out.println("storeID=" + option.storeId);
 		if (StringUtil.isNullOrEmpty(option.storeId)) {
 			builder.setParameter("keyid", CREDENTIAL)
 			.setParameter("latitude", option.latitude)
@@ -66,10 +64,8 @@ public class GurunaviApiClient {
 		}
 		
     	try {
-			System.out.println("url=" + builder.build().toString());
 			return new HttpGet(builder.build());
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	return null;

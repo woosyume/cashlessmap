@@ -35,7 +35,7 @@ function setMarker(lat, lng, name, pr, img1, img2, QR, storeId) {
             var name, storeId;
         	json["stores"].forEach(function(store){
                 name = store["name"];
-                storeId = store["prShort"];
+                storeId = store["translatedPrShort"];
             })
             document.getElementById("storeName").innerHTML = name;
             document.getElementById("storeName").style.color = 'navy';
