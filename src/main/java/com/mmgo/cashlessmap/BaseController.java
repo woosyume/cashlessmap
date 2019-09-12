@@ -1,15 +1,19 @@
 package com.mmgo.cashlessmap;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.google.gson.JsonSyntaxException;
+import com.mmgo.cashlessmap.entity.Coordinate;
+import com.mmgo.cashlessmap.entity.GoogleMapApiResponse;
 import com.mmgo.cashlessmap.entity.GurunaviApiClient;
 import com.mmgo.cashlessmap.entity.Stores;
+import com.mmgo.cashlessmap.service.GoogleMapApiService;
 import com.mmgo.cashlessmap.service.TranslateService;
+import com.mmgo.cashlessmap.utility.CoordinateParser;
 import com.mmgo.cashlessmap.utility.Option;
 import com.mmgo.cashlessmap.utility.RequestParser;
 
-import org.apache.http.HttpException;
 import org.apache.http.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +33,7 @@ public class BaseController {
 
     @Autowired
     private TranslateService translateService;
-    
+
     private GurunaviApiClient guruNaviApiClient = new GurunaviApiClient();
 
     @GetMapping("/")
@@ -59,5 +63,13 @@ public class BaseController {
 		    e.printStackTrace();
 	    }
 	    return null;
+    }
+
+	@RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/map/duration")
+	@ResponseBody
+	public GoogleMapApiResponse duration(@RequestBody String request) {
+		List<Coordinate> coordinates = CoordinateParser.parse(request);
+		GoogleMapApiResponse googleMapApiResponse = GoogleMapApiService.getDirection(coordinates);
+		return googleMapApiResponse;
     }
 }

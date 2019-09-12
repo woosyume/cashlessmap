@@ -35,9 +35,7 @@ public class TranslateService {
     public Stores translate(Stores stores, Option option) {
       try {
         for(Store store : stores.getStores()) {
-          Translate translate = new Translate(store.name, option.lang);
-          store.translatedName = translate(translate);
-          translate.setText(store.prLong);
+          Translate translate = new Translate(store.prLong, option.lang);
           store.translatedPrLong = translate(translate);
           translate.setText(store.prShort);
           store.translatedPrShort = translate(translate);
