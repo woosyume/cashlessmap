@@ -1,4 +1,4 @@
-var language;
+var language = 'en';
 $(function(){
     // Set language for creating dynamic url
     $('input[name="lang"]').change(function() {
