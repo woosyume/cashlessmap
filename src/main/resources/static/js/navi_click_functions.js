@@ -50,11 +50,10 @@ $(function(){
             requestToApi();
         };
     });
-	$("#button1").click(function() {
-		var seachText = $('#text1').val();
-		console.log(createJson(collectValuesAsList(language)));
-		requestToApi();
-	});
+    $("#button1").click(function() {
+        console.log(createJson(collectValuesAsList(language)));
+        requestToApi();
+    });
     // Set options for creating dynamic url
     $(".lunch_slct").click(function(){
         if(this.checked){
