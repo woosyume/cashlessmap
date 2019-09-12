@@ -141,7 +141,12 @@ function createJson(params) {
     var jsontext = JSON.stringify(obj);
     return jsontext;
 }
-
+document.onkeypress = enter;
+function enter(){
+  if( window.event.keyCode == 13 ){
+    return false;
+  }
+}
 function requestToApi() {
     var themeName = 'sk-dot';
     clearMarkers();
