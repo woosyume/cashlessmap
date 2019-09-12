@@ -23,58 +23,58 @@ import io.grpc.internal.IoUtils;
 public class GurunaviApiClient {
 
 	private Gson gson = new Gson();
-	
+
 	private final String CREDENTIAL = "e7295aa012ca9b21408cca91e1aa32f4"; // TODO property
 	private final String GNAVI_API_HOST = "https://api.gnavi.co.jp/RestSearchAPI/v3/";
-	
+
 	public Stores execute(Option option) throws JsonSyntaxException, ParseException, IOException {
-        try (CloseableHttpResponse response = HttpClients.createDefault().execute(findStore(option));) {
-            int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode == HttpStatus.SC_OK) {
-                return transformFrom(parseText(response.getEntity()));
-            } else {
-	            return this.processNotFoundResult(parseText(response.getEntity()));
-            }
-        }
-    }
-	
+		try (CloseableHttpResponse response = HttpClients.createDefault().execute(findStore(option));) {
+			int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode == HttpStatus.SC_OK) {
+				return transformFrom(parseText(response.getEntity()));
+			} else {
+				return this.processNotFoundResult(parseText(response.getEntity()));
+			}
+		}
+	}
+
 	public Stores execute(String storeId)throws JsonSyntaxException, ParseException, IOException{
 		try (CloseableHttpResponse response = HttpClients.createDefault().execute(findStore(storeId));) {
-            int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode == HttpStatus.SC_OK) {
-                return transformFrom(parseText(response.getEntity()));
-            } else {
-	            return this.processNotFoundResult(parseText(response.getEntity()));
-            }
-        }
+			int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode == HttpStatus.SC_OK) {
+				return transformFrom(parseText(response.getEntity()));
+			} else {
+				return this.processNotFoundResult(parseText(response.getEntity()));
+			}
+		}
 	}
-	
+
 	private HttpGet findStore(Option option) {
-    	URIBuilder builder = null;
+		URIBuilder builder = null;
 		try {
 			builder = new URIBuilder(GNAVI_API_HOST);
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	builder.setParameter("keyid", CREDENTIAL)
-    	.setParameter("latitude", option.latitude)
-    	.setParameter("longitude",option.longitude)
-    	.setParameter("e_money",option.eMoney.toString())
-    	.setParameter("lunch",option.lunch.toString())
-    	.setParameter("no_smoking",option.noSmoking.toString())
-      	.setParameter("card", option.card.toString())
-      	.setParameter("hit_per_page", option.hitPerPage.toString())
-    	.setParameter("range",option.range);
-    	try {
+		builder.setParameter("keyid", CREDENTIAL)
+			.setParameter("latitude", option.latitude)
+			.setParameter("longitude",option.longitude)
+			.setParameter("e_money",option.eMoney.toString())
+			.setParameter("lunch",option.lunch.toString())
+			.setParameter("no_smoking",option.noSmoking.toString())
+			.setParameter("card", option.card.toString())
+			.setParameter("hit_per_page", option.hitPerPage.toString())
+			.setParameter("range",option.range);
+		try {
 			return new HttpGet(builder.build());
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	return null;
-    }
-	
+		return null;
+	}
+
 	private HttpGet findStore(String storeId) {
 		URIBuilder builder = null;
 		try {
@@ -83,26 +83,26 @@ public class GurunaviApiClient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	builder.setParameter("keyid", CREDENTIAL)
-    	.setParameter("id", storeId);
-    	try {
+		builder.setParameter("keyid", CREDENTIAL)
+			.setParameter("id", storeId);
+		try {
 			return new HttpGet(builder.build());
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	return null;
-		
+		return null;
+
 	}
-    
+
 	private String parseText(HttpEntity entity) throws JsonSyntaxException, ParseException, IOException {
 		String response;
 		InputStream istream = entity.getContent();
 		byte[] bytes = IoUtils.toByteArray(istream);
 		response = new String(bytes, "UTF-8");
 		return response;
-    }
-	
+	}
+
 	private Stores transformFrom(String response) {
 		JsonObject object = gson.fromJson(response, JsonObject.class);
 		Stores stores = new Stores();
@@ -121,10 +121,10 @@ public class GurunaviApiClient {
 			store.longitude = element.getAsJsonObject().get("longitude").getAsString();
 			stores.add(store);
 		}
-        return stores;
+		return stores;
 	}
-	
+
 	private Stores processNotFoundResult(String response) {
-        return new Stores();
+		return new Stores();
 	}
 }

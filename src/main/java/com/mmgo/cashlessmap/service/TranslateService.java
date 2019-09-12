@@ -29,30 +29,30 @@ public class TranslateService {
 
     private final String CREDENTIAL =  "AIzaSyAEuceCXpy1UCZs9J6ic-XHtSafbntDFeA";
     private final String TRANSLATE_HOST = "https://translation.googleapis.com/language/translate/v2";
-    
+
     private Gson gson = new Gson();
 
     public Stores translate(Stores stores, Option option) {
-      try {
-        for(Store store : stores.getStores()) {
-          Translate translate = new Translate(store.name, option.lang);
-          store.translatedName = translate(translate);
-          translate.setText(store.prLong);
-          store.translatedPrLong = translate(translate);
-          translate.setText(store.prShort);
-          store.translatedPrShort = translate(translate);
+        try {
+            for(Store store : stores.getStores()) {
+                Translate translate = new Translate(store.name, option.lang);
+                store.translatedName = translate(translate);
+                translate.setText(store.prLong);
+                store.translatedPrLong = translate(translate);
+                translate.setText(store.prShort);
+                store.translatedPrShort = translate(translate);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (HttpException e) {
+            e.printStackTrace();
         }
-      } catch (IOException e) {
-        e.printStackTrace();
-      } catch (HttpException e) {
-        e.printStackTrace();
-      }
-      return stores;
+        return stores;
     }
 
     public String translate(Translate translate) throws JsonSyntaxException, ParseException, IOException, HttpException {
         if(translate.getTargetLanguage().equals("ja")) {
-          return translate.getText();
+            return translate.getText();
         }
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(createQueryHttpPost(translate));) {
             int statusCode = response.getStatusLine().getStatusCode();
@@ -65,27 +65,27 @@ public class TranslateService {
     }
 
     private HttpPost createQueryHttpPost(Translate todo) {
-        
-    	URIBuilder builder = null;
-      try {
-        builder = new URIBuilder(TRANSLATE_HOST);
-      } catch (URISyntaxException e) {
-        e.printStackTrace();
-      }
-      builder.setParameter("q", todo.getText())
-          .setParameter("target", todo.getTargetLanguage())
-          .setParameter("key", CREDENTIAL);
-      try {
-        return new HttpPost(builder.build());
-      } catch (URISyntaxException e) {
-        e.printStackTrace();
-      }
-    	return null;
+
+        URIBuilder builder = null;
+        try {
+            builder = new URIBuilder(TRANSLATE_HOST);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        builder.setParameter("q", todo.getText())
+            .setParameter("target", todo.getTargetLanguage())
+            .setParameter("key", CREDENTIAL);
+        try {
+            return new HttpPost(builder.build());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
-    
+
     private String parseTranslationText(HttpEntity entity) throws JsonSyntaxException, ParseException, IOException {
         JsonObject object = gson.fromJson(EntityUtils.toString(entity, "UTF-8"), JsonObject.class);
-        
+
         return object
             .getAsJsonObject("data")
             .getAsJsonArray("translations")
@@ -94,10 +94,10 @@ public class TranslateService {
             .get("translatedText")
             .getAsString();
     }
-    
+
     public Stores translate(Stores stores, String targetLang) throws JsonSyntaxException, ParseException, IOException, HttpException {
-    	for(Store store : stores.getStores()) {
-    		try (CloseableHttpResponse response = HttpClients.createDefault().execute(createQueryHttpPost(store.prShort, targetLang));) {
+        for(Store store : stores.getStores()) {
+            try (CloseableHttpResponse response = HttpClients.createDefault().execute(createQueryHttpPost(store.prShort, targetLang));) {
                 int statusCode = response.getStatusLine().getStatusCode();
                 if (statusCode == HttpStatus.SC_OK) {
                     store.prShort = parseTranslationText(response.getEntity());
@@ -105,28 +105,28 @@ public class TranslateService {
                     throw new HttpException(Integer.toString(statusCode));
                 }
             }
-    	}
-    	return stores;
+        }
+        return stores;
     }
-    
+
     private HttpPost createQueryHttpPost(String text, String targetLang) {
-      System.out.println(text);
-      System.out.println(targetLang);
-    	
-      URIBuilder builder = null;
-      try {
-        builder = new URIBuilder(TRANSLATE_HOST);
-      } catch (URISyntaxException e) {
-        e.printStackTrace();
-      }
-      builder.setParameter("q", text)
-          .setParameter("target", targetLang)
-          .setParameter("key", CREDENTIAL);
-      try {
-        return new HttpPost(builder.build());
-      } catch (URISyntaxException e) {
-        e.printStackTrace();
-      }
-    	return null;
+        System.out.println(text);
+        System.out.println(targetLang);
+
+        URIBuilder builder = null;
+        try {
+            builder = new URIBuilder(TRANSLATE_HOST);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        builder.setParameter("q", text)
+            .setParameter("target", targetLang)
+            .setParameter("key", CREDENTIAL);
+        try {
+            return new HttpPost(builder.build());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
