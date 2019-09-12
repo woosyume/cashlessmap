@@ -86,6 +86,32 @@ public class BaseController {
         return stores;
     }
 
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/search")
+	@ResponseBody
+	public Stores searchWithKeyword(@RequestBody String text) {
+        Option option = RequestParser.getOptionWithParsedJsonForSearch(text);
+        Translate translate = new Translate(option.getFreeWord(), option.lang);
+
+        try {
+            option.translatedSeachText = translateService.translate(translate);
+        } catch (JsonSyntaxException | ParseException | IOException | HttpException e) {
+            e.printStackTrace();
+        }
+
+        Stores stores = null;
+        try {
+            stores = guruNaviApiClient.execute(option);
+        } catch (JsonSyntaxException | ParseException | IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            stores = translateService.translate(stores, option);
+        } catch (JsonSyntaxException | ParseException e) {
+            e.printStackTrace();
+        }
+        return stores;
+    }
+
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/map/duration")
 	@ResponseBody
 	public GoogleMapApiResponse duration(@RequestBody String request) {

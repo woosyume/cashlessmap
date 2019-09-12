@@ -15,14 +15,23 @@ public class Option {
 	public String longitude;
 	public String seachText;
 	public String translatedSeachText;
+	private String freeWord;
 	public final Integer hitPerPage = 100;
 	public final String range = "5";
 
 	@Override
 	public String toString() {
-		return "Option [card=" + card + ", eMoney=" + eMoney + ", hitPerPage=" + hitPerPage + ", lang=" + lang
-				+ ", latitude=" + latitude + ", longitude=" + longitude + ", lunch=" + lunch + ", noSmoking="
-				+ noSmoking + ", pay=" + pay + ", range=" + range + ", seachText=" + seachText + ", storeId=" + storeId
-				+ ", translatedSeachText=" + translatedSeachText + "]";
+		return "Option [card=" + card + ", eMoney=" + eMoney + ", freeWord=" + freeWord + ", hitPerPage=" + hitPerPage
+				+ ", lang=" + lang + ", latitude=" + latitude + ", longitude=" + longitude + ", lunch=" + lunch
+				+ ", noSmoking=" + noSmoking + ", pay=" + pay + ", range=" + range + ", seachText=" + seachText
+				+ ", storeId=" + storeId + ", translatedSeachText=" + translatedSeachText + "]";
+	}
+
+	public String getFreeWord() {
+		return freeWord;
+	}
+
+	public void setFreeWord(String freeWord) {
+		this.freeWord = freeWord;
 	}
 }

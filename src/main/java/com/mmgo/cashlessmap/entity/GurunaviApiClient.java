@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 
 import com.google.gson.JsonElement;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.ParseException;
@@ -46,8 +48,12 @@ public class GurunaviApiClient {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
+		if (StringUtils.isEmpty(option.storeId) 
+		&& StringUtils.isNotEmpty(option.getFreeWord())) {
+			builder.setParameter("keyid", CREDENTIAL)
+			.setParameter("freeword", option.getFreeWord());
 
-		if (StringUtil.isNullOrEmpty(option.storeId)) {
+		} else if (StringUtils.isEmpty(option.storeId)) {
 			builder.setParameter("keyid", CREDENTIAL)
 			.setParameter("latitude", option.latitude)
 			.setParameter("longitude",option.longitude)
@@ -58,7 +64,8 @@ public class GurunaviApiClient {
 			  .setParameter("hit_per_page", option.hitPerPage.toString())
 			.setParameter("range",option.range)
 			.setParameter("freeword",option.translatedSeachText);
-		} else {
+			
+		}  else {
 			builder.setParameter("keyid", CREDENTIAL)
 			.setParameter("id", option.storeId);
 		}

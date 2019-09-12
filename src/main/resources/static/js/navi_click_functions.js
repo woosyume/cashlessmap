@@ -130,8 +130,11 @@ function collectValuesAsList(lang) {
     array.push($('.lunch_slct').val());
     array.push($('.card_slct').val());
     array.push($('.nosmoking_slct').val());
-    array.push(getCurrentPosision().latitude);
-    array.push(getCurrentPosision().longitude);
+    // array.push(currentPosition.latitude);
+    // array.push(currentPosition.longitude);
+    // TODO
+    array.push('34.668732');
+    array.push('135.501291');
     return array;
 }
 function createJson(params) {
@@ -209,6 +212,7 @@ function loadLanguage(lang) {
             $("#msg_menu_pay").text($.i18n.map.msg_menu_pay); 
             $("#msg_menu_settings").text($.i18n.map.msg_menu_settings); 
             $("#msg_menu_detail").text($.i18n.map.msg_menu_detail); 
+            $("#msg_search").val($.i18n.map.msg_search); 
         }
     });
 }
