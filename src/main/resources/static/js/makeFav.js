@@ -8,6 +8,7 @@ function toggleColor() {
         requestToFav();
     }
 }
+// TODO favorite function
 function requestToFav() {
     $.ajax({
         url: "/favorite",
@@ -18,6 +19,6 @@ function requestToFav() {
         console.log(json);
     })
     .fail(function(){
-        alert('noooo');
+
     });
 }
