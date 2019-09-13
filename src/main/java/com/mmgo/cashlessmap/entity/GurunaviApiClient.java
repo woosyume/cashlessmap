@@ -27,7 +27,7 @@ public class GurunaviApiClient {
 
 	private Gson gson = new Gson();
 	
-	private final String CREDENTIAL = "e7295aa012ca9b21408cca91e1aa32f4"; // TODO property
+	private final String CREDENTIAL = "470ad8db4ed9de3ca915bbd5b69fc2a1"; // TODO property
 	private final String GNAVI_API_HOST = "https://api.gnavi.co.jp/RestSearchAPI/v3/";
 	
 	public Stores execute(Option option) throws JsonSyntaxException, ParseException, IOException {

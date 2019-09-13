@@ -8,7 +8,7 @@ var directionsDisplay = new google.maps.DirectionsRenderer({
     preserveViewport: true
 });
 
-function setMarker(lat, lng, name, pr, img1, img2, QR, storeId) {
+function setMarker(lat, lng, name, pr, img1, img2, QR, storeId, tel) {
     var markerLatLng = new google.maps.LatLng(lat, lng, name, pr, img1, img2, QR);
     var marker = new google.maps.Marker({
         position: markerLatLng,
@@ -38,9 +38,12 @@ function setMarker(lat, lng, name, pr, img1, img2, QR, storeId) {
                 storeId = store["translatedPrShort"];
             })
             document.getElementById("storeName").innerHTML = name;
-            document.getElementById("storeName").style.color = 'navy';
-            document.getElementById("storeName").style.borderBottom = 'dashed 2px navy';
+            document.getElementById("storeName").style.color = '#202f55';
+            document.getElementById("storeName").style.borderBottom = 'dashed 2px #202f55';
             document.getElementById("PR").innerHTML = storeId;
+            document.getElementById('PR').style.color = 'dimgray';
+            document.getElementById('tel').innerHTML = tel;
+            document.getElementById('tel').style.color = "dimgray";
 
             var defaultImage = 'image/default.jpeg';
             if (img1 != '' || img2 != '') {
@@ -98,7 +101,8 @@ function requestDurationToApi(fromLat, fromLng, toLat, toLng) {
 	})
 	.done(function(json, textStatus, jqXHR){
 		//console(json["duration"]);
-	    document.getElementById("time").innerHTML = json["duration"];
+        document.getElementById("time").innerHTML = json["duration"];
+        document.getElementById('time').style.color = 'dimgray';
 	}).fail(function(jqXHR, textStatus, errorThrown){
 	});
 }
