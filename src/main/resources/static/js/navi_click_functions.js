@@ -89,6 +89,22 @@ $(function(){
             requestToApi();
         };
     });
+    $("#wechaticon").click(function(){
+        if ($("#wechaticon").attr("value") == 0){
+            $("#wechaticon").attr('value', "1");
+            var src = 'image/wechat.png';
+            $("#wechat-selected").attr("src", src);
+            console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
+            requestToApi();
+        } else {
+            $("#wechaticon").attr("value", 0);
+            $("#wechat-selected").attr("src", "");
+            console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
+            requestToApi();
+        };
+    });
     // Set options for creating dynamic url
     $(".lunch_slct").click(function(){
         if(this.checked){
@@ -199,6 +215,7 @@ function collectValuesAsList(lang) {
         if ($('#rakutenicon').attr('value') == 1) array_pay.push("楽天ペイ");
         if ($('#paypayicon').attr('value') == 1) array_pay.push("PayPay");
         if ($('#appleicon').attr('value') == 1) array_pay.push("Apple Pay");
+        if ($('#wechaticon').attr('value') == 1) array_pay.push("WeChat Pay");
     }
     array.push(array_pay);
     // Options
@@ -211,8 +228,8 @@ function collectValuesAsList(lang) {
     // array.push(currentPosition.latitude);
     // array.push(currentPosition.longitude);
     // TODO
-    array.push('34.6940735');
-    array.push('135.4935862');
+    array.push('34.668917');
+    array.push('135.500929');
 
     var array_card  = new Array();
     if ($('#visaicon').attr('value') == 1) array_card.push("Visa");
