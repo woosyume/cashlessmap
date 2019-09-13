@@ -60,8 +60,11 @@ public class GurunaviApiClient {
 			.setParameter("e_money",option.eMoney.toString())
 			.setParameter("lunch",option.lunch.toString())
 			.setParameter("no_smoking",option.noSmoking.toString())
-			  .setParameter("card", option.card.toString())
-			  .setParameter("hit_per_page", option.hitPerPage.toString())
+			.setParameter("bottomless_cup", option.bottomlessCup.toString())
+			.setParameter("private_room", option.privateRoom.toString())
+			.setParameter("wifi", option.wifi.toString())
+			.setParameter("card", option.card.toString())
+			.setParameter("hit_per_page", option.hitPerPage.toString())
 			.setParameter("range",option.range)
 			.setParameter("freeword",option.translatedSeachText);
 			
@@ -98,6 +101,7 @@ public class GurunaviApiClient {
             store.prLong = element.getAsJsonObject().get("pr").getAsJsonObject().get("pr_long").getAsString();
             store.creditCard = element.getAsJsonObject().get("credit_card").getAsString();
             store.eMoney = element.getAsJsonObject().get("e_money").getAsString();
+            store.tel = element.getAsJsonObject().get("tel").getAsString();
             store.shopImage1 = element.getAsJsonObject().get("image_url").getAsJsonObject().get("shop_image1").getAsString();
             store.shopImage2 = element.getAsJsonObject().get("image_url").getAsJsonObject().get("shop_image2").getAsString();
             store.qrCode = element.getAsJsonObject().get("image_url").getAsJsonObject().get("qrcode").getAsString();

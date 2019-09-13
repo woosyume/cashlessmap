@@ -10,6 +10,7 @@ public class Store {
 	public String translatedPrLong;
 	public String creditCard;
 	public String eMoney;
+	public String tel;
 	public String latitude;
 	public String longitude;
 	public String shopImage1;

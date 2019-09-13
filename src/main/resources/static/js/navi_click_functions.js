@@ -129,24 +129,66 @@ $(function(){
             requestToApi();
         };
     });
+    $(".bottomlesscup_slct").click(function(){
+        if(this.checked){
+            $(".bottomlesscup_slct").val("1");
+            console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
+            requestToApi();
+        } else {
+            $(".bottomlesscup_slct").val("0");
+            console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
+            requestToApi();
+        };
+    });
+    $(".wifi_slct").click(function(){
+        if(this.checked){
+            $(".wifi_slct").val("1");
+            console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
+            requestToApi();
+        } else {
+            $(".wifi_slct").val("0");
+            console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
+            requestToApi();
+        };
+    });
+    $(".privateroom_slct").click(function(){
+        if(this.checked){
+            $(".privateroom_slct").val("1");
+            console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
+            requestToApi();
+        } else {
+            $(".privateroom_slct").val("0");
+            console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
+            requestToApi();
+        };
+    });
 });
 $(function createJson(params) {
     var obj = new Object();
     obj.lang = params[0];
     obj.pay = params[1];
     obj.lunch = params[2];
-    obj.nosmoking = params[3];
-    obj.card = params[4];
-    obj.latitude = params[5];
-    obj.longitude = params[6];
-    obj.creditCard = params[7];
+    obj.card = params[3];
+    obj.nosmoking = params[4];
+    obj.bottomlesscup = params[5];
+    obj.wifi = params[6];
+    obj.privateroom = params[7];
+    obj.latitude = params[8];
+    obj.longitude = params[9];
+    obj.creditCard = params[10];
     return obj;
 })
 function collectValuesAsList(lang) {
     var array  = new Array();
     // Language
     array.push(lang);
-    
+
     // Pay
     var array_pay  = new Array();
     if ($('#rakutenicon').attr('value') == 0 &&
@@ -163,6 +205,9 @@ function collectValuesAsList(lang) {
     array.push($('.lunch_slct').val());
     array.push($('.card_slct').val());
     array.push($('.nosmoking_slct').val());
+    array.push($('.bottomlesscup_slct').val());
+    array.push($('.wifi_slct').val());
+    array.push($('.privateroom_slct').val());
     // array.push(currentPosition.latitude);
     // array.push(currentPosition.longitude);
     // TODO
@@ -183,9 +228,12 @@ function createJson(params) {
     obj.lunch = params[2];
     obj.card = params[3];
     obj.nosmoking = params[4];
-    obj.latitude = params[5];
-    obj.longitude = params[6];
-    obj.creditCard = params[7];
+    obj.bottomlesscup = params[5];
+    obj.wifi = params[6];
+    obj.privateroom = params[7];
+    obj.latitude = params[8];
+    obj.longitude = params[9];
+    obj.creditCard = params[10];
     var jsontext = JSON.stringify(obj);
     return jsontext;
 }
@@ -194,12 +242,12 @@ function requestToApi() {
     var themeName = 'sk-cube-grid';
     var message;
 
-    $.i18n.properties({ 
-        name: 'Messages', 
-        path: 'bundle/', 
-        mode: 'both', 
-        language: language, 
-        callback: function() { 
+    $.i18n.properties({
+        name: 'Messages',
+        path: 'bundle/',
+        mode: 'both',
+        language: language,
+        callback: function() {
             message = $.i18n.map.msg_loading;
         }
     });
@@ -235,25 +283,29 @@ function requestToApi() {
             })
 
         }).fail(function(jqXHR, textStatus, errorThrown){
-            alert('error');
+        	alert(createJson(collectValuesAsList(language)))
+        	alert('error');
         });
 }
 
 function loadLanguage(lang) {
-    $.i18n.properties({ 
-        name: 'Messages', 
-        path: 'bundle/', 
-        mode: 'both', 
-        language: lang, 
-        callback: function() { 
+    $.i18n.properties({
+        name: 'Messages',
+        path: 'bundle/',
+        mode: 'both',
+        language: lang,
+        callback: function() {
             $("#msg_welcome").text($.i18n.map.msg_welcome);
-            $("#msg_option_lunch").text($.i18n.map.msg_option_lunch); 
-            $("#msg_option_card").text($.i18n.map.msg_option_card); 
-            $("#msg_option_nosmoking").text($.i18n.map.msg_option_nosmoking); 
+            $("#msg_option_lunch").text($.i18n.map.msg_option_lunch);
+            $("#msg_option_card").text($.i18n.map.msg_option_card);
+            $("#msg_option_nosmoking").text($.i18n.map.msg_option_nosmoking);
+            $("#msg_option_bottomlesscup").text($.i18n.map.msg_option_bottomlesscup);
+            $("#msg_option_wifi").text($.i18n.map.msg_option_wifi);
+            $("#msg_option_privateroom").text($.i18n.map.msg_option_privateroom);
             $("#msg_menu_pay").text($.i18n.map.msg_menu_pay);
             $("#msg_menu_card").text($.i18n.map.msg_menu_card);
             $("#msg_menu_settings").text($.i18n.map.msg_menu_settings);
-            $("#msg_menu_detail").text($.i18n.map.msg_menu_detail); 
+            $("#msg_menu_detail").text($.i18n.map.msg_menu_detail);
             $("#msg_search").val($.i18n.map.msg_search);
         }
     });

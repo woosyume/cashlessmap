@@ -18,6 +18,9 @@ public class RequestParser {
 		option.lang = jsonObj.get("lang").getAsString();
 		option.card = jsonObj.get("card").getAsInt();		
 		option.lunch = jsonObj.get("lunch").getAsInt();
+		option.bottomlessCup = jsonObj.get("bottomlesscup").getAsInt();
+		option.privateRoom = jsonObj.get("privateroom").getAsInt();
+		option.wifi = jsonObj.get("wifi").getAsInt();
 		option.noSmoking = jsonObj.get("nosmoking").getAsInt();
 		option.latitude = jsonObj.get("latitude").getAsString();
 		option.longitude = jsonObj.get("longitude").getAsString();
