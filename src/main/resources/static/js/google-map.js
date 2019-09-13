@@ -18,7 +18,7 @@ function setMarker(lat, lng, name, pr, img1, img2, QR, storeId) {
     marker.addListener("click", function() {
         requestDurationToApi(currentPosition.latitude, currentPosition.longitude, lat, lng);
         setRoute(currentPosition.latitude, currentPosition.longitude, lat, lng);
-        
+
         $('.detail').addClass('open');
         // Request to translate details for clicked merchant.
         $.ajax({
@@ -41,7 +41,7 @@ function setMarker(lat, lng, name, pr, img1, img2, QR, storeId) {
             document.getElementById("storeName").style.color = 'navy';
             document.getElementById("storeName").style.borderBottom = 'dashed 2px navy';
             document.getElementById("PR").innerHTML = storeId;
-    
+
             var defaultImage = 'image/default.jpeg';
             if (img1 != '' || img2 != '') {
                 $(".shopImage1").attr("src", img1);
@@ -51,7 +51,7 @@ function setMarker(lat, lng, name, pr, img1, img2, QR, storeId) {
                 $(".shopImage2").attr("src", defaultImage);
             }
             $(".QR").attr("src", QR);
-    
+
         }).fail(function(jqXHR, textStatus, errorThrown){
             alert('error');
         });
@@ -97,7 +97,8 @@ function requestDurationToApi(fromLat, fromLng, toLat, toLng) {
 	    data : JSON.stringify(json)
 	})
 	.done(function(json, textStatus, jqXHR){
-	    console.log(json);
+		console(json["duration"]);
+	    document.getElementById("time").innerHTML = json["duration"];
 	}).fail(function(jqXHR, textStatus, errorThrown){
 	});
 }
