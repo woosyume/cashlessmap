@@ -68,6 +68,12 @@
         margin-top: 0px;
         z-index: 10;
     }
+
+    #wechat-selected {
+        margin-top: 0px;
+        z-index: 10;
+    }
+
     .btn-square {
  		display: inline-block;
   		padding: 0.2em 1em;
