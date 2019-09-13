@@ -97,7 +97,7 @@ function requestDurationToApi(fromLat, fromLng, toLat, toLng) {
 	    data : JSON.stringify(json)
 	})
 	.done(function(json, textStatus, jqXHR){
-		console(json["duration"]);
+		//console(json["duration"]);
 	    document.getElementById("time").innerHTML = json["duration"];
 	}).fail(function(jqXHR, textStatus, errorThrown){
 	});

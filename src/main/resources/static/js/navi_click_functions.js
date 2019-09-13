@@ -133,8 +133,8 @@ function collectValuesAsList(lang) {
     // array.push(currentPosition.latitude);
     // array.push(currentPosition.longitude);
     // TODO
-    array.push('34.668732');
-    array.push('135.501291');
+    array.push('34.6940735');
+    array.push('135.4935862');
     return array;
 }
 function createJson(params) {
