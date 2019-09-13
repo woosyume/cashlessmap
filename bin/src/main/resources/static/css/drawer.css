@@ -1,5 +1,5 @@
     .hidden_box {
-        margin: 2em 0;/*蜑榊ｾ後�ｮ菴咏區*/
+        margin: 2em 0;/*前後の余白*/
         padding: 0;
     }
 
@@ -24,10 +24,6 @@
         display: none;
     }
 
-    #card {
-        display: none;
-    }
-
     #pay {
         display: none;
     }
@@ -38,19 +34,6 @@
 
     #pay1 {
         display: none;
-    }
-
-
-    #visa-selected {
-        margin-top: 0px;
-        z-index: 10;
-        margin-top: 40px;
-    }
-
-    #masterscard-selected {
-        margin-top: 0px;
-        z-index: 10;
-        margin-top: 40px;
     }
 
     #rakuten-selected {
@@ -69,12 +52,12 @@
         z-index: 10;
     }
     .btn-square {
-        font-size: 14px;
  		display: inline-block;
   		padding: 0.2em 1em;
   		text-decoration: none;
   		background: red;
   		color: white;
+  		border-bottom: solid 2px #627295;
   		border-radius: 1px;
 	}
 	.btn-square:active {
@@ -83,16 +66,16 @@
   		border-bottom: none;
 	}
 	.textbox{
-        width: 160px;
-        padding: 2px 8px;
-        border-radius: 6px;
-        border-top: 1px solid #aaa;
-        border-left: 1px solid #aaa;
-        border-right: 2px solid #aaa;
-        border-bottom: 2px solid #aaa;
-        background-image: none;
-        background-color: #ddd;
-        font-size: 16px;
+ 	 width: 160px;
+	 padding: 2px 8px;
+  	 border-radius: 6px;
+  	 border-top: 1px solid #aaa;
+  	 border-left: 1px solid #aaa;
+  	 border-right: 2px solid #aaa;
+  	 border-bottom: 2px solid #aaa;
+  	 background-image: none
+  	 background-color: #ddd;
+  	 font-size: 16px;
   	 }
 
     .hidden_box .hidden_show {
