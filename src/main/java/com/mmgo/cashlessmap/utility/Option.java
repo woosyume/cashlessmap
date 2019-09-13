@@ -15,7 +15,8 @@ public class Option {
 	public String longitude;
 	public String seachText;
 	public String translatedSeachText;
-	private String freeWord;
+    public List<String> creditCards = new ArrayList();
+    private String freeWord;
 	public final Integer hitPerPage = 100;
 	public final String range = "5";
 

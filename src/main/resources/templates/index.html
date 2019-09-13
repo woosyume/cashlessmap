@@ -26,7 +26,9 @@
                 <image src="" id="rakuten-selected" width="40">
                 <image src="" id="paypay-selected" width="40">
                 <image src="" id="apple-selected" width="40">
-            </div>  
+                <image src="" id="visa-selected" width="40">
+                <image src="" id="masterscard-selected" width="40">
+            </div>
         </div> 
         <div class="detail">
         <div class="batsu"><span></span></div>
@@ -64,6 +66,18 @@
                 <!-- /Logo -->            
                 <form method="POST">
                 <div class="hidden_box">
+
+                <label for="card" id="msg_menu_card"></label>
+                <input type="checkbox" id="card"/>
+                <div class="hidden_show" style="padding-top: 10%;">
+                  <div id="visaicon" value="0">
+                    <img src="image/visa.png" width="40%">
+                  </div>
+                  <div id="masterscardicon" value="0">
+                    <img src="image/masterscard.png" width="40%" >
+                  </div>
+                </div>
+
                 <label for="pay" id="msg_menu_pay"></label>
                 <input type="checkbox" id="pay"/>
                 <div class="hidden_show" style="padding-top: 10%;">
