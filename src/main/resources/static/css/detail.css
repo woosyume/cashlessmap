@@ -4,6 +4,7 @@ h1 {
 }
 .detail.open {
     transform: translateZ(0);
+    padding: 0px;
 }
 .detail {
     width: 500px;
@@ -28,12 +29,10 @@ p.open {
 
 .batsu {
     display: inline-block;
-    width: 30px;
-    height: 30px;
-    position: relative;
-    cursor: pointer;
+    font-size: 56px;
+    width: 56px;
 }
-.batsu span::before,
+/* .batsu span::before,
 .batsu span::after {
     display: block;
     content: "";
@@ -50,4 +49,4 @@ p.open {
 }
 .batsu span::after {
     transform: rotate(45deg);
-}
+} */
