@@ -11,6 +11,9 @@ public class Option {
 	public Integer noSmoking;
 	public Integer card;
 	public Integer eMoney;
+	public Integer bottomlessCup;
+	public Integer privateRoom;
+	public Integer wifi;
 	public String latitude;
 	public String longitude;
 	public String seachText;
