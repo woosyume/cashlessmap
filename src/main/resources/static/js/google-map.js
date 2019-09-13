@@ -35,15 +35,21 @@ function setMarker(lat, lng, name, pr, img1, img2, QR, storeId) {
             var name, storeId;
         	json["stores"].forEach(function(store){
                 name = store["name"];
-                storeId = store["prShort"];
+                storeId = store["translatedPrShort"];
             })
             document.getElementById("storeName").innerHTML = name;
             document.getElementById("storeName").style.color = 'navy';
             document.getElementById("storeName").style.borderBottom = 'dashed 2px navy';
             document.getElementById("PR").innerHTML = storeId;
     
-            $(".shopImage1").attr("src", img1);
-            $(".shopImage2").attr("src", img2);
+            var defaultImage = 'image/default.jpeg';
+            if (img1 != '' || img2 != '') {
+                $(".shopImage1").attr("src", img1);
+                $(".shopImage2").attr("src", img2);
+            } else {
+                $(".shopImage1").attr("src", defaultImage);
+                $(".shopImage2").attr("src", defaultImage);
+            }
             $(".QR").attr("src", QR);
     
         }).fail(function(jqXHR, textStatus, errorThrown){

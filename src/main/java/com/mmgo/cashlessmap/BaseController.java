@@ -1,12 +1,19 @@
 package com.mmgo.cashlessmap;
 
 import java.io.IOException;
+import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.mmgo.cashlessmap.entity.Coordinate;
+import com.mmgo.cashlessmap.entity.GoogleMapApiResponse;
 import com.mmgo.cashlessmap.entity.GurunaviApiClient;
 import com.mmgo.cashlessmap.entity.Stores;
 import com.mmgo.cashlessmap.entity.Translate;
+import com.mmgo.cashlessmap.service.GoogleMapApiService;
 import com.mmgo.cashlessmap.service.TranslateService;
+import com.mmgo.cashlessmap.utility.CoordinateParser;
 import com.mmgo.cashlessmap.utility.Option;
 import com.mmgo.cashlessmap.utility.RequestParser;
 
@@ -50,18 +57,66 @@ public class BaseController {
 
             return stores;
         } catch (JsonSyntaxException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (HttpException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return null;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/international")
+    @ResponseBody
+    public Stores international(@RequestBody String text) {
+        Option option = RequestParser.getOptionWithParsedJsonForInternational(text);
+        Stores stores = null;
+        try {
+            stores = guruNaviApiClient.execute(option);
+        } catch (JsonSyntaxException | ParseException | IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            stores = translateService.translate(stores, option);
+        } catch (JsonSyntaxException | ParseException e) {
+            e.printStackTrace();
+        }
+        return stores;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/search")
+	@ResponseBody
+	public Stores searchWithKeyword(@RequestBody String text) {
+        Option option = RequestParser.getOptionWithParsedJsonForSearch(text);
+        Translate translate = new Translate(option.getFreeWord(), option.lang);
+
+        try {
+            option.translatedSeachText = translateService.translate(translate);
+        } catch (JsonSyntaxException | ParseException | IOException | HttpException e) {
+            e.printStackTrace();
+        }
+
+        Stores stores = null;
+        try {
+            stores = guruNaviApiClient.execute(option);
+        } catch (JsonSyntaxException | ParseException | IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            stores = translateService.translate(stores, option);
+        } catch (JsonSyntaxException | ParseException e) {
+            e.printStackTrace();
+        }
+        return stores;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json", value="/map/duration")
+	@ResponseBody
+	public GoogleMapApiResponse duration(@RequestBody String request) {
+		List<Coordinate> coordinates = CoordinateParser.parse(request);
+		GoogleMapApiResponse googleMapApiResponse = GoogleMapApiService.getDirection(coordinates);
+		return googleMapApiResponse;
     }
 }

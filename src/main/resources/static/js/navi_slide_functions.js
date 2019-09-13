@@ -18,15 +18,15 @@ function success(position) {
         }
     }));
 }
-sleep(1500);
 navigator.geolocation.getCurrentPosition(success);
+sleep(1500);
 
 $(document).ready(function() {
     var src = 'image/rakutenpay.png';
     $("#rakuten-selected").attr("src", src);
 
     // currentPosition
-
+    // sleep(1500);
     
     requestToApi();
     var defaultLang='en';
