@@ -24,6 +24,10 @@
         display: none;
     }
 
+    #card {
+        display: none;
+    }
+
     #pay {
         display: none;
     }
@@ -34,6 +38,19 @@
 
     #pay1 {
         display: none;
+    }
+
+
+    #visa-selected {
+        margin-top: 0px;
+        z-index: 10;
+        margin-top: 40px;
+    }
+
+    #masterscard-selected {
+        margin-top: 0px;
+        z-index: 10;
+        margin-top: 40px;
     }
 
     #rakuten-selected {
