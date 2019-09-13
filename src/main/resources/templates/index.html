@@ -7,17 +7,17 @@
         <link rel="stylesheet" href="css/google-map.css" type="text/css">
         <link rel="stylesheet" href="css/drawer.css" type="text/css">
         <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-        <link href="css/HoldOn.css" rel="stylesheet">
-        <link href="css/detail.css" rel="stylesheet">
-        <script src="js/HoldOn.js"></script>
+        <link href="/css/HoldOn.css" rel="stylesheet">
+        <link href="/css/detail.css" rel="stylesheet">
+        <script src="/js/HoldOn.js"></script>
         <script type="text/javascript" language="JavaScript" src="js/jquery.i18n.properties-min.js"></script>
         <link rel="stylesheet" href="css/slider-pro.min.css"/>
         <script src="js/jquery.sliderPro.min.js"></script>
     </head>
     <body>
         <div id="map"></div>
-        <script src="js/google-map.js"></script>
-        <script src="js/navi_click_functions.js"></script>
+        <script src="/js/google-map.js"></script>
+        <script src="/js/navi_click_functions.js"></script>
         <div class="menu-trigger" >
             <span></span>
             <span></span>
@@ -29,12 +29,12 @@
                 <image src="" id="visa-selected" width="40">
                 <image src="" id="masterscard-selected" width="40">
             </div>
-        </div>
+        </div> 
         <div class="detail">
-        <div class="batsu"><span></span></div>
-
+        <div class="batsu">×</div>
+            
             <svg width="30" height="30" viewBox="-200 -200 400 400" onclick="toggleColor()">
-            <g id="star" transform="translate(0,16) scale(2)" style="fill:none;stroke:black;stroke-width:10 ;stroke-linejoin:round;">
+            <g id="star" transform="translate(0,16) scale(2)" style="fill:none;stroke:gray;stroke-width:25 ;stroke-linejoin:round;">
             <path
                     d="M0.000   -100.000
                     L-31.153 -42.878
@@ -52,21 +52,48 @@
         <div class="details">
         <h1 id="storeName">
         </h1>
-            <img src="" class="shopImage1">
-            <img src="" class="shopImage2">
-            <p id="PR">
-            </p>
+        <div class="slider-pro" id="slider1">
+            <div class="sp-slides">
+                <!-- Slide 1 -->
+                <div class="sp-slide">
+                    <img class="sp-image" id="shopImage1" src=""/>
+                </div>
+                <!-- Slide 2 -->
+                <div class="sp-slide">
+                    <img class="sp-image" id="shopImage2" src=""/>
+                </div>
+            </div>
+        </div>
+        <p id="PR">
+        </p>
+        <p id="tel"></p>
+        <p id="time"></p>
         </div>
         </div>
         <nav>
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="image/logo.png" class="img_logo"/>
+                    <img src="/image/logo.png" class="img_logo"/>
                 </div>
                 <!-- /Logo -->
-                <form method="POST">
-                <div class="hidden_box">
+          <form method="POST">
 
+            <div class="hidden_box">
+              <label for="pay" id="msg_menu_pay"></label>
+              <input type="checkbox" id="pay"/>
+              <div class="hidden_show" style="padding-top: 10%;">
+                <div id="rakutenicon" value="1">
+                  <img src="image/selectrakuten.png" width="40%">
+                </div>
+                <div id="paypayicon" value="0">
+                  <img src="image/selectpaypay.png" width="40%" >
+                </div>
+                <div id="appleicon" value="0">
+                  <img src="image/selectapple.png" width="40%">
+                </div>
+              </div>
+
+              <div class="hidden_box">
                 <label for="card" id="msg_menu_card"></label>
                 <input type="checkbox" id="card"/>
                 <div class="hidden_show" style="padding-top: 10%;">
@@ -77,76 +104,65 @@
                     <img src="image/masterscard.png" width="40%" >
                   </div>
                 </div>
+              </div>
 
-                <label for="pay" id="msg_menu_pay"></label>
-                <input type="checkbox" id="pay"/>
-                <div class="hidden_show" style="padding-top: 10%;">
-                    <div id="rakutenicon" value="1">
-                        <img src="image/selectrakuten.png" width="40%">
-                    </div>
-                    <div id="paypayicon" value="0">
-                        <img src="image/selectpaypay.png" width="40%" >
-                    </div>
-                    <div id="appleicon" value="0">
-                        <img src="image/selectapple.png" width="40%">
-                    </div>
-                </div>
-                <div class="hidden_box">
+              <div class="hidden_box">
                 <label for="settings" id="msg_menu_settings"></label>
                 <input type="checkbox" id="settings"/>
                 <div class="hidden_show" style="padding-top: 10%;">
-                    <input type="radio" class="lang_en" name="lang" value="en">English
-                    <br>
-                    <input type="radio" class="lang_cn" name="lang" value="zh-CN">中文
-                    <br>
-                    <input type="radio" class="lang_mo" name="lang" value="mn">Монгол хэл
-                    <br>
-                    <input type="radio" class="lang_kr" name="lang" value="ko">한글
-                    <br>
-                    <input type="radio" class="lang_ja" name="lang" value="ja">日本語
-                    <br>
+                  <input type="radio" class="lang_en" name="lang" value="en">English
+                  <br>
+                  <input type="radio" class="lang_cn" name="lang" value="zh-CN">中文
+                  <br>
+                  <input type="radio" class="lang_mo" name="lang" value="mn">Монгол хэл
+                  <br>
+                  <input type="radio" class="lang_kr" name="lang" value="ko">한글
+                  <br>
+                  <input type="radio" class="lang_ja" name="lang" value="ja">日本語
+                  <br>
                 </div>
                 <div class="hidden_box">
-                <label for="description" id="msg_menu_detail"></label>
-                <input type="checkbox" id="description"/>
-                <div class="hidden_show">
+                  <label for="description" id="msg_menu_detail"></label>
+                  <input type="checkbox" id="description"/>
+                  <div class="hidden_show">
                     <div id="hidden_options">
-                        <div id="wrapper">
-                            <input type="checkbox" name="lunch" value="0" class="lunch_slct"><div id="msg_option_lunch"></div>
-                        </div>
-                        <br>
-                        <div id="wrapper">
-                            <input type="checkbox" name="card" value="0" class="card_slct"/><div id="msg_option_card"></div>
-                        </div>
-                        <br>
-                        <div id="wrapper">
-                            <input type="checkbox" name="no-smoking" value="0" class="nosmoking_slct"><div id="msg_option_nosmoking"></div>
-                        </div>
-                        <br>
-                        <div id="wrapper">
-                            <input type="checkbox" name="bottomless_cup" value="0" class="bottomlesscup_slct"><div id="msg_option_bottomlesscup"></div>
-                        </div>
-                        <br>
-                        <div id="wrapper">
-                            <input type="checkbox" name="wifi" value="0" class="wifi_slct"><div id="msg_option_wifi"></div>
-                        </div>
-                        <br>
-                        <div id="wrapper">
-                            <input type="checkbox" name="private_room" value="0" class="privateroom_slct"><div id="msg_option_privateroom"></div>
-                        </div>
-                        <br>
+                      <div id="wrapper">
+                        <input type="checkbox" name="lunch" value="0" class="lunch_slct"><div id="msg_option_lunch"></div>
+                      </div>
+                      <br>
+                      <div id="wrapper">
+                        <input type="checkbox" name="card" value="0" class="card_slct"/><div id="msg_option_card"></div>
+                      </div>
+                      <br>
+                      <div id="wrapper">
+                        <input type="checkbox" name="no-smoking" value="0" class="nosmoking_slct"><div id="msg_option_nosmoking"></div>
+                      </div>
+                      <br>
+                      <div id="wrapper">
+                        <input type="checkbox" name="bottomless_cup" value="0" class="bottomlesscup_slct"><div id="msg_option_bottomlesscup"></div>
+                      </div>
+                      <br>
+                      <div id="wrapper">
+                        <input type="checkbox" name="wifi" value="0" class="wifi_slct"><div id="msg_option_wifi"></div>
+                      </div>
+                      <br>
+                      <div id="wrapper">
+                        <input type="checkbox" name="private_room" value="0" class="privateroom_slct"><div id="msg_option_privateroom"></div>
+                      </div>
+                      <br>
                     </div>
+                  </div>
+                  <br>
+                  <br>
+                  <input type="text" class="searchKeyword" required />
+                  <input type="button" class="btn-square" value="Search" id="msg_search"/>
                 </div>
-                <br>
-                <br>
-                <input type="text" class="searchKeyword" required />
-                <input type="button" class="btn-square" value="Search" id="msg_search"/>
-                </div>
-            </form>
+          </form>
         </nav>
         <div class="overlay"></div>
-        <script src="js/navi_slide_functions.js"></script>
-        <script src="js/navi_search_function.js"></script>
-        <script src="js/makeFav.js"></script>
+        <script src="/js/navi_slide_functions.js"></script>
+        <script src="/js/navi_search_function.js"></script>
+        <script src="/js/makeFav.js"></script>
     </body>
 </html>
+>>>>>>> 632b06b62a0c08805379087f7ef6869b489fa99f

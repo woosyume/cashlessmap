@@ -8,7 +8,7 @@ var directionsDisplay = new google.maps.DirectionsRenderer({
     preserveViewport: true
 });
 
-function setMarker(lat, lng, name, pr, img1, img2, QR, storeId) {
+function setMarker(lat, lng, name, pr, img1, img2, QR, storeId, tel) {
     var markerLatLng = new google.maps.LatLng(lat, lng, name, pr, img1, img2, QR);
     var marker = new google.maps.Marker({
         position: markerLatLng,
@@ -18,7 +18,7 @@ function setMarker(lat, lng, name, pr, img1, img2, QR, storeId) {
     marker.addListener("click", function() {
         requestDurationToApi(currentPosition.latitude, currentPosition.longitude, lat, lng);
         setRoute(currentPosition.latitude, currentPosition.longitude, lat, lng);
-        
+
         $('.detail').addClass('open');
         // Request to translate details for clicked merchant.
         $.ajax({
@@ -38,20 +38,24 @@ function setMarker(lat, lng, name, pr, img1, img2, QR, storeId) {
                 storeId = store["translatedPrShort"];
             })
             document.getElementById("storeName").innerHTML = name;
-            document.getElementById("storeName").style.color = 'navy';
-            document.getElementById("storeName").style.borderBottom = 'dashed 2px navy';
+            document.getElementById("storeName").style.color = '#202f55';
+            document.getElementById("storeName").style.borderBottom = 'dashed 2px #202f55';
             document.getElementById("PR").innerHTML = storeId;
-    
+            document.getElementById('PR').style.color = 'dimgray';
+            document.getElementById('tel').innerHTML = tel;
+            document.getElementById('tel').style.color = "dimgray";
+
             var defaultImage = 'image/default.jpeg';
             if (img1 != '' || img2 != '') {
-                $(".shopImage1").attr("src", img1);
-                $(".shopImage2").attr("src", img2);
+                $("#shopImage1").attr("src", img1);
+                $("#shopImage2").attr("src", img2);
+                $( '#slider1' ).sliderPro();
             } else {
                 $(".shopImage1").attr("src", defaultImage);
                 $(".shopImage2").attr("src", defaultImage);
             }
             $(".QR").attr("src", QR);
-    
+
         }).fail(function(jqXHR, textStatus, errorThrown){
             alert('error');
         });
@@ -97,7 +101,9 @@ function requestDurationToApi(fromLat, fromLng, toLat, toLng) {
 	    data : JSON.stringify(json)
 	})
 	.done(function(json, textStatus, jqXHR){
-	    console.log(json);
+		//console(json["duration"]);
+        document.getElementById("time").innerHTML = json["duration"];
+        document.getElementById('time').style.color = 'dimgray';
 	}).fail(function(jqXHR, textStatus, errorThrown){
 	});
 }
