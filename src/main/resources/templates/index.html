@@ -7,17 +7,17 @@
         <link rel="stylesheet" href="css/google-map.css" type="text/css">
         <link rel="stylesheet" href="css/drawer.css" type="text/css">
         <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-        <link href="css/HoldOn.css" rel="stylesheet">
-        <link href="css/detail.css" rel="stylesheet">
-        <script src="js/HoldOn.js"></script>
+        <link href="/css/HoldOn.css" rel="stylesheet">
+        <link href="/css/detail.css" rel="stylesheet">
+        <script src="/js/HoldOn.js"></script>
         <script type="text/javascript" language="JavaScript" src="js/jquery.i18n.properties-min.js"></script>
         <link rel="stylesheet" href="css/slider-pro.min.css"/>
         <script src="js/jquery.sliderPro.min.js"></script>
     </head>
     <body>
         <div id="map"></div>
-        <script src="js/google-map.js"></script>
-        <script src="js/navi_click_functions.js"></script>
+        <script src="/js/google-map.js"></script>
+        <script src="/js/navi_click_functions.js"></script>
         <div class="menu-trigger" >
             <span></span>
             <span></span>
@@ -31,10 +31,10 @@
             </div>
         </div> 
         <div class="detail">
-        <div class="batsu"><span></span></div>
+        <div class="batsu">×</div>
             
             <svg width="30" height="30" viewBox="-200 -200 400 400" onclick="toggleColor()">
-            <g id="star" transform="translate(0,16) scale(2)" style="fill:none;stroke:black;stroke-width:10 ;stroke-linejoin:round;">
+            <g id="star" transform="translate(0,16) scale(2)" style="fill:none;stroke:gray;stroke-width:25 ;stroke-linejoin:round;">
             <path
                     d="M0.000   -100.000
                     L-31.153 -42.878
@@ -66,12 +66,14 @@
         </div>
         <p id="PR">
         </p>
+        <p id="tel"></p>
+        <p id="time"></p>
         </div>
         </div>
         <nav>
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="image/logo.png" class="img_logo"/>
+                    <img src="/image/logo.png" class="img_logo"/>
                 </div>
                 <!-- /Logo -->
           <form method="POST">
@@ -146,8 +148,8 @@
           </form>
         </nav>
         <div class="overlay"></div>
-        <script src="js/navi_slide_functions.js"></script>
-        <script src="js/navi_search_function.js"></script>
-        <script src="js/makeFav.js"></script>
+        <script src="/js/navi_slide_functions.js"></script>
+        <script src="/js/navi_search_function.js"></script>
+        <script src="/js/makeFav.js"></script>
     </body>
 </html>

@@ -150,8 +150,8 @@ function collectValuesAsList(lang) {
     // Pay
     var array_pay  = new Array();
     if ($('#rakutenicon').attr('value') == 0 &&
-     $('#paypayicon').attr('value') == 0 &&
-     $('#appleicon').attr('value') == 0) {
+        $('#paypayicon').attr('value') == 0 &&
+        $('#appleicon').attr('value') == 0) {
         array_pay.push("楽天ペイ"); // Set rakuten pay as default
     } else {
         if ($('#rakutenicon').attr('value') == 1) array_pay.push("楽天ペイ");
@@ -166,8 +166,8 @@ function collectValuesAsList(lang) {
     // array.push(currentPosition.latitude);
     // array.push(currentPosition.longitude);
     // TODO
-    array.push('34.693319');
-    array.push('135.494701');
+    array.push('34.6940735');
+    array.push('135.4935862');
 
     var array_card  = new Array();
     if ($('#visaicon').attr('value') == 1) array_card.push("Visa");
@@ -229,7 +229,8 @@ function requestToApi() {
                 var img2 = store["shopImage2"];
                 var QR = store["qrCode"];
                 var storeId = store["storeId"];
-                setMarker(latitude, longitude, name, pr, img1, img2, QR, storeId);
+                var tel = store["tel"];
+                setMarker(latitude, longitude, name, pr, img1, img2, QR, storeId, tel);
                 HoldOn.close();
             })
 

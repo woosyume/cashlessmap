@@ -1,9 +1,6 @@
-h1 {
-    color: #6594e0;
-    border-bottom: dashed 2px #6594e0;
-}
 .detail.open {
     transform: translateZ(0);
+    padding: 0px;
 }
 .detail {
     width: 500px;
@@ -28,12 +25,47 @@ p.open {
 
 .batsu {
     display: inline-block;
-    width: 30px;
-    height: 30px;
-    position: relative;
-    cursor: pointer;
+    font-size: 56px;
+    width: 56px;
 }
-.batsu span::before,
+#time {
+    position: relative;
+    padding-left: 1.2em;
+    line-height: 1.4;
+    margin-top: 20px;
+}
+#time::before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: .5em;
+    left: 0em;
+    width: 8px;
+    height: 3px;
+    border-left: 2px solid #202f55;
+    border-bottom: 2px solid #202f55;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+#tel {
+    position: relative;
+    padding-left: 1.2em;
+    line-height: 1.4;
+}
+#tel::before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: .5em;
+    left: 0em;
+    width: 8px;
+    height: 3px;
+    border-left: 2px solid #202f55;
+    border-bottom: 2px solid #202f55;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+/* .batsu span::before,
 .batsu span::after {
     display: block;
     content: "";
@@ -50,4 +82,4 @@ p.open {
 }
 .batsu span::after {
     transform: rotate(45deg);
-}
+} */
