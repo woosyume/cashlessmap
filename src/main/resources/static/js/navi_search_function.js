@@ -5,6 +5,8 @@ $(document).ready(function() {
         if (searchKeyword == '') {
             // No process
         } else {
+            clearMarkers();
+
             var themeName = 'sk-cube-grid';
             var message;
     
