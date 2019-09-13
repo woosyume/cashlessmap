@@ -44,8 +44,9 @@ function setMarker(lat, lng, name, pr, img1, img2, QR, storeId) {
     
             var defaultImage = 'image/default.jpeg';
             if (img1 != '' || img2 != '') {
-                $(".shopImage1").attr("src", img1);
-                $(".shopImage2").attr("src", img2);
+                $("#shopImage1").attr("src", img1);
+                $("#shopImage2").attr("src", img2);
+                $( '#slider1' ).sliderPro();
             } else {
                 $(".shopImage1").attr("src", defaultImage);
                 $(".shopImage2").attr("src", defaultImage);
