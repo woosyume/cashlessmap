@@ -228,8 +228,8 @@ function collectValuesAsList(lang) {
     // array.push(currentPosition.latitude);
     // array.push(currentPosition.longitude);
     // TODO
-    array.push('34.6940735');
-    array.push('135.4935862');
+    array.push('34.668917');
+    array.push('135.500929');
 
     var array_card  = new Array();
     if ($('#visaicon').attr('value') == 1) array_card.push("Visa");
