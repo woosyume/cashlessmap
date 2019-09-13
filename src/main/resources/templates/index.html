@@ -26,7 +26,9 @@
                 <image src="" id="rakuten-selected" width="40">
                 <image src="" id="paypay-selected" width="40">
                 <image src="" id="apple-selected" width="40">
-            </div>  
+                <image src="" id="visa-selected" width="40">
+                <image src="" id="masterscard-selected" width="40">
+            </div>
         </div> 
         <div class="detail">
         <div class="batsu">×</div>
@@ -50,12 +52,22 @@
         <div class="details">
         <h1 id="storeName">
         </h1>
-            <img src="" class="shopImage1">
-            <img src="" class="shopImage2">
-            <p id="PR">
-            </p>
-            <i class="fas fa-check"></i><p id="time"></p>
-            <i class="fas fa-check"></i><p id="tel"></p>
+        <div class="slider-pro" id="slider1">
+            <div class="sp-slides">
+                <!-- Slide 1 -->
+                <div class="sp-slide">
+                    <img class="sp-image" id="shopImage1" src=""/>
+                </div>
+                <!-- Slide 2 -->
+                <div class="sp-slide">
+                    <img class="sp-image" id="shopImage2" src=""/>
+                </div>
+            </div>
+        </div>
+        <p id="PR">
+        </p>
+        <p id="tel"></p>
+        <p id="time"></p>
         </div>
         </div>
         <nav>
@@ -63,62 +75,77 @@
                 <div class="logo">
                     <img src="/image/logo.png" class="img_logo"/>
                 </div>
-                <!-- /Logo -->            
-                <form method="POST">
-                <div class="hidden_box">
-                <label for="pay" id="msg_menu_pay"></label>
-                <input type="checkbox" id="pay"/>
-                <div class="hidden_show" style="padding-top: 10%;">
-                    <div id="rakutenicon" value="1">
-                        <img src="/image/selectrakuten.png" width="40%">
-                    </div>
-                    <div id="paypayicon" value="0">
-                        <img src="/image/selectpaypay.png" width="40%" >
-                    </div>
-                    <div id="appleicon" value="0">
-                        <img src="/image/selectapple.png" width="40%">
-                    </div>
+                <!-- /Logo -->
+          <form method="POST">
+
+            <div class="hidden_box">
+              <label for="pay" id="msg_menu_pay"></label>
+              <input type="checkbox" id="pay"/>
+              <div class="hidden_show" style="padding-top: 10%;">
+                <div id="rakutenicon" value="1">
+                  <img src="image/selectrakuten.png" width="40%">
                 </div>
-                <div class="hidden_box">
+                <div id="paypayicon" value="0">
+                  <img src="image/selectpaypay.png" width="40%" >
+                </div>
+                <div id="appleicon" value="0">
+                  <img src="image/selectapple.png" width="40%">
+                </div>
+              </div>
+
+              <div class="hidden_box">
+                <label for="card" id="msg_menu_card"></label>
+                <input type="checkbox" id="card"/>
+                <div class="hidden_show" style="padding-top: 10%;">
+                  <div id="visaicon" value="0">
+                    <img src="image/visa.png" width="40%">
+                  </div>
+                  <div id="masterscardicon" value="0">
+                    <img src="image/masterscard.png" width="40%" >
+                  </div>
+                </div>
+              </div>
+
+              <div class="hidden_box">
                 <label for="settings" id="msg_menu_settings"></label>
                 <input type="checkbox" id="settings"/>
                 <div class="hidden_show" style="padding-top: 10%;">
-                    <input type="radio" class="lang_en" name="lang" value="en">English
-                    <br>
-                    <input type="radio" class="lang_cn" name="lang" value="zh-CN">中文
-                    <br>
-                    <input type="radio" class="lang_mo" name="lang" value="mn">Монгол хэл
-                    <br>
-                    <input type="radio" class="lang_kr" name="lang" value="ko">한글
-                    <br>
-                    <input type="radio" class="lang_ja" name="lang" value="ja">日本語
-                    <br>
+                  <input type="radio" class="lang_en" name="lang" value="en">English
+                  <br>
+                  <input type="radio" class="lang_cn" name="lang" value="zh-CN">中文
+                  <br>
+                  <input type="radio" class="lang_mo" name="lang" value="mn">Монгол хэл
+                  <br>
+                  <input type="radio" class="lang_kr" name="lang" value="ko">한글
+                  <br>
+                  <input type="radio" class="lang_ja" name="lang" value="ja">日本語
+                  <br>
                 </div>
                 <div class="hidden_box">
-                <label for="description" id="msg_menu_detail"></label>
-                <input type="checkbox" id="description"/>
-                <div class="hidden_show">
+                  <label for="description" id="msg_menu_detail"></label>
+                  <input type="checkbox" id="description"/>
+                  <div class="hidden_show">
                     <div id="hidden_options">
-                        <div id="wrapper">
-                            <input type="checkbox" name="lunch" value="0" class="lunch_slct"><div id="msg_option_lunch"></div>
-                        </div>
-                        <br>
-                        <div id="wrapper">
-                            <input type="checkbox" name="card" value="0" class="card_slct"/><div id="msg_option_card"></div>
-                        </div>
-                        <br>
-                        <div id="wrapper">
-                            <input type="checkbox" name="no-smoking" value="0" class="nosmoking_slct"><div id="msg_option_nosmoking"></div>
-                        </div>
-                        <br>
+                      <div id="wrapper">
+                        <input type="checkbox" name="lunch" value="0" class="lunch_slct"><div id="msg_option_lunch"></div>
+                      </div>
+                      <br>
+                      <div id="wrapper">
+                        <input type="checkbox" name="card" value="0" class="card_slct"/><div id="msg_option_card"></div>
+                      </div>
+                      <br>
+                      <div id="wrapper">
+                        <input type="checkbox" name="no-smoking" value="0" class="nosmoking_slct"><div id="msg_option_nosmoking"></div>
+                      </div>
+                      <br>
                     </div>
+                  </div>
+                  <br>
+                  <br>
+                  <input type="text" class="searchKeyword" required />
+                  <input type="button" class="btn-square" value="Search" id="msg_search"/>
                 </div>
-                <br>
-                <br>
-                <input type="text" class="searchKeyword" required />
-                <input type="button" class="btn-square" value="Search" id="msg_search"/>
-                </div>
-            </form>
+          </form>
         </nav>
         <div class="overlay"></div>
         <script src="/js/navi_slide_functions.js"></script>

@@ -19,12 +19,22 @@ public class Stores {
 	public Stores filterJsonValue(Option option){
 		Stores newStores = new Stores();
 		for(Store store: this.getStores()) {
-			String[] pays = store.eMoney.split(",",0);	
+			String[] pays = store.eMoney.split(",",0);
+			String[] creditCards = store.creditCard.split(",", 0);
+			boolean find = false;
 			for(String pay : pays) {
 				if(option.pay.contains(pay)) {
-					newStores.add(store);
+					find = true;
 					break;
 				}
+			}
+			for(String creditCard : creditCards) {
+				if(option.creditCards.contains(creditCard)) {
+					find = true;
+				}
+			}
+			if(find) {
+				newStores.add(store);
 			}
 		}
 		return newStores;

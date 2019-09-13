@@ -7,7 +7,39 @@ $(function(){
         loadLanguage(language);
         requestToApi();
     })
-                    
+
+    $("#visaicon").click(function(){
+        if ($("#visaicon").attr("value") == 0){
+            $("#visaicon").attr('value', 1);
+            var src = 'image/visa.png';
+            $("#visa-selected").attr("src", src);
+            console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
+            requestToApi();
+        } else {
+            $("#visaicon").attr('value', 0);
+            $("#visa-selected").attr("src", "");
+            console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
+            requestToApi();
+        };
+    });
+    $("#masterscardicon").click(function(){
+        if ($("#masterscardicon").attr("value") == 0){
+            $("#masterscardicon").attr('value', 1);
+            var src = 'image/masterscard.png';
+            $("#masterscard-selected").attr("src", src);
+            console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
+            requestToApi();
+        } else {
+            $("#masterscardicon").attr('value', 0);
+            $("#masterscard-selected").attr("src", "");
+            console.log(createJson(collectValuesAsList(language)));
+            clearMarkers();
+            requestToApi();
+        };
+    });
     // Set options for creating dynamic url
     $("#rakutenicon").click(function(){
         if ($("#rakutenicon").attr("value") == 0){
@@ -107,6 +139,7 @@ $(function createJson(params) {
     obj.card = params[4];
     obj.latitude = params[5];
     obj.longitude = params[6];
+    obj.creditCard = params[7];
     return obj;
 })
 function collectValuesAsList(lang) {
@@ -135,6 +168,12 @@ function collectValuesAsList(lang) {
     // TODO
     array.push('34.6940735');
     array.push('135.4935862');
+
+    var array_card  = new Array();
+    if ($('#visaicon').attr('value') == 1) array_card.push("Visa");
+    if ($('#masterscardicon').attr('value') == 1) array_card.push("MasterCard");
+    array.push(array_card);
+
     return array;
 }
 function createJson(params) {
@@ -146,6 +185,7 @@ function createJson(params) {
     obj.nosmoking = params[4];
     obj.latitude = params[5];
     obj.longitude = params[6];
+    obj.creditCard = params[7];
     var jsontext = JSON.stringify(obj);
     return jsontext;
 }
@@ -210,10 +250,11 @@ function loadLanguage(lang) {
             $("#msg_option_lunch").text($.i18n.map.msg_option_lunch); 
             $("#msg_option_card").text($.i18n.map.msg_option_card); 
             $("#msg_option_nosmoking").text($.i18n.map.msg_option_nosmoking); 
-            $("#msg_menu_pay").text($.i18n.map.msg_menu_pay); 
-            $("#msg_menu_settings").text($.i18n.map.msg_menu_settings); 
+            $("#msg_menu_pay").text($.i18n.map.msg_menu_pay);
+            $("#msg_menu_card").text($.i18n.map.msg_menu_card);
+            $("#msg_menu_settings").text($.i18n.map.msg_menu_settings);
             $("#msg_menu_detail").text($.i18n.map.msg_menu_detail); 
-            $("#msg_search").val($.i18n.map.msg_search); 
+            $("#msg_search").val($.i18n.map.msg_search);
         }
     });
 }
@@ -222,3 +263,9 @@ function sleep(waitMsec) {
     var startMsec = new Date();
     while (new Date() - startMsec < waitMsec);
 };
+document.onkeypress = enter;
+function enter(){
+  if( window.event.keyCode == 13 ){
+    return false;
+  }
+}

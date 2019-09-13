@@ -6,16 +6,3 @@ function toggleColor() {
         star.style.fill = "none";
     }
 }
-// function requestToFav() {
-//     $.ajax({
-//         url: "/favorite",
-//         type: 'post',
-//         dataType: 'json'
-//     })
-//     .done(function(json){
-//         console.log(json);
-//     })
-//     .fail(function(){
-//         alert('noooo');
-//     });
-// }

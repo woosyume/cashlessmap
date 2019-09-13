@@ -14,6 +14,7 @@ public class RequestParser {
 
 		option.eMoney = getEMoneyAsInt(jsonObj);
 		option.pay = getPayAsList(jsonObj);
+		option.creditCards = getCreditCardsAsList(jsonObj);
 		option.lang = jsonObj.get("lang").getAsString();
 		option.card = jsonObj.get("card").getAsInt();		
 		option.lunch = jsonObj.get("lunch").getAsInt();
@@ -21,6 +22,15 @@ public class RequestParser {
 		option.latitude = jsonObj.get("latitude").getAsString();
 		option.longitude = jsonObj.get("longitude").getAsString();
 		return option;
+	}
+
+	private static List<String> getCreditCardsAsList(JsonObject jsonObject) {
+		List<String> creditCards = new ArrayList<String>();
+		if(jsonObject.getAsJsonArray("creditCard") == null) return creditCards;
+		for(JsonElement element : jsonObject.getAsJsonArray("creditCard")) {
+			creditCards.add(element.getAsString());
+		}
+		return creditCards;
 	}
 
 	public static Option getOptionWithParsedJsonForInternational(String text) {
