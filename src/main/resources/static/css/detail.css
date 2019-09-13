@@ -30,29 +30,39 @@ p.open {
 }
 #time {
     position: relative;
-    padding-left: 1.2em;
     line-height: 1.4;
-    margin-top: 20px;
 }
 #time::before {
-    display: block;
-    content: '';
-    position: absolute;
-    top: .5em;
-    left: 0em;
-    width: 8px;
-    height: 3px;
-    border-left: 2px solid #202f55;
-    border-bottom: 2px solid #202f55;
-    -webkit-transform: rotate(-45deg);
-    transform: rotate(-45deg);
+    content:"";
+	display:inline-block;
+	width:2em;
+	height:2em;
+	background:url(/image/walking.png) no-repeat;
+    background-size:contain;
+    padding-right: 1em;
 }
+/* #time::before {
+    content: url(/image/walking.png);
+    position: relative;
+    top: 8px;
+    -webkit-transform: scale(0.2);
+    transform: scale(0.2);
+} */
 #tel {
     position: relative;
-    padding-left: 1.2em;
     line-height: 1.4;
+    padding-left: 4.5px;
 }
 #tel::before {
+    content:"";
+	display:inline-block;
+	width:1.5em;
+	height:1.5em;
+	background:url(/image/tel.png) no-repeat;
+    background-size:contain;
+    padding-right: 1em;
+}
+/* #tel::before {
     display: block;
     content: '';
     position: absolute;
@@ -64,22 +74,4 @@ p.open {
     border-bottom: 2px solid #202f55;
     -webkit-transform: rotate(-45deg);
     transform: rotate(-45deg);
-}
-/* .batsu span::before,
-.batsu span::after {
-    display: block;
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 84%;
-    height: 16%;
-    margin: -8% 0 0 -42%;
-    background: rgb(167, 128, 66);
-}
-.batsu span::before {
-    transform: rotate(-45deg);
-}
-.batsu span::after {
-    transform: rotate(45deg);
 } */
