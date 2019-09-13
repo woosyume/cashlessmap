@@ -221,3 +221,9 @@ function sleep(waitMsec) {
     var startMsec = new Date();
     while (new Date() - startMsec < waitMsec);
 };
+document.onkeypress = enter;
+function enter(){
+  if( window.event.keyCode == 13 ){
+    return false;
+  }
+}
