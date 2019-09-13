@@ -171,7 +171,7 @@ function collectValuesAsList(lang) {
 
     var array_card  = new Array();
     if ($('#visaicon').attr('value') == 1) array_card.push("Visa");
-    if ($('#mastercardicon').attr('value') == 1) array_card.push("MasterCard");
+    if ($('#masterscardicon').attr('value') == 1) array_card.push("MasterCard");
     array.push(array_card);
 
     return array;
